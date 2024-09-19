@@ -83,7 +83,9 @@
       <workItem from="1726466310728" duration="153000" />
       <workItem from="1726490988553" duration="1556000" />
       <workItem from="1726725464261" duration="4239000" />
-      <workItem from="1726733594929" duration="365000" />
+      <workItem from="1726733594929" duration="1409000" />
+      <workItem from="1726735032159" duration="82000" />
+      <workItem from="1726738007011" duration="328000" />
     </task>
     <task id="LOCAL−00001" summary="Pohja">
       <option name="closed" value="true" />
@@ -99,7 +101,14 @@
       <option name="presentableId" value="LOCAL−00002" />
       <updated>1726729528998</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL−00003" summary="Effects and variables changed">
+      <option name="closed" value="true" />
+      <created>1726733993068</created>
+      <option name="number" value="LOCAL−00003" />
+      <option name="presentableId" value="LOCAL−00003" />
+      <updated>1726733993068</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
