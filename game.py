@@ -26,6 +26,43 @@ def clear_console():
     else:  # macOS and Linux
         os.system('clear')
 
+def alkuruutu():
+    # Luodaan Decrypt-efekti alkuruudun animaatiota varten
+    effect = Decrypt(alkuanimaatioruutu)
+    effect.effect_config.merge = True  # Määritetään, että animaatioiden kehykset sulautuvat yhteen
+
+    # Animaatio toistetaan terminaaliin
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
+
+    tmp = input("Press enter to continue")
+    clear_console()
+
+def häviöruutu():
+    # Luodaan Burn-efekti alkuruudun animaatiota varten
+    effect = Burn(havioanimaatioruutu)
+    effect.effect_config.merge = True  # Määritetään, että animaatioiden kehykset sulautuvat yhteen
+
+    # Animaatio toistetaan terminaaliin
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
+
+    tmp = input("Press enter to continue...")
+
+    clear_console()
+
+def loppuruutu():
+    # Luodaan Matrix-efekti loppuruudun animaatiota varten
+    effect = Matrix(loppuanimaatioruutu)
+
+    # Animaatio toistetaan terminaaliin
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
+
+
 yhteys = mysql.connector.connect(
          host='127.0.0.1',
          port= 3306,
@@ -112,17 +149,7 @@ playback.load_file('bgmusicexample.mp3')
 playback.loop_at_end(True)
 playback.play()
 
-# Luodaan Slide-efekti alkuruudun animaatiota varten
-effect = Decrypt(alkuanimaatioruutu)
-effect.effect_config.merge = True  # Määritetään, että animaatioiden kehykset sulautuvat yhteen
-
-# Animaatio toistetaan terminaaliin
-with effect.terminal_output() as terminal:
-    for frame in effect:
-        terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
-
-tmp = input("Press enter to continue")
-clear_console()
+#alkuruutu()
 
 # Tulostetaan värejä terminaaliin
 print(Fore.RED + "Red")  # Tulostetaan punainen teksti
@@ -141,26 +168,9 @@ tmp = input("Press enter to continue...")
 # Ruuduntyhjennys
 clear_console()
 
-# Luodaan Slide-efekti alkuruudun animaatiota varten
-effect = Burn(havioanimaatioruutu)
-effect.effect_config.merge = True  # Määritetään, että animaatioiden kehykset sulautuvat yhteen
+#häviöruutu()
 
-# Animaatio toistetaan terminaaliin
-with effect.terminal_output() as terminal:
-    for frame in effect:
-        terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
-
-tmp = input("Press enter to continue...")
-
-clear_console()
-
-# Luodaan Beams-efekti loppuruudun animaatiota varten
-effect = Matrix(loppuanimaatioruutu)
-
-# Animaatio toistetaan terminaaliin
-with effect.terminal_output() as terminal:
-    for frame in effect:
-        terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
+#loppuruutu()
 
 #Mikon työtila
 #xddd
