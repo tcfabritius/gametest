@@ -10,8 +10,8 @@ from terminaltexteffects.effects.effect_burn import Burn
 # Tuodaan Fore ja Style väritekstejä varten
 from colorama import Fore, Style
 
-# Tuodaan winsound äänentoistoa varten
-import winsound
+# Tuodaan just_playback äänentoistoa varten
+from just_playback import Playback
 
 # Tuodaan os ruuduntyhjennystä varten
 import os
@@ -34,10 +34,10 @@ alkuanimaatioruutu = """
 havioanimaatioruutu = """
 
 
-                                                                                                    
-                                                                                                    
-                                                                                                    
-                                                                                                    
+
+
+
+
                                      @@@@@@@@@@@@@@@@@@@@@@@@@@                                     
                                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                               
                           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                          
@@ -68,7 +68,7 @@ havioanimaatioruutu = """
                @@@@@@@@@@@@@                                            @@@@@@@@@@@@@               
                @@@@@@@@@@@                                               @@@@@@@@@@@@               
                 @@@@@@@@                                                   @@@@@@@@@                
-                                                                                                                                                                                                
+
 """
 
 # Alustetaan loppuruutu-animaation sisältö monirivisellä tekstillä
@@ -85,7 +85,12 @@ https://creativecommons.org/licenses/by/3.0/
 """
 
 # Soitetaan taustamusiikki loopattuna asynkronisesti (ei pysäytä ohjelmaa)
-winsound.PlaySound("bgmusicexample.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+#winsound.PlaySound("bgmusicexample.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
+#playsound.playsound("bgmusicexample.mp3",False)
+playback = Playback() # creates an object for managing playback of a single audio file
+playback.load_file('bgmusicexample.mp3')
+playback.loop_at_end(True)
+playback.play()
 
 # Luodaan Slide-efekti alkuruudun animaatiota varten
 effect = Decrypt(alkuanimaatioruutu)
@@ -100,12 +105,12 @@ tmp = input("Press enter to continue")
 os.system('cls')
 
 # Tulostetaan värejä terminaaliin
-print(Fore.RED + "Red")      # Tulostetaan punainen teksti
+print(Fore.RED + "Red")  # Tulostetaan punainen teksti
 print(Fore.GREEN + "Green")  # Tulostetaan vihreä teksti
-print(Fore.BLUE + "Blue")    # Tulostetaan sininen teksti
-print(Fore.YELLOW + "Yellow")# Tulostetaan keltainen teksti
-print(Fore.MAGENTA + "Magenta") # Tulostetaan magenta teksti
-print(Fore.CYAN + "Cyan")    # Tulostetaan syaani teksti
+print(Fore.BLUE + "Blue")  # Tulostetaan sininen teksti
+print(Fore.YELLOW + "Yellow")  # Tulostetaan keltainen teksti
+print(Fore.MAGENTA + "Magenta")  # Tulostetaan magenta teksti
+print(Fore.CYAN + "Cyan")  # Tulostetaan syaani teksti
 
 # Resetoidaan värimuutokset
 print(Style.RESET_ALL)
