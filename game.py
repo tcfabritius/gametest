@@ -165,6 +165,8 @@ with effect.terminal_output() as terminal:
 #Mikon työtila
 #xddd
 
-#Jonin työtila testi testi
+#Jonin työtila
+
+# Lorem ipsum
 
 #Outin työtila
