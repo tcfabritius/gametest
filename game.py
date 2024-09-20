@@ -16,12 +16,25 @@ from just_playback import Playback
 # Tuodaan os ruuduntyhjennystä varten
 import os
 
+import mysql.connector
+from geopy import distance
+
 def clear_console():
     # For Windows, use 'cls', for Mac/Linux, use 'clear'
     if os.name == 'nt':  # Windows
         os.system('cls')
     else:  # macOS and Linux
         os.system('clear')
+
+yhteys = mysql.connector.connect(
+         host='127.0.0.1',
+         port= 3306,
+         database='flight_game',
+         user='user',
+         password='user',
+         autocommit=True
+         )
+
 
 # Alustetaan alkuruutu-animaation sisältö monirivisellä tekstillä
 alkuanimaatioruutu = """
