@@ -136,3 +136,8 @@ effect = Matrix(loppuanimaatioruutu)
 with effect.terminal_output() as terminal:
     for frame in effect:
         terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
+
+#Mikon työtila
+
+
+#Jonin työtila
