@@ -16,6 +16,13 @@ from just_playback import Playback
 # Tuodaan os ruuduntyhjennystä varten
 import os
 
+def clear_console():
+    # For Windows, use 'cls', for Mac/Linux, use 'clear'
+    if os.name == 'nt':  # Windows
+        os.system('cls')
+    else:  # macOS and Linux
+        os.system('clear')
+
 # Alustetaan alkuruutu-animaation sisältö monirivisellä tekstillä
 alkuanimaatioruutu = """
  ___   _                 _         
@@ -102,7 +109,7 @@ with effect.terminal_output() as terminal:
         terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
 tmp = input("Press enter to continue")
-os.system('cls')
+clear_console()
 
 # Tulostetaan värejä terminaaliin
 print(Fore.RED + "Red")  # Tulostetaan punainen teksti
@@ -119,7 +126,7 @@ print(Style.RESET_ALL)
 tmp = input("Press enter to continue...")
 
 # Ruuduntyhjennys
-os.system('cls')
+clear_console()
 
 # Luodaan Slide-efekti alkuruudun animaatiota varten
 effect = Burn(havioanimaatioruutu)
@@ -132,7 +139,7 @@ with effect.terminal_output() as terminal:
 
 tmp = input("Press enter to continue...")
 
-os.system('cls')
+clear_console()
 
 # Luodaan Beams-efekti loppuruudun animaatiota varten
 effect = Matrix(loppuanimaatioruutu)
