@@ -150,7 +150,7 @@ with effect.terminal_output() as terminal:
         terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
 #Mikon työtila
-
+#xddd
 
 #Jonin työtila testi testi
 
