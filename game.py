@@ -8,7 +8,7 @@ from terminaltexteffects.effects.effect_matrix import Matrix
 from terminaltexteffects.effects.effect_burn import Burn
 
 # Tuodaan Fore ja Style väritekstejä varten
-from colorama import Fore, Style
+from colorama import (Fore, Style)
 
 # Tuodaan just_playback äänentoistoa varten
 from just_playback import Playback
@@ -63,7 +63,7 @@ def loppuruutu():
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
 
-yhteys = mysql.connector.connect(
+connection = mysql.connector.connect(
          host='127.0.0.1',
          port= 3306,
          database='flight_game',
@@ -177,6 +177,16 @@ clear_console()
 
 #Jonin työtila
 
-# Lorem ipsum
+# Kysytään pelaajan nimi. Uudelle pelaajalle määritetään lähtötiedot ja aikaisemmin syöttetty pelaaja tunnistetaan.
+
+print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
+player = input("USE ALIAS: ")
+
+sql = f"INSERT INTO game(screen_name) VALUES ('{player}')" # Huom. toimiakseen mysql pöydän ID palkki pitää olla "AUTO_INCREMENT".
+cursor = connection.cursor()
+cursor.execute(sql)
+result = cursor.fetchall()
+
 
 #Outin työtila
+
