@@ -89,12 +89,6 @@ alkuanimaatioruutu = """
 
 # Häviö animaatio
 havioanimaatioruutu = """
-
-
-
-
-
-
                                      @@@@@@@@@@@@@@@@@@@@@@@@@@                                     
                                @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                               
                           @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@                          
@@ -125,7 +119,6 @@ havioanimaatioruutu = """
                @@@@@@@@@@@@@                                            @@@@@@@@@@@@@               
                @@@@@@@@@@@                                               @@@@@@@@@@@@               
                 @@@@@@@@                                                   @@@@@@@@@                
-
 """
 
 # Alustetaan loppuruutu-animaation sisältö monirivisellä tekstillä
