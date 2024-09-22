@@ -208,11 +208,11 @@ else:
     cursor.execute(sql)
     result = cursor.fetchall()
 
-    sql = f"SELECT if FROM game INSERT INTO game.co2_consumed VALUES(0)"
+    sql = f"SELECT if FROM game INSERT INTO game.co2_consumed VALUES(0) WHERE game.id = ('{player}')"
     cursor = connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()
-    sql = f"SELECT if FROM game INSERT INTO game.co2_budget VALUES(1000)"
+    sql = f"SELECT if FROM game INSERT INTO game.co2_budget VALUES(1000) WHERE game.id = ('{player}')"
     cursor = connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()
