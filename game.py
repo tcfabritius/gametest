@@ -189,15 +189,33 @@ clear_console()
 
 #Jonin työtila
 
-# Kysytään pelaajan nimi. Uudelle pelaajalle määritetään lähtötiedot ja aikaisemmin syöttetty pelaaja tunnistetaan.
+# Kysytään pelaajan nimi. Uudelle pelaajalle määritetään lähtötiedot ja aikaisemmin syötetty pelaaja tunnistetaan.
 
 print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
 player = input("USE ALIAS: ")
 
-sql = f"INSERT INTO game(screen_name) VALUES ('{player}')" # Huom. toimiakseen mysql pöydän ID palkki pitää olla "AUTO_INCREMENT".
+sql = f"INSERT INTO game(id) VALUES ('{player}')"
 cursor = connection.cursor()
 cursor.execute(sql)
 result = cursor.fetchall()
+
+if result[0] > 0:
+    print(f"Welcome back" + player)
+
+else:
+    sql = f"SELECT id FROM game INNER JOIN game ON game.location = airport.ident INSERT INTO game.location VALUES('EFHK') WHERE game.id = ('{player}')"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    result = cursor.fetchall()
+
+    sql = f"SELECT if FROM game INSERT INTO game.co2_consumed VALUES(0)"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    result = cursor.fetchall()
+    sql = f"SELECT if FROM game INSERT INTO game.co2_budget VALUES(1000)"
+    cursor = connection.cursor()
+    cursor.execute(sql)
+    result = cursor.fetchall()
 
 
 #Outin työtila
