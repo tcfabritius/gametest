@@ -203,7 +203,7 @@ if result[0] > 0:
     print(f"Welcome back" + player)
 
 else:
-    sql = f"SELECT id FROM game INNER JOIN game ON game.location = airport.ident INSERT INTO game.location VALUES('EFHK') WHERE game.id = ('{player}')"
+    sql = f"SELECT id FROM game INNER JOIN game ON game.location = airport.ident INSERT INTO airport.ident VALUES('EFHK') WHERE game.id = ('{player}')"
     cursor = connection.cursor()
     cursor.execute(sql)
     result = cursor.fetchall()
