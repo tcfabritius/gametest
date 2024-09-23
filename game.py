@@ -213,9 +213,10 @@ else:
     cursor.execute("UPDATE game SET location = %s WHERE id = %s", ('EFHK', player))
     connection.commit()
 
-    # Annetaan uudelle pelaajalle CO2 päästöt ja CO2 budjetti
+    # Annetaan uudelle pelaajalle lähtötiedot
     cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
     cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
+    cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
     connection.commit()
 
 # Suljetaan kursori ja yhteys
