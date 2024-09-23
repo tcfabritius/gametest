@@ -56,7 +56,7 @@ def häviöruutu():
 
     clear_console()
 
-def loppuruutu():
+def voittoruutu():
     # Luodaan Fireworks-efekti voittoruudun animaatiota varten
     effect = Fireworks(voittoanimaatioruutu)
 
@@ -80,7 +80,7 @@ def loppuruutu():
 
 def web(mission_id):
     clear_console()
-    cursor.execute("SELECT description FROM mission WHERE id = %s", (mission_id,))
+    cursor.execute("SELECT description FROM mission WHERE id = %s", (mission_id))
     connection.commit()
     kuvaus = cursor.fetchall()
     print(Fore.GREEN + kuvaus[1])
