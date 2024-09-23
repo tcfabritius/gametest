@@ -88,6 +88,7 @@ def openWeb(mission_id):
     tmp = input("Press enter to exit web browser")
     cursor.close()
     connection.close()
+    print(Style.RESET_ALL)
     clear_console()
 
 connection = mysql.connector.connect(
@@ -200,8 +201,6 @@ https://creativecommons.org/licenses/by/3.0/
 """
 
 # Soitetaan taustamusiikki loopattuna asynkronisesti (ei pysäytä ohjelmaa)
-#winsound.PlaySound("bgmusicexample.wav", winsound.SND_LOOP + winsound.SND_ASYNC)
-#playsound.playsound("bgmusicexample.mp3",False)
 playback = Playback() # creates an object for managing playback of a single audio file
 playback.load_file('bgmusicexample.mp3')
 playback.loop_at_end(True)
@@ -209,22 +208,6 @@ playback.play()
 
 #alkuruutu()
 
-# Tulostetaan värejä terminaaliin
-print(Fore.RED + "Red")  # Tulostetaan punainen teksti
-print(Fore.GREEN + "Green")  # Tulostetaan vihreä teksti
-print(Fore.BLUE + "Blue")  # Tulostetaan sininen teksti
-print(Fore.YELLOW + "Yellow")  # Tulostetaan keltainen teksti
-print(Fore.MAGENTA + "Magenta")  # Tulostetaan magenta teksti
-print(Fore.CYAN + "Cyan")  # Tulostetaan syaani teksti
-
-# Resetoidaan värimuutokset
-print(Style.RESET_ALL)
-
-# Odotetaan käyttäjän syötettä jatkamiseen
-tmp = input("Press enter to continue...")
-
-# Ruuduntyhjennys
-clear_console()
 
 #häviöruutu()
 
