@@ -231,6 +231,7 @@ clear_console()
 
 #Jonin työtila
 
+# PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
 
 # Kysytään pelaajan nimi
 print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
@@ -266,6 +267,23 @@ cursor.close()
 connection.close()
 
 
+
+# VALINTAMENU
+
+print("Choose action to proceed:\n1.Hack\n2.Web\n3.Buy\n4.Back to Main Menu ")
+
+choice = int(input("Enter your choice: "))
+if choice == 1:
+    if currentMission == success:
+        winMission(0)
+    elif currentMission == failure:
+        loseTheGame()
+elif choice == 2:
+    openWeb()
+elif choice == 3:
+    openShop()
+elif choice == 4:
+    openPauseMenu()
 
 #Outin työtila
 
