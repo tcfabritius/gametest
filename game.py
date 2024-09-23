@@ -7,6 +7,9 @@ from terminaltexteffects.effects.effect_matrix import Matrix
 # Tuodaan Burn-efekti terminaltextanimaatiota varten
 from terminaltexteffects.effects.effect_burn import Burn
 
+# Tuodaan Burn-efekti terminaltextanimaatiota varten
+from terminaltexteffects.effects.effect_fireworks import Fireworks
+
 # Tuodaan Fore ja Style väritekstejä varten
 from colorama import (Fore, Style)
 
@@ -43,6 +46,19 @@ def häviöruutu():
     # Luodaan Burn-efekti alkuruudun animaatiota varten
     effect = Burn(havioanimaatioruutu)
     effect.effect_config.merge = True  # Määritetään, että animaatioiden kehykset sulautuvat yhteen
+
+    # Animaatio toistetaan terminaaliin
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
+
+    tmp = input("Press enter to continue...")
+
+    clear_console()
+
+def loppuruutu():
+    # Luodaan Fireworks-efekti voittoruudun animaatiota varten
+    effect = Fireworks(voittoanimaatioruutu)
 
     # Animaatio toistetaan terminaaliin
     with effect.terminal_output() as terminal:
@@ -112,6 +128,24 @@ havioanimaatioruutu = """
    @@@@@@@   @@ @@ @@ @@ @@ @@ @@ @@  @@@@@@@   
    @@@@@@     @@@@@@@@@@@@@@@@@@@@@    @@@@@@   
      @@@       @@@@@@@@@@@@@@@@@@@      @@@      
+"""
+
+voittoanimaatioruutu = """
+....................... .....
+............................ 
+..............@@.............
+..............@............. 
+.@...... .....@...... .... @.
+.@.....@@.....@+....@@.  ..@.
+..@:.........:@@....@.....@. 
+...@#...@@...@@@...@@..  @@..
+...@@@..@@@@@@@@@@@@@%.@@@.. 
+.. .@@@@@@@@@@@@@@@@@@@@@.. .
+....@@@@@@@@@@@@@@@@@@@@@....
+  .. ...@@@#..  .:@@@@...  . 
+......@@........ ....@@#.....
+............................ 
+....................... .....
 """
 
 #havioanimaatioruutu = """
