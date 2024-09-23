@@ -210,8 +210,7 @@ else:
     print(f"Welcome, {player}! Your alias has been created.")
 
     # Annetaan uudelle pelaajalle sijainti
-    cursor.execute("SELECT id FROM game INNER JOIN game ON game.location = airport.ident WHERE id = %s", (player,))
-    cursor.execute("UPDATE game SET location = %s WHERE airport.ident = EFHK", ( player))
+    cursor.execute("UPDATE game SET location = %s WHERE id = %s", ('EFHK', player))
     connection.commit()
 
     # Annetaan uudelle pelaajalle lähtötiedot
