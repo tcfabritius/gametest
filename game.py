@@ -196,13 +196,18 @@ player = input("USE ALIAS: ")
 
 sql = f"INSERT INTO game(id) VALUES ('{player}')"
 cursor = connection.cursor()
-cursor.execute(sql)
+cursor.execute(("SELECT COUNT(*) FROM game WHERE id = %s", (player,)))
 result = cursor.fetchall()
 
 if result[0] > 0:
     print(f"Welcome back" + player)
 
 else:
+    # Insert new player
+    cursor.execute("INSERT INTO game(id) VALUES (%s)", (player,))
+    connection.commit()
+    print(f"Welcome, {player}! Your alias has been created.")
+
     sql = f"SELECT id FROM game INNER JOIN game ON game.location = airport.ident INSERT INTO airport.ident VALUES('EFHK') WHERE game.id = ('{player}')"
     cursor = connection.cursor()
     cursor.execute(sql)
