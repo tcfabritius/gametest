@@ -42,7 +42,7 @@ def alkuruutu():
     tmp = input("Press enter to continue")
     clear_console()
 
-def häviöruutu():
+def loseTheGame():
     # Luodaan Burn-efekti alkuruudun animaatiota varten
     effect = Burn(havioanimaatioruutu)
     effect.effect_config.merge = True  # Määritetään, että animaatioiden kehykset sulautuvat yhteen
@@ -56,7 +56,7 @@ def häviöruutu():
 
     clear_console()
 
-def voittoruutu():
+def winMission():
     # Luodaan Fireworks-efekti voittoruudun animaatiota varten
     effect = Fireworks(voittoanimaatioruutu)
 
@@ -78,7 +78,7 @@ def loppuruutu():
         for frame in effect:
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
-def web(mission_id):
+def openWeb(mission_id):
     clear_console()
     cursor.execute("SELECT description FROM mission WHERE id = %s", (mission_id))
     connection.commit()
