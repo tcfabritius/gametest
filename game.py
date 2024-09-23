@@ -80,11 +80,14 @@ def loppuruutu():
 
 def openWeb(mission_id):
     clear_console()
+    cursor = connection.cursor()
     cursor.execute("SELECT description FROM mission WHERE id = %s", (mission_id))
     connection.commit()
     kuvaus = cursor.fetchall()
     print(Fore.GREEN + kuvaus[1])
     tmp = input("Press enter to exit web browser")
+    cursor.close()
+    connection.close()
     clear_console()
 
 connection = mysql.connector.connect(
