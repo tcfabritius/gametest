@@ -67,7 +67,7 @@ def web(mission_id):
     cursor.execute("SELECT description FROM mission WHERE id = %s", (mission_id,))
     connection.commit()
     kuvaus = cursor.fetchall()
-    print(Fore.GREEN + kuvaus)
+    print(Fore.GREEN + kuvaus[1])
     tmp = input("Press enter to exit web browser")
     clear_console()
 
