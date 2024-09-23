@@ -62,6 +62,14 @@ def loppuruutu():
         for frame in effect:
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
+def web(mission_id):
+    clear_console()
+    cursor.execute("SELECT description FROM mission WHERE id = %s", (mission_id,))
+    connection.commit()
+    kuvaus = cursor.fetchall()
+    print(Fore.GREEN + kuvaus)
+    tmp = input("Press enter to exit web browser")
+    clear_console()
 
 connection = mysql.connector.connect(
          host='127.0.0.1',
