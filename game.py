@@ -189,38 +189,39 @@ clear_console()
 
 #Jonin työtila
 
-# Kysytään pelaajan nimi. Uudelle pelaajalle määritetään lähtötiedot ja aikaisemmin syötetty pelaaja tunnistetaan.
+# Kysytään pelaajan nimi
 
 print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
 player = input("USE ALIAS: ")
 
-sql = f"INSERT INTO game(id) VALUES ('{player}')"
+# Luodaan kursori
 cursor = connection.cursor()
-cursor.execute(("SELECT COUNT(*) FROM game WHERE id = %s", (player,)))
-result = cursor.fetchall()
+
+# Tarkistetaan onko annettu pelaaja jo olemassa
+cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
+result = cursor.fetchone()
 
 if result[0] > 0:
-    print(f"Welcome back" + player)
-
+    print(f"Welcome back, {player}!")
 else:
-    # Insert new player
+    # Luodaan uusi pelaaja
     cursor.execute("INSERT INTO game(id) VALUES (%s)", (player,))
     connection.commit()
     print(f"Welcome, {player}! Your alias has been created.")
 
-    sql = f"SELECT id FROM game INNER JOIN game ON game.location = airport.ident INSERT INTO airport.ident VALUES('EFHK') WHERE game.id = ('{player}')"
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    result = cursor.fetchall()
+    # Annetaan uudelle pelaajalle sijainti
+    cursor.execute("UPDATE game SET location = %s WHERE id = %s", ('EFHK', player))
+    connection.commit()
 
-    sql = f"SELECT if FROM game INSERT INTO game.co2_consumed VALUES(0) WHERE game.id = ('{player}')"
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    result = cursor.fetchall()
-    sql = f"SELECT if FROM game INSERT INTO game.co2_budget VALUES(1000) WHERE game.id = ('{player}')"
-    cursor = connection.cursor()
-    cursor.execute(sql)
-    result = cursor.fetchall()
+    # Annetaan uudelle pelaajalle CO2 päästöt ja CO2 budjetti
+    cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
+    cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
+    connection.commit()
+
+# Suljetaan kursori ja yhteys
+cursor.close()
+connection.close()
+
 
 
 #Outin työtila
