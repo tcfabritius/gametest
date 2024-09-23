@@ -189,8 +189,8 @@ clear_console()
 
 #Jonin työtila
 
-# Kysytään pelaajan nimi
 
+# Kysytään pelaajan nimi
 print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
 player = input("USE ALIAS: ")
 
