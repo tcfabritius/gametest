@@ -1,28 +1,14 @@
-# Tuodaan Decrypt-efekti terminaltekstianimaatioita varten
-from symbol import return_stmt
-
+# Tuodaan kirjastot
 from terminaltexteffects.effects.effect_decrypt import Decrypt
-
-# Tuodaan Matrix-efekti terminaltekstianimaatioita varten
 from terminaltexteffects.effects.effect_matrix import Matrix
-
-# Tuodaan Burn-efekti terminaltextanimaatiota varten
 from terminaltexteffects.effects.effect_burn import Burn
-
-# Tuodaan Burn-efekti terminaltextanimaatiota varten
 from terminaltexteffects.effects.effect_fireworks import Fireworks
-
-# Tuodaan Fore ja Style väritekstejä varten
 from colorama import (Fore, Style)
-
-# Tuodaan just_playback äänentoistoa varten
 from just_playback import Playback
-
-# Tuodaan os ruuduntyhjennystä varten
-import os
-
-import mysql.connector
+from symbol import return_stmt
 from geopy import distance
+import os
+import mysql.connector
 import random
 
 
