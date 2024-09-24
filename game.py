@@ -11,7 +11,7 @@ import os
 import mysql.connector
 import random
 
-
+# FUNKTIOT ALKAA
 def clear_console():
     # For Windows, use 'cls', for Mac/Linux, use 'clear'
     if os.name == 'nt':  # Windows
@@ -94,6 +94,8 @@ def updateInnerLocation(givenLocation):
 def generateBankKey():
     key = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
     return key
+
+# FUNKTIOT PÄÄTTYY
 
 connection = mysql.connector.connect(
          host='127.0.0.1',
