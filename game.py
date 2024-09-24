@@ -1,4 +1,6 @@
 # Tuodaan Decrypt-efekti terminaltekstianimaatioita varten
+from symbol import return_stmt
+
 from terminaltexteffects.effects.effect_decrypt import Decrypt
 
 # Tuodaan Matrix-efekti terminaltekstianimaatioita varten
@@ -286,6 +288,67 @@ elif choice == 3:
     openShop()
 elif choice == 4:
     openPauseMenu()
+
+
+# ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
+
+def loseTheGame():
+
+    print("GAME OVER")
+
+    # Luodaan kursori
+    cursor = connection.cursor()
+    # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
+    CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("CO2 left in the budget: " + CO2Left + "ppm")
+    # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
+    totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("Total used CO2: " + totalUsedCO2 + "ppm")
+    # Tulostetaan jäänyt rahamäärä
+    moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("Money left in the budget: " + moneyLeft + "€")
+    # Suljetaan kursori ja yhteys
+    cursor.close()
+    connection.close()
+
+    goBack = input("Press Enter to go back to Main Menu: ")
+    if goBack == "":
+        openPauseMenu()
+    return
+
+# ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
+
+def winGame():
+
+    print("CONGRATULATIONS FOR WINNING THE GAME!")
+
+    # Luodaan kursori
+    cursor = connection.cursor()
+    # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
+    CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("CO2 left in the budget: " + CO2Left + "ppm")
+    # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
+    totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("Total used CO2: " + totalUsedCO2 + "ppm")
+    # Tulostetaan jäänyt rahamäärä
+    moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("Money left in the budget: " + moneyLeft + "€")
+    # Suljetaan kursori ja yhteys
+    cursor.close()
+    connection.close()
+
+    print("THANK YOU FOR PLAYING THE GAME!\nCREDITS:\nTim Fabritius\nMikko Laakkonen\nJoni Oksanen\nOuti Salonen")
+
+    goBack = input("Press Enter to go back to Main Menu: ")
+    if goBack == "":
+        openPauseMenu()
+    return
 
 #Outin työtila
 
