@@ -46,7 +46,7 @@ def alkuruutu():
     tmp = input("Press enter to continue")
     clear_console()
 
-def loseTheGame():
+def havioruutu():
     # Luodaan Burn-efekti alkuruudun animaatiota varten
     effect = Burn(havioanimaatioruutu)
     effect.effect_config.merge = True  # Määritetään, että animaatioiden kehykset sulautuvat yhteen
@@ -60,7 +60,7 @@ def loseTheGame():
 
     clear_console()
 
-def winMission():
+def voittoruutu():
     # Luodaan Fireworks-efekti voittoruudun animaatiota varten
     effect = Fireworks(voittoanimaatioruutu)
 
