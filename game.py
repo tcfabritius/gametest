@@ -221,127 +221,6 @@ playback.play()
 
 #Mikon työtila
 
-#Jonin työtila
-
-# PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
-
-# Kysytään pelaajan nimi
-print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
-player = input("USE ALIAS: ")
-
-# Luodaan kursori
-cursor = connection.cursor()
-
-# Tarkistetaan onko annettu pelaaja jo olemassa
-cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
-result = cursor.fetchone()
-
-if result[0] > 0:
-    print(f"Welcome back, {player}!")
-else:
-    # Luodaan uusi pelaaja
-    cursor.execute("INSERT INTO game(id) VALUES (%s)", (player,))
-    connection.commit()
-    print(f"Welcome, {player}! Your alias has been created.")
-
-    # Annetaan uudelle pelaajalle sijainti
-    cursor.execute("UPDATE game SET location = %s WHERE id = %s", ('EFHK', player))
-    connection.commit()
-
-    # Annetaan uudelle pelaajalle lähtötiedot
-    cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
-    cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
-    cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
-    connection.commit()
-
-# Suljetaan kursori ja yhteys
-cursor.close()
-connection.close()
-
-
-
-# VALINTAMENU
-
-print("Choose action to proceed:\n1.Hack\n2.Web\n3.Buy\n4.Back to Main Menu ")
-
-choice = int(input("Enter your choice: "))
-if choice == 1:
-    if currentMission == success:
-        winMission(0)
-    elif currentMission == failure:
-        loseTheGame()
-elif choice == 2:
-    openWeb()
-elif choice == 3:
-    openShop()
-elif choice == 4:
-    openPauseMenu()
-
-
-# ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
-
-def loseTheGame():
-
-    print("GAME OVER")
-
-    # Luodaan kursori
-    cursor = connection.cursor()
-    # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
-    CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("CO2 left in the budget: " + CO2Left + "ppm")
-    # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
-    totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("Total used CO2: " + totalUsedCO2 + "ppm")
-    # Tulostetaan jäänyt rahamäärä
-    moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("Money left in the budget: " + moneyLeft + "€")
-    # Suljetaan kursori ja yhteys
-    cursor.close()
-    connection.close()
-
-    goBack = input("Press Enter to go back to Main Menu: ")
-    if goBack == "":
-        openPauseMenu()
-    return
-
-# ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
-
-def winGame():
-
-    print("CONGRATULATIONS FOR WINNING THE GAME!")
-
-    # Luodaan kursori
-    cursor = connection.cursor()
-    # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
-    CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("CO2 left in the budget: " + CO2Left + "ppm")
-    # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
-    totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("Total used CO2: " + totalUsedCO2 + "ppm")
-    # Tulostetaan jäänyt rahamäärä
-    moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("Money left in the budget: " + moneyLeft + "€")
-    # Suljetaan kursori ja yhteys
-    cursor.close()
-    connection.close()
-
-    print("THANK YOU FOR PLAYING THE GAME!\nCREDITS:\nTim Fabritius\nMikko Laakkonen\nJoni Oksanen\nOuti Salonen")
-
-    goBack = input("Press Enter to go back to Main Menu: ")
-    if goBack == "":
-        openPauseMenu()
-    return
-
-#Outin työtila
-
-#Mikon työtila
-
 # Mission 0 - Tutorial
 #Description
 print(Fore.GREEN + """
@@ -497,6 +376,8 @@ while True:
     else:
         print("Log in failed.")
         input("HELPER.PY: Please try again. (HELPER.PY:[Enter]): ")
+        privaraKey = input(f"Please input your 4-letter id: ")
+        privaraPassword = input(f"Please input your password: ")
 
 print("YOU: USE: rootkit")
 print("""
@@ -583,3 +464,123 @@ print(Style.RESET_ALL)
 # Mission 1
 
 # Mission 2
+
+#Jonin työtila
+
+# PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
+
+# Kysytään pelaajan nimi
+print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
+player = input("USE ALIAS: ")
+
+# Luodaan kursori
+cursor = connection.cursor()
+
+# Tarkistetaan onko annettu pelaaja jo olemassa
+cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
+result = cursor.fetchone()
+
+if result[0] > 0:
+    print(f"Welcome back, {player}!")
+else:
+    # Luodaan uusi pelaaja
+    cursor.execute("INSERT INTO game(id) VALUES (%s)", (player,))
+    connection.commit()
+    print(f"Welcome, {player}! Your alias has been created.")
+
+    # Annetaan uudelle pelaajalle sijainti
+    cursor.execute("UPDATE game SET location = %s WHERE id = %s", ('EFHK', player))
+    connection.commit()
+
+    # Annetaan uudelle pelaajalle lähtötiedot
+    cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
+    cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
+    cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
+    connection.commit()
+
+# Suljetaan kursori ja yhteys
+cursor.close()
+connection.close()
+
+
+
+# VALINTAMENU
+
+print("Choose action to proceed:\n1.Hack\n2.Web\n3.Buy\n4.Back to Main Menu ")
+
+choice = int(input("Enter your choice: "))
+if choice == 1:
+    if currentMission == success:
+        winMission(0)
+    elif currentMission == failure:
+        loseTheGame()
+elif choice == 2:
+    openWeb()
+elif choice == 3:
+    openShop()
+elif choice == 4:
+    openPauseMenu()
+
+
+# ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
+
+def loseTheGame():
+
+    print("GAME OVER")
+
+    # Luodaan kursori
+    cursor = connection.cursor()
+    # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
+    CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("CO2 left in the budget: " + CO2Left + "ppm")
+    # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
+    totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("Total used CO2: " + totalUsedCO2 + "ppm")
+    # Tulostetaan jäänyt rahamäärä
+    moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("Money left in the budget: " + moneyLeft + "€")
+    # Suljetaan kursori ja yhteys
+    cursor.close()
+    connection.close()
+
+    goBack = input("Press Enter to go back to Main Menu: ")
+    if goBack == "":
+        openPauseMenu()
+    return
+
+# ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
+
+def winGame():
+
+    print("CONGRATULATIONS FOR WINNING THE GAME!")
+
+    # Luodaan kursori
+    cursor = connection.cursor()
+    # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
+    CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("CO2 left in the budget: " + CO2Left + "ppm")
+    # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
+    totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("Total used CO2: " + totalUsedCO2 + "ppm")
+    # Tulostetaan jäänyt rahamäärä
+    moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
+    connection.commit()
+    print("Money left in the budget: " + moneyLeft + "€")
+    # Suljetaan kursori ja yhteys
+    cursor.close()
+    connection.close()
+
+    print("THANK YOU FOR PLAYING THE GAME!\nCREDITS:\nTim Fabritius\nMikko Laakkonen\nJoni Oksanen\nOuti Salonen")
+
+    goBack = input("Press Enter to go back to Main Menu: ")
+    if goBack == "":
+        openPauseMenu()
+    return
+
+#Outin työtila
+
