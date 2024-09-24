@@ -285,11 +285,11 @@ def loseTheGame():
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
     CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
     connection.commit()
-    print("CO2 left in the budget: " + CO2Left)
+    print("CO2 left in the budget: " + CO2Left + "ppm")
     # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
     totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
     connection.commit()
-    print("Total used CO2: " + totalUsedCO2)
+    print("Total used CO2: " + totalUsedCO2 + "ppm")
     # Tulostetaan jäänyt rahamäärä
     moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
     connection.commit()
@@ -314,11 +314,11 @@ def winGame():
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
     CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
     connection.commit()
-    print("CO2 left in the budget: " + CO2Left)
+    print("CO2 left in the budget: " + CO2Left + "ppm")
     # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
     totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
     connection.commit()
-    print("Total used CO2: " + totalUsedCO2)
+    print("Total used CO2: " + totalUsedCO2 + "ppm")
     # Tulostetaan jäänyt rahamäärä
     moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
     connection.commit()
