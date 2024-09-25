@@ -238,3 +238,8 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+# Add misc.xml, vsc.xml, and HackerOnBoard.iml from the .idea directory
+.idea/**/misc.xml
+.idea/**/vsc.xml
+.idea/**/HackerOnBoard.iml
