@@ -75,16 +75,6 @@ def openWeb(webpage):
     print(Style.RESET_ALL)
     clear_console()
 
-def updateInnerLocation(givenLocation):
-    while currentLocation == givenLocation:
-        if (givenLocation in locations):
-            print("No need to move.")
-        else:
-            print("No such location.")
-    else:
-        print(f"Going to: {currentLocation}")
-        return currentLocation
-
 def generateBankKey():
     key = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
     return key
@@ -225,8 +215,6 @@ def mission0():
     
     Good luck —this is your first step into a larger world of high-stakes infiltration.
     """)
-    currentLocation = ""
-    locations = ["privara_capital", "home"]
     player = input("Enter id: ")
 
     # After playerGreeting
@@ -345,14 +333,6 @@ def mission0():
     print("YOU: Buy rootkit")
     #Lose money
 
-    goToLocation = input("YOU: GO_TO: HELPER.PY[Enter desired location, which currently is privara_capital]: ")
-
-
-
-    newLocation = updateInnerLocation(goToLocation)
-    currentLocation = newLocation
-    print (f"Now at: {currentLocation}.")
-
     print("OPTIONS: (1) atm\n(2) customer service\n(3) bathroom")
 
     print("YOU: OPTION: (1) atm")
@@ -434,10 +414,6 @@ def mission0():
 
     print("HELPER.PY: How can I help?")
     goToLocation = input("YOU: GO_TO: (HELPER.PY:[Home?]): ")
-
-    newLocation = updateInnerLocation(goToLocation)
-    currentLocation = newLocation
-    print (f"Now at: {currentLocation}.")
 
     input("USER: Gh0stP@cket sent: bit sloppy but you did the trick (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: package in money out, nice work (HELPER.PY:[Enter]): ")
