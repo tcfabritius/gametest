@@ -142,9 +142,9 @@ def optionMenu():
     choice = int(input("Enter your choice: "))
     if choice == 1:
         if currentMission == True:
-            winMission(0)
+            winScreen()
         elif currentMission == False:
-            loseTheGame()
+            loseGame()
     elif choice == 2:
         openWeb()
     elif choice == 3:
