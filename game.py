@@ -79,10 +79,8 @@ def generateBankKey():
     key = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
     return key
 
-# ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
-
-def loseTheGame():
-
+def loseGame(player):
+    # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
     print("GAME OVER")
 
     # Luodaan kursori
@@ -108,10 +106,8 @@ def loseTheGame():
         openPauseMenu()
     return
 
-# ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
-
-def winGame():
-
+def winGame(player):
+    # ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
     print("CONGRATULATIONS FOR WINNING THE GAME!")
 
     # Luodaan kursori
@@ -139,9 +135,8 @@ def winGame():
         openPauseMenu()
     return
 
-
-# VALINTAMENU
 def valintamenu():
+    # VALINTAMENU
     print("Choose action to proceed:\n1.Hack\n2.Web\n3.Buy\n4.Back to Main Menu ")
 
     choice = int(input("Enter your choice: "))
@@ -162,7 +157,6 @@ def openShop():
 
 def openPauseMenu():
     print("Pause Menu")
-
 
 def init():
     # PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
@@ -428,7 +422,6 @@ def mission0():
     print(f"(HELPER.PY:[Enter]): Guided mission protocol over. Good luck {player}")
     print(Style.RESET_ALL)
 
-
 # FUNKTIOT PÄÄTTYY
 
 connection = mysql.connector.connect(
@@ -456,7 +449,6 @@ websivut = {
     testi
     """
 }
-
 
 # Alustetaan alkuruutu-animaation sisältö monirivisellä tekstillä
 alkuanimaatioruutu = """
