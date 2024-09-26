@@ -541,7 +541,8 @@ https://creativecommons.org/licenses/by/3.0/
 #loseTheGame()
 #winGame()
 #optionMenu()
+
 #Svetlanan funktiot
+
 #PÄÄOHJELMA
-#init()
 #mission0()
