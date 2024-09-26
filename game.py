@@ -141,9 +141,9 @@ def optionMenu():
 
     choice = int(input("Enter your choice: "))
     if choice == 1:
-        if currentMission == success:
+        if currentMission == True:
             winMission(0)
-        elif currentMission == failure:
+        elif currentMission == False:
             loseTheGame()
     elif choice == 2:
         openWeb()
@@ -444,6 +444,8 @@ playback.loop_at_end(True)
 playback.play()
 
 player = init(connection)
+
+currentMission = False
 
 websivut = {
     "ghostrepo.net":"""
