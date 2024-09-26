@@ -160,7 +160,7 @@ def openPauseMenu():
 
     # PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
 
-def init():
+def init(connection):
 
     # Kysytään pelaajan nimi
     print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
@@ -425,8 +425,6 @@ def mission0():
     print(f"(HELPER.PY:[Enter]): Guided mission protocol over. Good luck {player}")
     print(Style.RESET_ALL)
 
-player = init()
-
 # FUNKTIOT PÄÄTTYY
 
 
@@ -438,6 +436,8 @@ connection = mysql.connector.connect(
          password='user',
          autocommit=True
          )
+
+player = init(connection)
 
 websivut = {
     "ghostrepo.net":"""
