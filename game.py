@@ -466,11 +466,18 @@ connection = mysql.connector.connect(
 
 websivut = {
     "ghostrepo.net":"""
+    ghostrepo.net
+    
     Testi
     Testi
     Testi
     """,
     "privaracapital.org":"""
+    privaracapital.org
+    
+    Testi
+    testi
+    testi
     """
 }
 
