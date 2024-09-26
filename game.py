@@ -18,7 +18,7 @@ def clear_console():
     else:  # macOS and Linux
         os.system('clear')
 
-def alkuruutu():
+def startScreen():
     # Luodaan Decrypt-efekti alkuruudun animaatiota varten
     effect = Decrypt(alkuanimaatioruutu)
     effect.effect_config.merge = True  # Määritetään, että animaatioiden kehykset sulautuvat yhteen
@@ -31,7 +31,7 @@ def alkuruutu():
     tmp = input("Press enter to continue")
     clear_console()
 
-def havioruutu():
+def loseScreen():
     # Luodaan Burn-efekti alkuruudun animaatiota varten
     effect = Burn(havioanimaatioruutu)
     effect.effect_config.merge = True  # Määritetään, että animaatioiden kehykset sulautuvat yhteen
@@ -45,7 +45,7 @@ def havioruutu():
 
     clear_console()
 
-def voittoruutu():
+def winScreen():
     # Luodaan Fireworks-efekti voittoruudun animaatiota varten
     effect = Fireworks(voittoanimaatioruutu)
 
@@ -58,7 +58,7 @@ def voittoruutu():
 
     clear_console()
 
-def loppuruutu():
+def endScreen():
     # Luodaan Matrix-efekti loppuruudun animaatiota varten
     effect = Matrix(loppuanimaatioruutu)
 
@@ -135,7 +135,7 @@ def winGame(player):
         openPauseMenu()
     return
 
-def valintamenu():
+def optionMenu():
     # VALINTAMENU
     print("Choose action to proceed:\n1.Hack\n2.Web\n3.Buy\n4.Back to Main Menu ")
 
@@ -462,11 +462,11 @@ alkuanimaatioruutu = """
  | |  |/  | '_ ` _ \    | | | '_ \ 
  | |      | | | | | |   | | | | | |
 |___|     |_| |_| |_|   |_| |_| |_|
- _   _            _                             _                         _ 
-| | | | __ _  ___| | _____ _ __    ___  _ __   | |__   ___   __ _ _ __ __| |
-| |_| |/ _` |/ __| |/ / _ \ '__|  / _ \| '_ \  | '_ \ / _ \ / _` | '__/ _` |
-|  _  | (_| | (__|   <  __/ |    | (_) | | | | | |_) | (_) | (_| | | | (_| |
-|_| |_|\__,_|\___|_|\_\___|_|     \___/|_| |_| |_.__/ \___/ \__,_|_|  \__,_|
+                Hacker on board...
+
+
+
+
 """
 
 # Häviö animaatio
@@ -526,11 +526,11 @@ playback.loop_at_end(True)
 playback.play()
 
 #TIMIN FUNKTIOT
-#alkuruutu()
-#havioruutu()
-#loppuruutu()
-#voittoruutu()
-openWeb("ghostrepo.net")
+#startScreen()
+#loseScreen()
+#endScreen()
+#winScreen()
+#openWeb("ghostrepo.net")
 
 #MIKON FUNKTIOT
 #mission0()
@@ -539,7 +539,7 @@ openWeb("ghostrepo.net")
 #init()
 #loseTheGame()
 #winGame()
-#valintaMenu()
+#optionMenu()
 
 #PÄÄOHJELMA
 #init()
