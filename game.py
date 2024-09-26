@@ -542,7 +542,6 @@ playback.play()
 #winGame()
 #optionMenu()
 #Svetlanan funktiot
-
 #PÄÄOHJELMA
 #init()
 #mission0()
