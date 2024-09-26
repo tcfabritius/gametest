@@ -437,6 +437,12 @@ connection = mysql.connector.connect(
          autocommit=True
          )
 
+# Soitetaan taustamusiikki loopattuna asynkronisesti (ei pysäytä ohjelmaa)
+playback = Playback() # creates an object for managing playback of a single audio file
+playback.load_file('bgmusicexample.mp3')
+playback.loop_at_end(True)
+playback.play()
+
 player = init(connection)
 
 websivut = {
@@ -519,12 +525,6 @@ Music promoted by https://www.chosic.com/free-music/all/
 Creative Commons CC BY 3.0
 https://creativecommons.org/licenses/by/3.0/
 """
-
-# Soitetaan taustamusiikki loopattuna asynkronisesti (ei pysäytä ohjelmaa)
-playback = Playback() # creates an object for managing playback of a single audio file
-playback.load_file('bgmusicexample.mp3')
-playback.loop_at_end(True)
-playback.play()
 
 #TIMIN FUNKTIOT
 #startScreen()
