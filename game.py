@@ -190,6 +190,8 @@ def init():
         cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
         connection.commit()
 
+    return player
+
     # Suljetaan kursori ja yhteys
     cursor.close()
     connection.close()
@@ -422,7 +424,10 @@ def mission0():
     print(f"(HELPER.PY:[Enter]): Guided mission protocol over. Good luck {player}")
     print(Style.RESET_ALL)
 
+player = init()
+
 # FUNKTIOT PÄÄTTYY
+
 
 connection = mysql.connector.connect(
          host='127.0.0.1',
@@ -534,7 +539,7 @@ openWeb("ghostrepo.net")
 #init()
 #loseTheGame()
 #winGame()
-#choiceMenu()
+#valintaMenu()
 
 #PÄÄOHJELMA
 #init()
