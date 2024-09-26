@@ -158,8 +158,9 @@ def openShop():
 def openPauseMenu():
     print("Pause Menu")
 
-def init():
     # PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
+
+def init():
 
     # Kysytään pelaajan nimi
     print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
@@ -190,11 +191,11 @@ def init():
         cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
         connection.commit()
 
-    return player
-
     # Suljetaan kursori ja yhteys
     cursor.close()
     connection.close()
+
+    return player
 
 def mission0():
     # Mission 0 - Tutorial
