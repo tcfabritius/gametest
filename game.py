@@ -67,16 +67,11 @@ def loppuruutu():
         for frame in effect:
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
-def openWeb(mission_id):
+def openWeb(webpage):
     clear_console()
-    cursor = connection.cursor()
-    cursor.execute("SELECT description FROM mission WHERE id = %s", (mission_id))
-    connection.commit()
-    kuvaus = cursor.fetchall()
-    print(Fore.GREEN + kuvaus[1])
+    print("")
+    print(Fore.GREEN + websivut[webpage])
     tmp = input("Press enter to exit web browser")
-    cursor.close()
-    connection.close()
     print(Style.RESET_ALL)
     clear_console()
 
@@ -469,6 +464,16 @@ connection = mysql.connector.connect(
          autocommit=True
          )
 
+websivut = {
+    "ghostrepo.net":"""
+    Testi
+    Testi
+    Testi
+    """,
+    "privaracapital.org":"""
+    """
+}
+
 
 # Alustetaan alkuruutu-animaation sisältö monirivisellä tekstillä
 alkuanimaatioruutu = """
@@ -545,7 +550,7 @@ playback.play()
 #havioruutu()
 #loppuruutu()
 #voittoruutu()
-#openWeb()
+openWeb("ghostrepo.net")
 
 #MIKON FUNKTIOT
 #mission0()
@@ -555,3 +560,7 @@ playback.play()
 #loseTheGame()
 #winGame()
 #choiceMenu()
+
+#PÄÄOHJELMA
+#init()
+#mission0()
