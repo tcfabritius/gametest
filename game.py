@@ -106,7 +106,6 @@ def raiseThreat(type):
     cursor.close()
     connection.close()
 
-
 def lowerThreat():
     cursor = connection.cursor()
     cursor.execute("UPDATE threat SET threat = threat - 20")
@@ -137,10 +136,6 @@ def openWeb(webpage):
     tmp = input("Press enter to exit web browser")
     print(Style.RESET_ALL)
     clear_console()
-
-def generateBankKey():
-    key = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
-    return key
 
 def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
@@ -260,25 +255,8 @@ def init(connection):
 
     return player
 
-
-
 def mission0():
     # Mission 0 - Tutorial
-    #Description
-    print(Fore.GREEN + """
-    Mission Brief: "Infiltration of Privara Capital"
-    
-    You’ve been recruited by a hacker organization for a critical operation. 
-    Your first task is to infiltrate Privara Capital, a bank notorious for its aggressive profit-driven practices. 
-    The organization suspects the bank of engaging in illegal activities and needs solid evidence.
-    
-    Your mission is to breach the bank’s internal network, gather sensitive data, and drive funds to the organization. 
-    You'll be equipped with the organization’s custom-built hacking tools.
-    
-    Good luck —this is your first step into a larger world of high-stakes infiltration.
-    """)
-    player = input("Enter id: ")
-
     # After playerGreeting
     input(f"USER: Gh0stP@cket sent: cool moves '{player}' lmao. (HELPER.PY:[Enter]: (Input whatever to progress)): ")
 
@@ -382,7 +360,7 @@ def mission0():
     print("YOU: Option 3 - Become a client at Privara")
 
     #Fake bank fake account
-    newPrivaraKey = generateBankKey()
+    newPrivaraKey = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
     print(f"Your 4-digit key is: {newPrivaraKey}")
     newPrivaraPassword = input("Please input new password: ")
     print("Password set.")
@@ -444,38 +422,20 @@ def mission0():
     """)
 
     #Player will do one mission task here.
-    ##2
-    intTask2 = input("access_point 20: int2**3*int5\nCaseFalse =? ")
-    if intTask2 == "false" or intTask2 == "no":
-        correctAnswer = input("input correct variable: ")
-        if correctAnswer == 40:
-            print("access point status:'PASS'")
-            print("out_undo_partial_alloc: while (--i >= 0) {free_page((unsigned long)group_info->blocks[i])};\n"
-                    "kfree(group_info); return NULL;) EXPORT_SYMBOL(groups_alloc);")
-        # taskScore += 1
-        # new task unless matched score is met.
-        elif intTask2 == "true" or intTask2 == "yes":
-            print("access point status: 'FAILURE'")
-            # new task unless matched score is met.
-            # refresh new task.
-            # add point to threat?
+    while True:
+        firstTask = input("access_point 20: int2**3*int5\nCaseFalse =? ")
+        if firstTask != 40:
+            firstTask = input("Faulty input: ")
         else:
-            print("access point encountered critical user error.")
-            print("access point status: 'FAILURE'")
-            # refresh new task
-            # add point to threat?
-    else:
-        print("access point encountered critical user error.")
-        print("access point status: 'FAILURE'")
-        # refresh new task
-        # add point to threat?
+            print("You did it.")
+            break
 
     #Teach about the threat-mechanic via intrusion
     print("HELPER.PY: /!\WARNING/!\: Threat-level increased.\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
     #Here is where we update the threat level for the first time.
 
-    print("HELPER.PY: How can I help?")
-    goToLocation = input("YOU: GO_TO: (HELPER.PY:[Home?]): ")
+    #Player goes home
+    print("HELPER.PY: Going home...")
 
     input("USER: Gh0stP@cket sent: bit sloppy but you did the trick (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: package in money out, nice work (HELPER.PY:[Enter]): ")
@@ -628,8 +588,6 @@ alkuanimaatioruutu = """
                 Hacker on board...
 
 
-
-
 """
 
 # Häviö animaatio
@@ -701,7 +659,7 @@ https://creativecommons.org/licenses/by/3.0/
 #Svetlanan funktiot
 
 #PÄÄOHJELMA
-#mission0()
+mission0()
 #mission1()
 #mission2()
 #winGame()
