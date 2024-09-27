@@ -85,6 +85,35 @@ def calcPrice(icao1, icao2):
         loseGame()
     return hinta
 
+def raiseThreat(type):
+    cursor = connection.cursor()
+    cursor.execute("SELECT threat FROM game WHERE id = %s", (player))
+    threat = cursor.fetchone()
+    if type == "stay":
+        if threat + 1 > 100:
+            loseGame()
+        else:
+            cursor.execute("UPDATE threat SET threat = threat +1")
+            connection.commit()
+
+    if type == "failure":
+        if threat + 3 > 100:
+            loseGame()
+        else:
+            cursor.execute("UPDATE threat SET threat = threat +3")
+            connection.commit()
+
+    cursor.close()
+    connection.close()
+
+
+def lowerThreat():
+    cursor = connection.cursor()
+    cursor.execute("UPDATE threat SET threat = threat - 20")
+    connection.commit()
+    cursor.close()
+    connection.close()
+
 def calcCO2(icao1, icao2):
     sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao1}'"
     kursori = connection.cursor()
