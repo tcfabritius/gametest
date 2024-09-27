@@ -67,6 +67,34 @@ def endScreen():
         for frame in effect:
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
+def calcPrice(icao1, icao2):
+    sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao1}'"
+    kursori = yhteys.cursor()
+    kursori.execute(sql_kysely)
+    sijainti1 = kursori.fetchall()
+    sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao2}'"
+    kursori = yhteys.cursor()
+    kursori.execute(sql_kysely)
+    sijainti2 = kursori.fetchall()
+    hinta = int(distance.distance(sijainti1, sijainti2).km)*1
+    return hinta
+
+def calcCO2(icao1, icao2):
+    sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao1}'"
+    kursori = yhteys.cursor()
+    kursori.execute(sql_kysely)
+    sijainti1 = kursori.fetchall()
+    sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao2}'"
+    kursori = yhteys.cursor()
+    kursori.execute(sql_kysely)
+    sijainti2 = kursori.fetchall()
+    valimatka = int(distance.distance(sijainti1, sijainti2).km)
+    if valimatka < 1500:
+        paastot = valimatka * 225
+    else:
+        paastot = valimatka * 120
+    return paastot
+
 def openWeb(webpage):
     clear_console()
     print("")
@@ -196,6 +224,8 @@ def init(connection):
     connection.close()
 
     return player
+
+
 
 def mission0():
     # Mission 0 - Tutorial
