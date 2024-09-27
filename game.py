@@ -456,8 +456,10 @@ def mission0():
     print(Style.RESET_ALL)
 
 def mission1():
+    print("Mission 1")
 
 def mission2():
+    print("Mission 2")
 
 # FUNKTIOT PÄÄTTYY
 
