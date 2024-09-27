@@ -69,11 +69,11 @@ def endScreen():
 
 def calcPrice(icao1, icao2):
     sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao1}'"
-    kursori = yhteys.cursor()
+    kursori = connection.cursor()
     kursori.execute(sql_kysely)
     sijainti1 = kursori.fetchall()
     sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao2}'"
-    kursori = yhteys.cursor()
+    kursori = connection.cursor()
     kursori.execute(sql_kysely)
     sijainti2 = kursori.fetchall()
     hinta = int(distance.distance(sijainti1, sijainti2).km)*1
@@ -81,11 +81,11 @@ def calcPrice(icao1, icao2):
 
 def calcCO2(icao1, icao2):
     sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao1}'"
-    kursori = yhteys.cursor()
+    kursori = connection.cursor()
     kursori.execute(sql_kysely)
     sijainti1 = kursori.fetchall()
     sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao2}'"
-    kursori = yhteys.cursor()
+    kursori = connection.cursor()
     kursori.execute(sql_kysely)
     sijainti2 = kursori.fetchall()
     valimatka = int(distance.distance(sijainti1, sijainti2).km)
