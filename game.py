@@ -498,37 +498,39 @@ def mission1():
 points = 0
 
 while points < 4:
-task1 = input("Question: What does GMO stand for in biotechnology?")
-if task1 == "Genetically Modified Organism" or task1 == "genetically modified organism":
-    print("Correct! Well done!")
-    points += 1
-else:
-    print("Incorrect. Try again!")
-    raiseThreat("failure")
+    task1 = input("Question: What does GMO stand for in biotechnology?")
+    if task1 == "Genetically Modified Organism" or task1 == "genetically modified organism":
+        print("Correct! Well done!")
+        points += 1
+    else:
+        print("Incorrect. Try again!")
+        raiseThreat("failure")
 
-task2 = input("Question: Which famous biotechnology tool allows for precise editing of DNA sequences?")
-if task2 == "CRISPR" or task2 == "crispr":
-    print("Correct! Well done!")
-    points += 1
-else:
-    print("Incorrect. Try again!")
-    raiseThreat("failure")
+    task2 = input("Question: Which famous biotechnology tool allows for precise editing of DNA sequences?")
+    if task2 == "CRISPR" or task2 == "crispr":
+        print("Correct! Well done!")
+        points += 1
+    else:
+        print("Incorrect. Try again!")
+        raiseThreat("failure")
 
-task3 = input("Question: In which year was the first genetically modified crop, the Flavr Savr tomato, approved for commercial sale in the U.S.? HINT it's in the 90s")
-if task3 == "1994":
-    print("Correct! Well done!")
-    points += 1
-else:
-    print("Incorrect. Try again!")
-    raiseThreat("failure")
+    task3 = input("Question: In which year was the first genetically modified crop, the Flavr Savr tomato, approved for commercial sale in the U.S.? HINT it's in the 90s")
+    if task3 == "1994":
+        print("Correct! Well done!")
+        points += 1
+    else:
+        print("Incorrect. Try again!")
+        raiseThreat("failure")
 
-task4 = input("Question: What is the term for the process of transferring genes from one organism to another?")
-if task4 == "Genetic Engineering" or task4 == "genetic engineering":
-    print("Correct! Well done!")
-    points += 1
-else:
-    print("Incorrect. Try again!")
-    raiseThreat("failure")
+
+    task4 = input("Question: What is the term for the process of transferring genes from one organism to another?")
+    if task4 == "Genetic Engineering" or task4 == "genetic engineering":
+        print("Correct! Well done!")
+        points += 1
+    else:
+        print("Incorrect. Try again!")
+        raiseThreat("failure")
+
 
 
 # Encryption aiheinen tehtävä
