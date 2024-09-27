@@ -507,7 +507,7 @@ while points < 4:
         points += 1
     else:
         print("Incorrect. Try again!")
-        threat(failure)
+        raiseThreat("failure")
 
     task2 = input("Solve the following word using Caesar Shift -1: 'gnknfqzl'\n")
     if task2 == "hologram":
@@ -515,7 +515,7 @@ while points < 4:
         points += 1
     else:
         print("Incorrect. Try again!")
-        threat(failure)
+        raiseThreat("failure")
 
     task3= input("Solve the following sentence using Caesar Shift -1: 'zqd xnt rdqhntr'\n")
     if task3 == "are you serious":
@@ -523,7 +523,7 @@ while points < 4:
         points += 1
     else:
         print("Incorrect. Try again!")
-        threat(failure)
+        raiseThreat("failure")
 
     task4= input("Solve the following sentence using Caesar Shift -1: 'fnnc lnqmhmf uhdszml'\n")
     if task4 == "good morning vietnam":
@@ -531,7 +531,7 @@ while points < 4:
         points += 1
     else:
         print("Incorrect. Try again!")
-        threat(failure)
+        raiseThreat("failure")
 
 
 
