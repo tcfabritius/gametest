@@ -362,12 +362,13 @@ def mission0():
     #Fake bank fake account
     newPrivaraKey = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
     print(f"Your 4-digit key is: {newPrivaraKey}")
-    newPrivaraPassword = input("Please input new password: ")
+    newPrivaraPassword = int(input("Please input new password: "))
+
     print("Password set.")
     input("HELPER.PY: Please take mental note of these credentials. (HELPER.PY:[Enter]): ")
 
-    privaraKey = input(f"Please input your 4-letter id: ")
-    privaraPassword = input(f"Please input your password: ")
+    privaraKey = int(input(f"Please input your 4-letter id: "))
+    privaraPassword = int(input(f"Please input your password: "))
     while True:
         if privaraPassword == newPrivaraPassword and privaraKey == newPrivaraKey:
             print("Log in successful.")
@@ -413,11 +414,14 @@ def mission0():
     #Player will do one mission task here.
     while True:
         firstTask = input("access_point 20: int2**3*int5\nCaseFalse =? ")
-        if firstTask != 40:
-            firstTask = input("Faulty input: ")
-        else:
-            print("You did it.")
-            break
+        if firstTask == "yes" or "true":
+            print("ERROR: Critical user error.")
+        elif firstTask == "no" or "false":
+            correctAnswer = int(input("Please input correct variable: "))
+            if correctAnswer == 40:
+                print("access_point 20: STATUS: GREEN")
+                break
+
 
     #Teach about the threat-mechanic via intrusion
     print("HELPER.PY: /!\WARNING/!\: Threat-level increased.\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
