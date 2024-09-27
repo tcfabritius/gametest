@@ -366,17 +366,6 @@ def mission0():
     print("Password set.")
     input("HELPER.PY: Please take mental note of these credentials. (HELPER.PY:[Enter]): ")
 
-    #Might be worth it to utilize some kind of fake code language to do context sensitive actions?
-    #Player buys rootkit-device
-    print("HELPER.PY: How can I help?")
-
-    print("YOU: Buy rootkit")
-    #Lose money
-
-    print("OPTIONS: (1) atm\n(2) customer service\n(3) bathroom")
-
-    print("YOU: OPTION: (1) atm")
-
     privaraKey = input(f"Please input your 4-letter id: ")
     privaraPassword = input(f"Please input your password: ")
     while True:
