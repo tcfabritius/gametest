@@ -425,6 +425,10 @@ def mission0():
     print(f"(HELPER.PY:[Enter]): Guided mission protocol over. Good luck {player}")
     print(Style.RESET_ALL)
 
+def mission1():
+
+def mission2():
+
 # FUNKTIOT PÄÄTTYY
 
 
@@ -548,3 +552,7 @@ https://creativecommons.org/licenses/by/3.0/
 
 #PÄÄOHJELMA
 #mission0()
+#mission1()
+#mission2()
+#winGame()
+#winScreen()
