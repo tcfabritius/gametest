@@ -68,7 +68,7 @@ def endScreen():
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
 def calcPrice(icao1, icao2):
-    sql_kysely = f"money from game where id = '{player}'"
+    sql_kysely = f"select money from game where id = '{player}'"
     kursori = connection.cursor()
     kursori.execute(sql_kysely)
     saldo = kursori.fetchall()
