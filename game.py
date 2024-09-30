@@ -137,6 +137,55 @@ def openWeb(webpage):
     print(Style.RESET_ALL)
     clear_console()
 
+def travel_to(icao_target):
+    row_iterator = connection.cursor()
+    sql_current = (f"SELECT game.location FROM game, airport WHERE game.id ='{player}'")
+    row_iterator.execute(sql_current)
+    location_c = row_iterator.fetchone()
+    current_location = location_c[0]
+    target = icao_target
+    #travel_price = calcPrice(current_location, target)
+    #print(travel_price)
+    travel_co2 = calcCO2(current_location, target)
+"""
+    #update location
+    sql_target = (f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = '{travel_co2}' WHERE id ='{player}'")
+    row_iterator.execute(sql_target)
+    # update money
+    sql_money = (f"UPDATE game SET money = (money -'{target}') WHERE id ='{player}'")
+    row_iterator.execute(sql_money)
+"""
+def travel_menu(country_code):
+    row_iterator = connection.cursor()
+    sql_quest = (f"SELECT ident, airport.name FROM airport "
+                 f"WHERE iso_country ='{country_code}' AND type='medium_airport'ORDER BY RAND() LIMIT 10")
+    row_iterator.execute(sql_quest)
+    airports = row_iterator.fetchall()
+
+    airports_list = []
+    for r in airports:
+        new_r = list(r)
+        airports_list.append(new_r)
+    for r in airports_list:
+        #For-loop complaining without functionality.
+        print("lmao.")
+        #r.append(price_temp(10,90))#calcPrice(current_location, target)
+        #r.append(co2_temp(130,80))#calcCO2(current_location, target)
+# print menu
+    print("\nAvailable Airports: \n")
+    i = 0
+    for r in airports_list:
+        print(f" {airports_list[i][0]} {airports_list[i][1]} "
+              f"\n price: {airports_list[i][2]}; CO2 consumed: {airports_list[i][3]}\n")
+        i+=1
+
+    destination = input("Where do you want to go? Please choose airport code from the list: ")
+    # if airport code in airports_list
+    if any(destination in sublist for sublist in airports_list):
+        travel_to(destination)
+    else:
+        print("Ok. You want to travel later")
+
 def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
     print("GAME OVER")
