@@ -152,35 +152,38 @@ def openWeb(webpage):
     clear_console()
 
 def travel_to(icao_target):
-    row_iterator = connection.cursor()
-    sql_current = f"SELECT game.location FROM game, airport WHERE game.id ='{player}'"
-    row_iterator.execute(sql_current)
-    location_c = row_iterator.fetchone()
+    connection.reconnect()
+    cursor = connection.cursor()
+    cursor.execute("SELECT game.location FROM game, airport WHERE game.id = %s", (player,))
+    location_c = cursor.fetchone()
     current_location = location_c[0]
     target = icao_target
     travel_price = calcPrice(current_location, target)
+    print(travel_price)
     travel_co2 = calcCO2(current_location, target)
-    row_iterator.close()
-    connection.close()
-"""
+    print(travel_co2)
+    connection.reconnect()
     #update location
     sql_target = (f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = '{travel_co2}' WHERE id ='{player}'")
-    row_iterator.execute(sql_target)
+    cursor.execute(sql_target)
     # update money
-    sql_money = (f"UPDATE game SET money = (money -'{target}') WHERE id ='{player}'")
-    row_iterator.execute(sql_money)
-"""
+    sql_money = (f"UPDATE game SET money = (money -'{travel_price}') WHERE id ='{player}'")
+    cursor.execute(sql_money)
+    cursor.close()
+    connection.close()
 
 def travel_menu(country_code):
-    row_iterator = connection.cursor()
+    connection.reconnect()
+    cursor = connection.cursor()
     sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}' AND type='medium_airport' ORDER BY RAND() LIMIT 10"
-    row_iterator.execute(sql_quest)
-    airports = row_iterator.fetchall()
-
-    sql_current = f"SELECT game.location FROM game, airport WHERE game.id ='{player}'"
-    row_iterator.execute(sql_current)
-    location_c = row_iterator.fetchone()
+    cursor.execute(sql_quest)
+    airports = cursor.fetchall()
+    print(airports)
+    cursor = connection.cursor()
+    cursor.execute("SELECT game.location FROM game, airport WHERE game.id = %s", (player,))
+    location_c = cursor.fetchone()
     current_location = location_c[0]
+    print(location_c)
     icao = []
     names = []
     prices = []
@@ -194,8 +197,8 @@ def travel_menu(country_code):
     # print menu
     print("\nAvailable Airports: \n")
 
-    for i in icao:
-        print(icao[i] + " " + names[i] + " " + prices[i] + " " + co2[i])
+    for (a, b, c, d) in zip(icao, names, prices, co2):
+        print(f"{a}  {b} \n      price: {c}; CO2 consumed: {d}\n")
 
     destination = input("Where do you want to go? Please choose airport code from the list: ")
     # if airport code in airports_list
@@ -203,9 +206,8 @@ def travel_menu(country_code):
         travel_to(destination)
     else:
         print("Ok. You want to travel later")
-    row_iterator.close()
+    cursor.close()
     connection.close()
-
 
 def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
@@ -1233,10 +1235,10 @@ https://creativecommons.org/licenses/by/3.0/
 #endScreen()
 #winScreen()
 #openWeb("ghostrepo.net")
-tmp = calcPrice("EFHK","ESSA")
-print(tmp)
-tmp = calcCO2("EFHK","ESSA")
-print(tmp)
+#tmp = calcPrice("EFHK","ESSA")
+#print(tmp)
+#tmp = calcCO2("EFHK","ESSA")
+#print(tmp)
 #MIKON FUNKTIOT
 #mission0()
 
@@ -1247,7 +1249,7 @@ print(tmp)
 #optionMenu()
 
 #Svetlanan funktiot
-#travel_menu("FI")
+travel_menu("FI")
 
 
 #PÄÄOHJELMA
