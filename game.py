@@ -992,39 +992,40 @@ def mission1():
 
 def mission1Tasks():
     points = 0
+    randValue = random.randint(1, 4)
     while points < 4:
-        task1 = input("Question: What does GMO stand for in biotechnology?")
-        if task1 == "Genetically Modified Organism" or task1 == "genetically modified organism":
-            print("Correct! Well done!")
-            points += 1
-        else:
-            print("Incorrect. Try again!")
-            raiseThreat("failure")
-
-        task2 = input("Question: Which famous biotechnology tool allows for precise editing of DNA sequences?")
-        if task2 == "CRISPR" or task2 == "crispr":
-            print("Correct! Well done!")
-            points += 1
-        else:
-            print("Incorrect. Try again!")
-            raiseThreat("failure")
-
-        task3 = input("Question: In which year was the first genetically modified crop, the Flavr Savr tomato, approved for commercial sale in the U.S.? HINT it's in the 90s")
-        if task3 == "1994":
-            print("Correct! Well done!")
-            points += 1
-        else:
-            print("Incorrect. Try again!")
-            raiseThreat("failure")
-
-
-        task4 = input("Question: What is the term for the process of transferring genes from one organism to another?")
-        if task4 == "Genetic Engineering" or task4 == "genetic engineering":
-            print("Correct! Well done!")
-            points += 1
-        else:
-            print("Incorrect. Try again!")
-            raiseThreat("failure")
+        if randValue == 1:
+            task1 = input("Question: What does GMO stand for in biotechnology?")
+            if task1 == "Genetically Modified Organism" or task1 == "genetically modified organism":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randValue == 2:
+            task2 = input("Question: Which famous biotechnology tool allows for precise editing of DNA sequences?")
+            if task2 == "CRISPR" or task2 == "crispr":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randValue == 3:
+            task3 = input("Question: In which year was the first genetically modified crop, the Flavr Savr tomato, approved for commercial sale in the U.S.? HINT it's in the 90s")
+            if task3 == "1994":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randValue == 4:
+            task4 = input("Question: What is the term for the process of transferring genes from one organism to another?")
+            if task4 == "Genetic Engineering" or task4 == "genetic engineering":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
 
 # Encryption aiheinen tehtävä
 def mission2():
@@ -1032,38 +1033,40 @@ def mission2():
 
 def mission2Tasks():
     points = 0
+    randomValue = random.randint(1, 4)
     while points < 4:
-        task1 = input("Solve the following sentence using Caesar Shift -1: 'fnnc ktbj rzuhmf sgd vnqkc'\n")
-        if task1 == "good luck saving the world":
-            print("Correct! Well done!")
-            points += 1
-        else:
-            print("Incorrect. Try again!")
-            raiseThreat("failure")
-
-        task2 = input("Solve the following word using Caesar Shift -1: 'gnknfqzl'\n")
-        if task2 == "hologram":
-            print("Correct! Well done!")
-            points += 1
-        else:
-            print("Incorrect. Try again!")
-            raiseThreat("failure")
-
-        task3 = input("Solve the following sentence using Caesar Shift -1: 'zqd xnt rdqhntr'\n")
-        if task3 == "are you serious":
-            print("Correct! Well done!")
-            points += 1
-        else:
-            print("Incorrect. Try again!")
-            raiseThreat("failure")
-
-        task4 = input("Solve the following sentence using Caesar Shift -1: 'fnnc lnqmhmf uhdszml'\n")
-        if task4 == "good morning vietnam":
-            print("Correct! Well done!")
-            points += 1
-        else:
-            print("Incorrect. Try again!")
-            raiseThreat("failure")
+        if randomValue == 1:
+            task1 = input("Solve the following sentence using Caesar Shift -1: 'fnnc ktbj rzuhmf sgd vnqkc'\n")
+            if task1 == "good luck saving the world":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randomValue == 2:
+            task2 = input("Solve the following word using Caesar Shift -1: 'gnknfqzl'\n")
+            if task2 == "hologram":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randomValue == 3:
+            task3 = input("Solve the following sentence using Caesar Shift -1: 'zqd xnt rdqhntr'\n")
+            if task3 == "are you serious":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randomValue == 4:
+            task4 = input("Solve the following sentence using Caesar Shift -1: 'fnnc lnqmhmf uhdszml'\n")
+            if task4 == "good morning vietnam":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
 
 # FUNKTIOT PÄÄTTYY
 ########################################################################################################################
@@ -1163,7 +1166,7 @@ https://creativecommons.org/licenses/by/3.0/
 """
 
 #TIMIN FUNKTIOT
-#startScreen()
+startScreen()
 #loseScreen()
 #endScreen()
 #winScreen()
@@ -1182,7 +1185,8 @@ https://creativecommons.org/licenses/by/3.0/
 
 #PÄÄOHJELMA
 mission0()
-#mission1()
+mission1()
 #mission2()
 #winGame()
 #winScreen()
+endScreen()
