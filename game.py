@@ -992,8 +992,8 @@ def mission1():
 
 def mission1Tasks():
     points = 0
-    randValue = random.randint(1, 4)
-    while points < 4:
+    randValue = random.randint(1, 10)
+    while points < 10:
         if randValue == 1:
             task1 = input("Question: What does GMO stand for in biotechnology?")
             if task1 == "Genetically Modified Organism" or task1 == "genetically modified organism":
@@ -1021,6 +1021,54 @@ def mission1Tasks():
         elif randValue == 4:
             task4 = input("Question: What is the term for the process of transferring genes from one organism to another?")
             if task4 == "Genetic Engineering" or task4 == "genetic engineering":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randValue == 5:
+            task5 = input("Solve the following sentence using Caesar Shift +1: 'xfmm epof jt cfuufs uibo xfmm tbje'\n")
+            if task5 == "well done is better than well said":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randValue == 6:
+            task6 = input("Solve the following words using Caesar Shift +1: 'qsjwbsb dbqjubm'\n")
+            if task6 == "privara capital":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randValue == 7:
+            task7 = input("Solve the following word using Caesar Shift +1: 'ofvsbhfojy'\n")
+            if task7 == "neuragenix":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randValue == 8:
+            task8 = input("Solve the following words using Caesar Shift +1: 'ofuxpsl qspupdpm'\n")
+            if task8 == "network protocol":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randValue == 9:
+            task9 = input("Solve the following word using Caesar Shift +1: 'bvuifoujdbujpo'\n")
+            if task9 == "authentication":
+                print("Correct! Well done!")
+                points += 1
+            else:
+                print("Incorrect. Try again!")
+                raiseThreat("failure")
+        elif randValue == 10:
+            task10 = input("Solve the following word using Caesar Shift +1: 'lfsofm qbojd'\n")
+            if task10 == "kernel panic":
                 print("Correct! Well done!")
                 points += 1
             else:
