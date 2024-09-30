@@ -139,13 +139,12 @@ def openWeb(webpage):
 
 def travel_to(icao_target):
     row_iterator = connection.cursor()
-    sql_current = (f"SELECT game.location FROM game, airport WHERE game.id ='{player}'")
+    sql_current = f"SELECT game.location FROM game, airport WHERE game.id ='{player}'"
     row_iterator.execute(sql_current)
     location_c = row_iterator.fetchone()
     current_location = location_c[0]
     target = icao_target
-    #travel_price = calcPrice(current_location, target)
-    #print(travel_price)
+    travel_price = calcPrice(current_location, target)
     travel_co2 = calcCO2(current_location, target)
 """
     #update location
@@ -155,36 +154,40 @@ def travel_to(icao_target):
     sql_money = (f"UPDATE game SET money = (money -'{target}') WHERE id ='{player}'")
     row_iterator.execute(sql_money)
 """
+
 def travel_menu(country_code):
     row_iterator = connection.cursor()
-    sql_quest = (f"SELECT ident, airport.name FROM airport "
-                 f"WHERE iso_country ='{country_code}' AND type='medium_airport'ORDER BY RAND() LIMIT 10")
+    sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}' AND type='medium_airport'ORDER BY RAND() LIMIT 10"
     row_iterator.execute(sql_quest)
     airports = row_iterator.fetchall()
 
-    airports_list = []
+    sql_current = f"SELECT game.location FROM game, airport WHERE game.id ='{player}'"
+    row_iterator.execute(sql_current)
+    location_c = row_iterator.fetchone()
+    current_location = location_c[0]
+    icao = []
+    names = []
+    prices = []
+    co2 = []
+# create lists
     for r in airports:
-        new_r = list(r)
-        airports_list.append(new_r)
-    for r in airports_list:
-        #For-loop complaining without functionality.
-        print("lmao.")
-        #r.append(price_temp(10,90))#calcPrice(current_location, target)
-        #r.append(co2_temp(130,80))#calcCO2(current_location, target)
-# print menu
+        icao.append(r[0])
+        names.append(r[1])
+        prices.append(calcPrice(current_location, r[0]))
+        co2.append(calcCO2(current_location, r[0]))
+    # print menu
     print("\nAvailable Airports: \n")
-    i = 0
-    for r in airports_list:
-        print(f" {airports_list[i][0]} {airports_list[i][1]} "
-              f"\n price: {airports_list[i][2]}; CO2 consumed: {airports_list[i][3]}\n")
-        i+=1
+
+    for i in icao:
+        print(icao[i] + " " + names[i] + " " + prices[i] + " " + co2[i])
 
     destination = input("Where do you want to go? Please choose airport code from the list: ")
     # if airport code in airports_list
-    if any(destination in sublist for sublist in airports_list):
+    if destination in icao:
         travel_to(destination)
     else:
         print("Ok. You want to travel later")
+
 
 def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
@@ -1082,7 +1085,7 @@ def mission2():
 
 def mission2Tasks():
     points = 0
-    randomValue = random.randint(1, 10)
+    randomValue = random.randint(1, 4)
     while points < 4:
         if randomValue == 1:
             task1 = input("Solve the following sentence using Caesar Shift -1: 'fnnc ktbj rzuhmf sgd vnqkc'\n")
@@ -1111,54 +1114,6 @@ def mission2Tasks():
         elif randomValue == 4:
             task4 = input("Solve the following sentence using Caesar Shift -1: 'fnnc lnqmhmf uhdszml'\n")
             if task4 == "good morning vietnam":
-                print("Correct! Well done!")
-                points += 1
-            else:
-                print("Incorrect. Try again!")
-                raiseThreat("failure")
-        elif randomValue == 5:
-            task5 = input("Solve the following sentence using Caesar Shift +1: 'xfmm epof jt cfuufs uibo xfmm tbje'\n")
-            if task5 == "well done is better than well said":
-                print("Correct! Well done!")
-                points += 1
-            else:
-                print("Incorrect. Try again!")
-                raiseThreat("failure")
-        elif randomValue == 6:
-            task6 = input("Solve the following words using Caesar Shift +1: 'qsjwbsb dbqjubm'\n")
-            if task6 == "privara capital":
-                print("Correct! Well done!")
-                points += 1
-            else:
-                print("Incorrect. Try again!")
-                raiseThreat("failure")
-        elif randomValue == 7:
-            task7 = input("Solve the following word using Caesar Shift +1: 'ofvsbhfojy'\n")
-            if task7 == "neuragenix":
-                print("Correct! Well done!")
-                points += 1
-            else:
-                print("Incorrect. Try again!")
-                raiseThreat("failure")
-        elif randomValue == 8:
-            task8 = input("Solve the following words using Caesar Shift +1: 'ofuxpsl qspupdpm'\n")
-            if task8 == "network protocol":
-                print("Correct! Well done!")
-                points += 1
-            else:
-                print("Incorrect. Try again!")
-                raiseThreat("failure")
-        elif randomValue == 9:
-            task9 = input("Solve the following word using Caesar Shift +1: 'bvuifoujdbujpo'\n")
-            if task9 == "authentication":
-                print("Correct! Well done!")
-                points += 1
-            else:
-                print("Incorrect. Try again!")
-                raiseThreat("failure")
-        elif randomValue == 10:
-            task10 = input("Solve the following word using Caesar Shift +1: 'lfsofm qbojd'\n")
-            if task10 == "kernel panic":
                 print("Correct! Well done!")
                 points += 1
             else:
@@ -1263,7 +1218,7 @@ https://creativecommons.org/licenses/by/3.0/
 """
 
 #TIMIN FUNKTIOT
-startScreen()
+#startScreen()
 #loseScreen()
 #endScreen()
 #winScreen()
@@ -1279,6 +1234,8 @@ startScreen()
 #optionMenu()
 
 #Svetlanan funktiot
+travel_menu("FI")
+
 
 #PÄÄOHJELMA
 #mission0()
