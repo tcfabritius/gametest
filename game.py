@@ -155,13 +155,6 @@ def travel_to(icao_target):
     sql_money = (f"UPDATE game SET money = (money -'{target}') WHERE id ='{player}'")
     row_iterator.execute(sql_money)
 """
-# test
-def price_temp(a,b):
-    return (f"test value- {a+b}")
-def co2_temp(c,d):
-    return (f"test value- {c+d}")
-# end test
-
 def travel_menu(country_code):
     row_iterator = connection.cursor()
     sql_quest = (f"SELECT ident, airport.name FROM airport "
@@ -174,9 +167,8 @@ def travel_menu(country_code):
         new_r = list(r)
         airports_list.append(new_r)
     for r in airports_list:
-
-        r.append(price_temp(10,90))#calcPrice(current_location, target)
-        r.append(co2_temp(130,80))#calcCO2(current_location, target)
+        #r.append(price_temp(10,90))#calcPrice(current_location, target)
+        #r.append(co2_temp(130,80))#calcCO2(current_location, target)
 # print menu
     print("\nAvailable Airports: \n")
     i = 0
@@ -191,7 +183,6 @@ def travel_menu(country_code):
         travel_to(destination)
     else:
         print("Ok. You want to travel later")
-
 
 def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
