@@ -193,9 +193,6 @@ def travel_menu(country_code):
         print("Ok. You want to travel later")
 
 
-
-
-
 def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
     print("GAME OVER")
