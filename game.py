@@ -162,7 +162,7 @@ def travel_to(icao_target):
     travel_co2 = calcCO2(current_location, target)
     connection.reconnect()
     #update location
-    sql_target = (f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = '{travel_co2}' WHERE id ='{player}'")
+    sql_target = f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = '{travel_co2}' WHERE id ='{player}'"
     cursor.execute(sql_target)
     connection.commit()
 
@@ -172,13 +172,13 @@ def travel_to(icao_target):
     budget_co2 = cursor.fetchone()
     co2_budget = budget_co2[0]
     #print(co2_budget)
-    #if travel_co2 > co2_budget: ??? oliko tarkoitus seurata co2_budgettia, se on pieni
+    #if travel_co2 > co2_budget: ??? co2_budgetti on liian pieni
         #loseGame()
 
     # update money
     connection.reconnect()
     cursor = connection.cursor()
-    sql_money = (f"UPDATE game SET money = (money -'{travel_price}') WHERE id ='{player}'")
+    sql_money = f"UPDATE game SET money = (money -'{travel_price}') WHERE id ='{player}'"
     cursor.execute(sql_money)
     connection.commit()
     cursor.close()
@@ -214,7 +214,7 @@ def travel_menu(country_code):
 
     destination = input("Where do you want to go? Please choose airport code from the list: ")
     # if airport code in airports
-    if destination in icao:
+    if destination in icao or destination !="":
         travel_to(destination)
     else:
         print("Ok. You want to travel later")
