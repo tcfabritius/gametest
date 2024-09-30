@@ -127,7 +127,6 @@ def lowerThreat():
     connection.close()
 
 def calcCO2(icao1, icao2):
-    print(icao1, icao2)
     connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("SELECT latitude_deg, longitude_deg from airport where ident = %s", (icao1,))
@@ -160,16 +159,28 @@ def travel_to(icao_target):
     current_location = location_c[0]
     target = icao_target
     travel_price = calcPrice(current_location, target)
-    #print(travel_price)
     travel_co2 = calcCO2(current_location, target)
-    #print(travel_co2)
     connection.reconnect()
     #update location
     sql_target = (f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = '{travel_co2}' WHERE id ='{player}'")
     cursor.execute(sql_target)
+    connection.commit()
+
+    connection.reconnect()
+    cursor = connection.cursor()
+    cursor.execute("SELECT game.co2_budget FROM game, airport WHERE game.id = %s", (player,))
+    budget_co2 = cursor.fetchone()
+    co2_budget = budget_co2[0]
+    #print(co2_budget)
+    #if travel_co2 > co2_budget: ??? oliko tarkoitus seurata co2_budgettia, se on pieni
+        #loseGame()
+
     # update money
+    connection.reconnect()
+    cursor = connection.cursor()
     sql_money = (f"UPDATE game SET money = (money -'{travel_price}') WHERE id ='{player}'")
     cursor.execute(sql_money)
+    connection.commit()
     cursor.close()
     connection.close()
 
@@ -179,10 +190,9 @@ def travel_menu(country_code):
     cursor.execute("SELECT game.location FROM game, airport WHERE game.id = %s", (player,))
     location_c = cursor.fetchone()
     current_location = location_c[0]
-    #print(location_c)
     connection.reconnect()
     cursor = connection.cursor()
-    sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}' AND type='medium_airport' ORDER BY RAND() LIMIT 10"
+    sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}'AND ident != '{current_location}' AND type='medium_airport' ORDER BY RAND() LIMIT 10"
     cursor.execute(sql_quest)
     airports = cursor.fetchall()
     #print(airports)
@@ -196,14 +206,14 @@ def travel_menu(country_code):
         names.append(r[1])
         prices.append(calcPrice(current_location, r[0]))
         co2.append(calcCO2(current_location, r[0]))
+
     # print menu
     print("\nAvailable Airports: \n")
-
     for (a, b, c, d) in zip(icao, names, prices, co2):
         print(f"{a}  {b} \n      price: {c}; CO2 consumed: {d}\n")
 
     destination = input("Where do you want to go? Please choose airport code from the list: ")
-    # if airport code in airports_list
+    # if airport code in airports
     if destination in icao:
         travel_to(destination)
     else:
