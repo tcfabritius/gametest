@@ -127,6 +127,7 @@ def lowerThreat():
     connection.close()
 
 def calcCO2(icao1, icao2):
+    print(icao1, icao2)
     connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("SELECT latitude_deg, longitude_deg from airport where ident = %s", (icao1,))
@@ -159,9 +160,9 @@ def travel_to(icao_target):
     current_location = location_c[0]
     target = icao_target
     travel_price = calcPrice(current_location, target)
-    print(travel_price)
+    #print(travel_price)
     travel_co2 = calcCO2(current_location, target)
-    print(travel_co2)
+    #print(travel_co2)
     connection.reconnect()
     #update location
     sql_target = (f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = '{travel_co2}' WHERE id ='{player}'")
@@ -175,15 +176,16 @@ def travel_to(icao_target):
 def travel_menu(country_code):
     connection.reconnect()
     cursor = connection.cursor()
-    sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}' AND type='medium_airport' ORDER BY RAND() LIMIT 10"
-    cursor.execute(sql_quest)
-    airports = cursor.fetchall()
-    print(airports)
-    cursor = connection.cursor()
     cursor.execute("SELECT game.location FROM game, airport WHERE game.id = %s", (player,))
     location_c = cursor.fetchone()
     current_location = location_c[0]
-    print(location_c)
+    #print(location_c)
+    connection.reconnect()
+    cursor = connection.cursor()
+    sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}' AND type='medium_airport' ORDER BY RAND() LIMIT 10"
+    cursor.execute(sql_quest)
+    airports = cursor.fetchall()
+    #print(airports)
     icao = []
     names = []
     prices = []
