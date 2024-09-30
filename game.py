@@ -1042,7 +1042,7 @@ def mission1():
 def mission1Tasks():
     points = 0
     randValue = random.randint(1, 10)
-    while points < 10:
+    while points < 4:
         if randValue == 1:
             task1 = input("Question: What does GMO stand for in biotechnology?")
             if task1 == "Genetically Modified Organism" or task1 == "genetically modified organism":
