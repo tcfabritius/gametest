@@ -1184,9 +1184,9 @@ startScreen()
 #Svetlanan funktiot
 
 #PÄÄOHJELMA
-mission0()
-mission1()
+#mission0()
+#mission1()
 #mission2()
 #winGame()
 #winScreen()
-endScreen()
+#endScreen()
