@@ -167,6 +167,8 @@ def travel_menu(country_code):
         new_r = list(r)
         airports_list.append(new_r)
     for r in airports_list:
+        #For-loop complaining without functionality.
+        print("lmao.")
         #r.append(price_temp(10,90))#calcPrice(current_location, target)
         #r.append(co2_temp(130,80))#calcCO2(current_location, target)
 # print menu
