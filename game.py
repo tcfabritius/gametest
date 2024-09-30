@@ -10,6 +10,16 @@ import os
 import mysql.connector
 import random
 
+connection = mysql.connector.connect(
+         host='127.0.0.1',
+         port= 3306,
+         database='flight_game',
+         user='user',
+         password='user',
+         autocommit=True
+         )
+
+
 # FUNKTIOT ALKAA
 def clear_console():
     # For Windows, use 'cls', for Mac/Linux, use 'clear'
@@ -68,21 +78,22 @@ def endScreen():
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
 def calcPrice(icao1, icao2):
-    sql_kysely = f"select money from game where id = '{player}'"
-    kursori = connection.cursor()
-    kursori.execute(sql_kysely)
-    saldo = kursori.fetchall()
-    sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao1}'"
-    kursori = connection.cursor()
-    kursori.execute(sql_kysely)
-    sijainti1 = kursori.fetchall()
-    sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao2}'"
-    kursori = connection.cursor()
-    kursori.execute(sql_kysely)
-    sijainti2 = kursori.fetchall()
+    connection.reconnect()
+    cursor = connection.cursor()
+    cursor.execute("select money from game WHERE id = %s", (player,))
+    saldo = cursor.fetchall()
+    cursor = connection.cursor()
+    cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao1,))
+    sijainti1 = cursor.fetchall()
+    cursor = connection.cursor()
+    cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao2,))
+    sijainti2 = cursor.fetchall()
     hinta = int(distance.distance(sijainti1, sijainti2).km)*1
-    if hinta > saldo[0]:
+    atm_saldo = int(saldo[0][0])
+    if hinta > atm_saldo:
         loseGame()
+    cursor.close()
+    connection.close()
     return hinta
 
 def raiseThreat(type):
@@ -114,19 +125,20 @@ def lowerThreat():
     connection.close()
 
 def calcCO2(icao1, icao2):
-    sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao1}'"
-    kursori = connection.cursor()
-    kursori.execute(sql_kysely)
-    sijainti1 = kursori.fetchall()
-    sql_kysely = f"select latitude_deg, longitude_deg from airport where ident = '{icao2}'"
-    kursori = connection.cursor()
-    kursori.execute(sql_kysely)
-    sijainti2 = kursori.fetchall()
+    connection.reconnect()
+    cursor = connection.cursor()
+    cursor.execute("SELECT latitude_deg, longitude_deg from airport where ident = %s", (icao1,))
+    sijainti1 = cursor.fetchall()
+    cursor = connection.cursor()
+    cursor.execute("SELECT latitude_deg, longitude_deg from airport where ident = %s", (icao2,))
+    sijainti2 = cursor.fetchall()
     valimatka = int(distance.distance(sijainti1, sijainti2).km)
     if valimatka < 1500:
         paastot = valimatka * 225
     else:
         paastot = valimatka * 120
+    cursor.close()
+    connection.close()
     return paastot
 
 def openWeb(webpage):
@@ -146,6 +158,8 @@ def travel_to(icao_target):
     target = icao_target
     travel_price = calcPrice(current_location, target)
     travel_co2 = calcCO2(current_location, target)
+    row_iterator.close()
+    connection.close()
 """
     #update location
     sql_target = (f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = '{travel_co2}' WHERE id ='{player}'")
@@ -157,7 +171,7 @@ def travel_to(icao_target):
 
 def travel_menu(country_code):
     row_iterator = connection.cursor()
-    sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}' AND type='medium_airport'ORDER BY RAND() LIMIT 10"
+    sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}' AND type='medium_airport' ORDER BY RAND() LIMIT 10"
     row_iterator.execute(sql_quest)
     airports = row_iterator.fetchall()
 
@@ -187,6 +201,8 @@ def travel_menu(country_code):
         travel_to(destination)
     else:
         print("Ok. You want to travel later")
+    row_iterator.close()
+    connection.close()
 
 
 def loseGame(player):
@@ -1124,14 +1140,6 @@ def mission2Tasks():
 ########################################################################################################################
 # MAIN
 
-connection = mysql.connector.connect(
-         host='127.0.0.1',
-         port= 3306,
-         database='flight_game',
-         user='user',
-         password='user',
-         autocommit=True
-         )
 
 # Soitetaan taustamusiikki loopattuna asynkronisesti (ei pysäytä ohjelmaa)
 playback = Playback() # creates an object for managing playback of a single audio file
@@ -1223,7 +1231,10 @@ https://creativecommons.org/licenses/by/3.0/
 #endScreen()
 #winScreen()
 #openWeb("ghostrepo.net")
-
+tmp = calcPrice("EFHK","ESSA")
+print(tmp)
+tmp = calcCO2("EFHK","ESSA")
+print(tmp)
 #MIKON FUNKTIOT
 #mission0()
 
@@ -1234,7 +1245,7 @@ https://creativecommons.org/licenses/by/3.0/
 #optionMenu()
 
 #Svetlanan funktiot
-travel_menu("FI")
+#travel_menu("FI")
 
 
 #PÄÄOHJELMA
