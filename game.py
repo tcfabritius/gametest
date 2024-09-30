@@ -97,6 +97,7 @@ def calcPrice(icao1, icao2):
     return hinta
 
 def raiseThreat(type):
+    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("SELECT threat FROM game WHERE id = %s", (player))
     threat = cursor.fetchone()
@@ -118,6 +119,7 @@ def raiseThreat(type):
     connection.close()
 
 def lowerThreat():
+    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("UPDATE threat SET threat = threat - 20")
     connection.commit()
