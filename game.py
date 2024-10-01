@@ -80,18 +80,12 @@ def endScreen():
 def calcPrice(icao1, icao2):
     connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("select money from game WHERE id = %s", (player,))
-    saldo = cursor.fetchall()
-    cursor = connection.cursor()
     cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao1,))
     sijainti1 = cursor.fetchall()
     cursor = connection.cursor()
     cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao2,))
     sijainti2 = cursor.fetchall()
     hinta = int(distance.distance(sijainti1, sijainti2).km)*1
-    atm_saldo = int(saldo[0][0])
-    if hinta > atm_saldo:
-        loseGame()
     cursor.close()
     connection.close()
     return hinta
@@ -159,16 +153,25 @@ def travel_to(icao_target):
     current_location = location_c[0]
     target = icao_target
     travel_price = calcPrice(current_location, target)
-    travel_co2 = calcCO2(current_location, target)
     connection.reconnect()
-    #update location
+    cursor = connection.cursor()
+    cursor.execute("select money from game WHERE id = %s", (player,))
+    saldo = cursor.fetchall()
+    atm_saldo = int(saldo[0][0])
+    if travel_price > atm_saldo:
+        loseGame(player)
+
+    travel_co2 = calcCO2(current_location, target)
+    # update location
+    connection.reconnect()
+    cursor = connection.cursor()
     sql_target = f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = '{travel_co2}' WHERE id ='{player}'"
     cursor.execute(sql_target)
     connection.commit()
 
     connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("SELECT game.co2_budget FROM game, airport WHERE game.id = %s", (player,))
+    cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
     budget_co2 = cursor.fetchone()
     co2_budget = budget_co2[0]
     #print(co2_budget)
@@ -222,23 +225,28 @@ def travel_menu(country_code):
     connection.close()
 
 def loseGame(player):
+
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
     print("GAME OVER")
-
+    connection.reconnect()
     # Luodaan kursori
     cursor = connection.cursor()
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
-    CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("CO2 left in the budget: " + CO2Left + "ppm")
+    cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
+    co2_left = cursor.fetchone()
+    print(f"CO2 left in the budget: {co2_left[0]} ppm")
+    connection.reconnect()
+    cursor = connection.cursor()
     # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
-    totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("Total used CO2: " + totalUsedCO2 + "ppm")
+    cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
+    total_used_co2 = cursor.fetchone()
+    print(f"Total used CO2: {total_used_co2[0]} ppm")
+    connection.reconnect()
+    cursor = connection.cursor()
     # Tulostetaan jäänyt rahamäärä
-    moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("Money left in the budget: " + moneyLeft + "€")
+    cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
+    money_left = cursor.fetchone()
+    print(f"Money left in the budget:{money_left[0]}€")
     # Suljetaan kursori ja yhteys
     cursor.close()
     connection.close()
