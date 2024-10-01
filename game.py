@@ -3,6 +3,7 @@ from terminaltexteffects.effects.effect_decrypt import Decrypt
 from terminaltexteffects.effects.effect_matrix import Matrix
 from terminaltexteffects.effects.effect_burn import Burn
 from terminaltexteffects.effects.effect_fireworks import Fireworks
+from terminaltexteffects.effects.effect_waves import Waves
 from colorama import (Fore, Style)
 from just_playback import Playback
 from geopy import distance
@@ -58,6 +59,19 @@ def loseScreen():
 def winScreen():
     # Luodaan Fireworks-efekti voittoruudun animaatiota varten
     effect = Fireworks(voittoanimaatioruutu)
+
+    # Animaatio toistetaan terminaaliin
+    with effect.terminal_output() as terminal:
+        for frame in effect:
+            terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
+
+    tmp = input("Press enter to continue...")
+
+    clear_console()
+
+def missionCompletedScreen():
+    # Luodaan Fireworks-efekti voittoruudun animaatiota varten
+    effect = Waves(voittoanimaatioruutu)
 
     # Animaatio toistetaan terminaaliin
     with effect.terminal_output() as terminal:
