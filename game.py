@@ -1338,7 +1338,7 @@ https://creativecommons.org/licenses/by/3.0/
 #optionMenu()
 
 #Svetlanan funktiot
-travel_menu("FI")
+#travel_menu("FI")
 
 
 #PÄÄOHJELMA
