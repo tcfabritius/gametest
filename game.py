@@ -564,15 +564,15 @@ def mission1():
                                       "\n(5): Move "
                                       "\n "
                                       "\nInput: ")
-            elif step1State == 0:
-                branch2_1 = input("HELPER.PY: What would you like to do?"
-                                  "\n(1): Check delivery "
-                                  "\n(2): Locations "
-                                  "\n(3): Web "
-                                  "\n(4): Status "
-                                  # "\n(5): Move "
-                                  "\n "
-                                  "\nInput: ")
+        elif step1State == 0:
+            branch2_1 = input("HELPER.PY: What would you like to do?"
+                                "\n(1): Check delivery "
+                                "\n(2): Locations "
+                                "\n(3): Web "
+                                "\n(4): Status "
+                                # "\n(5): Move "
+                                "\n "
+                                "\nInput: ")
 
             if branch2_1 == "1":
                 print(
@@ -1114,6 +1114,76 @@ def mission1Tasks():
 # Encryption aiheinen tehtävä
 def mission2():
     print("Mission 2")
+    input("Cipherium Technologies is reputed to engage in covert operations, "
+          "\nusing their cutting-edge encryption to shield corruption and protect dubious corporations from public eye. "
+          "\nFind the dirt and reveal it.")
+
+    input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
+    # input("USER: Gh0stP@cket sent:  (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: good and ready hackerling? (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: our next task is to tackle Cipherium Technologies. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: they deal in encryption to shield dirty corporate secrets. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: apparently they also do black business practices, extortion and monopoly bs (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: this time its all on you but remember that we in this together. (HELPER.PY:[Enter]): ")
+
+    #######################################################################################################################
+    # Step 1
+    step1State = 0
+    while True:
+        if step1State == 1:
+            breakQuery = input("HELPER.PY: Would you like to move to Cipherium Tech.? (HELPER.PY:[yes/no]): ")
+            if breakQuery == "yes":
+                print("HELPER.PY: Moving to target. ")
+                break
+            elif breakQuery == "no":
+                branch2_1 = input("HELPER.PY: What would you like to do?"
+                                  "\n(1): Locations "
+                                  "\n(2): Web "
+                                  "\n(3): Status "
+                                  "\n(4): Move "
+                                  "\n "
+                                  "\nInput: ")
+        elif step1State == 0:
+            branch2_1 = input("HELPER.PY: What would you like to do?"
+                                "\n(1): Locations "
+                                "\n(2): Web "
+                                "\n(3): Status "
+                                # "\n(4): Move "
+                                "\n "
+                                "\nInput: ")
+
+            if branch2_1 == "1":
+                if step1State == 0:
+                    # print("HELPER.PY: ")
+                    print("HELPER.PY: Current available locations are: "
+                          "\n>Home<"
+                          "\n ")
+                elif step1State == 1:
+                    print("HELPER.PY: Current available locations are: "
+                          "\n>Home<"
+                          "\n*Cipherium"
+                          "\n ")
+            elif branch2_1 == "2":
+                input("WIP: Web content for Cipherium....")
+                step1State = 1
+                print("State updated."
+                      "\n ")
+            elif branch2_1 == "3":
+                print(f"Your current threat level is: blahblah"
+                      f"\n ")
+            elif branch2_1 == "4":
+                breakQuery = input("HELPER.PY: Would you like to move to Cipherium Tech.? (HELPER.PY:[yes/no]): ")
+                if breakQuery == "yes":
+                    print("HELPER.PY: Moving to target. ")
+                    break
+                elif breakQuery == "no":
+                    branch2_1 = input("HELPER.PY: What would you like to do?"
+                                      "\n(1): Locations "
+                                      "\n(2): Web "
+                                      "\n(3): Status "
+                                      "\n(4): Move "
+                                      "\n "
+                                      "\nInput: ")
 
 def mission2Tasks():
     points = 0
@@ -1155,7 +1225,6 @@ def mission2Tasks():
 # FUNKTIOT PÄÄTTYY
 ########################################################################################################################
 # MAIN
-
 
 # Soitetaan taustamusiikki loopattuna asynkronisesti (ei pysäytä ohjelmaa)
 playback = Playback() # creates an object for managing playback of a single audio file
@@ -1208,7 +1277,7 @@ havioanimaatioruutu = """
           @@@@@@@@@@@@@   @@@@@@@@@@@@@         
            @@@@@@@@@@@@@@@@@@@@@@@@@@@         
          @   @@ @L @O @S @E @R @! @@   @        
-       @@@@  @@ @@ @@ @@ @@ @@ @@ @@  @@@@ 
+       @@@@  @@ L@ O@ S@ E@ R@ !@ @@  @@@@ 
    @@@@@@     @@@@@@@@@@@@@@@@@@@@@    @@@@@@@  
      @@@@      @@@@@@@@@@@@@@@@@@@     @@@@      
 """
