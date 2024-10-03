@@ -106,7 +106,6 @@ def calcPrice(icao1, icao2):
     cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao2,))
     sijainti2 = cursor.fetchall()
     hinta = int(distance.distance(sijainti1, sijainti2).km) * 1
-    cursor.close()
     return hinta
 
 
@@ -1479,6 +1478,10 @@ print(airports[1])
 
 currentMission = False
 
+cursor = connection.cursor()
+cursor.execute("SELECT COUNT(*) FROM mission_accomplished WHERE game_id = %s", (player,))
+result = cursor.fetchone()
+
 websivut = {
     "ghostrepo.net": """
     ghostrepo.net
@@ -1586,9 +1589,13 @@ https://creativecommons.org/licenses/by/3.0/
 # travel_to("EFHK")
 
 # PÄÄOHJELMA
-mission0()
-mission1()
-mission2()
-winGame(player)
-winScreen()
-endScreen()
+if result[0] == 0:
+    mission0()
+if result[0] == 1:
+    mission1()
+if result[0] == 2:
+    mission2()
+if result[0] == 3:
+    winGame(player)
+    winScreen()
+    endScreen()
