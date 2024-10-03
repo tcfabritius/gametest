@@ -286,7 +286,7 @@ def loseGame(player):
 
     goBack = input("Press Enter to go back to Main Menu: ")
     if goBack == "":
-        openPauseMenu()
+        PauseMenu()
     return
 
 def winGame(player):
@@ -315,7 +315,7 @@ def winGame(player):
 
     goBack = input("Press Enter to go back to Main Menu: ")
     if goBack == "":
-        openPauseMenu()
+        PauseMenu()
     return
 
 def optionMenu():
@@ -333,13 +333,34 @@ def optionMenu():
     elif choice == 3:
         openShop()
     elif choice == 4:
-        openPauseMenu()
+        PauseMenu()
 
 def openShop():
     print("Kauppa")
 
-def openPauseMenu():
-    print("Pause Menu")
+def quitGame():
+    print("Thank you for playing!")
+
+def reset():
+    playerDeleteQuery = print(f"Do you want to delete player {player} [Y/N]?\n ")
+    if playerDeleteQuery == "Y" or playerDeleteQuery == "y":
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM game WHERE id = %s", (player,))
+        cursor.close()
+        connection.close()
+    elif playerDeleteQuery == "N" or playerDeleteQuery == "n":
+        PauseMenu()
+
+def PauseMenu():
+    print("Pause Menu\n1.Start Game\n2.Delete Player\n3.Quit Game\n ")
+
+    choice = int(input("Enter your choice: "))
+    if choice == 1:
+        init(connection)
+    elif choice == 2:
+        reset(player)
+    elif choice == 3:
+        quitGame()
 
     # PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
 
