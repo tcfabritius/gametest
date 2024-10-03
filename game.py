@@ -187,6 +187,7 @@ def openWeb(webpage):
 
 def travel_to(icao_target):
     cursor = connection.cursor(buffered=True)
+
     cursor.execute("SELECT game.location FROM game, airport WHERE game.id = %s", (player,))
     location_c = cursor.fetchone()
     current_location = location_c[0]
