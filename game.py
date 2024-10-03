@@ -1337,6 +1337,9 @@ def mission2Tasks():
 ########################################################################################################################
 # MAIN
 
+print(Fore.GREEN)
+print(Style.BRIGHT)
+
 # Soitetaan taustamusiikki loopattuna asynkronisesti (ei pysäytä ohjelmaa)
 playback = Playback()  # creates an object for managing playback of a single audio file
 playback.load_file('bgmusicexample.mp3')
