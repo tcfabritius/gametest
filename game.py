@@ -1582,13 +1582,13 @@ https://creativecommons.org/licenses/by/3.0/
 # pauseMenu()
 
 # Svetlanan funktiot
-travel_menu("FI")
+# travel_menu("FI")
 # travel_to("EFHK")
 
 # PÄÄOHJELMA
-# mission0()
-# mission1()
-# mission2()
-# winGame()
-# winScreen()
-# endScreen()
+mission0()
+mission1()
+mission2()
+winGame(player)
+winScreen()
+endScreen()
