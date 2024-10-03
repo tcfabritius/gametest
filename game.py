@@ -376,13 +376,19 @@ def reset():
 def pauseMenu():
     print("Pause Menu\n1.Start Game\n2.Delete Player\n3.Quit Game\n ")
 
-    choice = int(input("Enter your choice: "))
-    if choice == 1:
-        init()
-    elif choice == 2:
-        reset(player)
-    elif choice == 3:
-        quitGame()
+    while True:
+        choice = int(input("Enter your choice: "))
+        if choice == 1:
+            init()
+            break
+        elif choice == 2:
+            reset(player)
+            break
+        elif choice == 3:
+            quitGame()
+            break
+        else:
+            print("Invalid choice")
 
     # PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
 
