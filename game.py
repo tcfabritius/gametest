@@ -152,13 +152,15 @@ def calcCO2(icao1, icao2):
     connection.close()
     return paastot
 
-def pay(multiplier):
+def pay(multiplier, mission):
     connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("SELECT money FROM game WHERE id = %s", (player))
+    cursor.execute("SELECT pay FROM mission WHERE id = %s", (mission,))
     money = cursor.fetchone()
-    multiplier * money
-    cursor.execute("UPDATE money SET threat = threat +1 WHERE id = %s", (player))
+    print(money)
+    money = int(money[0])
+    money = multiplier * money
+    cursor.execute("UPDATE game SET money = money + %s WHERE id = %s", (money,player))
     connection.commit()
     cursor.close()
     connection.close()
@@ -1359,8 +1361,14 @@ https://creativecommons.org/licenses/by/3.0/
 #print(tmp)
 #tmp = calcCO2("EFHK","ESSA")
 #print(tmp)
+pay(1,0)
+
 #MIKON FUNKTIOT
 #mission0()
+#mission1()
+#mission1Tasks()
+#mission2()
+#mission2Tasks()
 
 #JONIN FUNKTIOT
 #init()
@@ -1369,7 +1377,8 @@ https://creativecommons.org/licenses/by/3.0/
 #optionMenu()
 
 #Svetlanan funktiot
-travel_menu("FI")
+#travel_menu("FI")
+#travel_to("EFHK")
 
 
 #PÄÄOHJELMA
