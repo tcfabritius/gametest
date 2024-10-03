@@ -371,8 +371,27 @@ def init(connection):
 
     # Luodaan kursori
     cursor = connection.cursor()
+    # Maiden arpominen
+    countries_sql = f"SELECT iso_country FROM country ORDER BY RAND() LIMIT 3"
+    result = cursor.execute(countries_sql)
+    countries = cursor.fetchall()
+    for country in countries:
+        global maat
+        maat.append(country[0])
 
-    # Tarkistetaan onko annettu pelaaja jo olemassa
+    for maa in maat:
+        airports_sql = f"SELECT ident FROM airport WHERE iso_country = '{maa}' ORDER BY RAND() LIMIT 1"
+        result = cursor.execute(airports_sql)
+        airport = cursor.fetchall()
+        global airports
+        airports.append(airport[0][0])
+
+    # Lasketaan alkuraha
+    money = calcPrice("EFHK", airports[0])
+    money = money + 1000
+
+
+# Tarkistetaan onko annettu pelaaja jo olemassa
     cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
     result = cursor.fetchone()
 
@@ -391,8 +410,9 @@ def init(connection):
         # Annetaan uudelle pelaajalle lähtötiedot
         cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
         cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
-        cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
+        cursor.execute("UPDATE game SET money = %s WHERE id = %s", (money, player))
         connection.commit()
+        travel_to(airports[0])
 
     # Suljetaan kursori ja yhteys
     cursor.close()
@@ -1292,6 +1312,9 @@ playback = Playback() # creates an object for managing playback of a single audi
 playback.load_file('bgmusicexample.mp3')
 playback.loop_at_end(True)
 playback.play()
+
+maat = []
+airports = []
 
 player = init(connection)
 
