@@ -23,6 +23,12 @@ connection = mysql.connector.connect(
 
 ########################################################################################################################
 # FUNKTIOT ALKAA
+def check_completed_missions():
+    cursor = connection.cursor()
+    cursor.execute("SELECT COUNT(*) FROM mission_accomplished WHERE game_id = %s", (player,))
+    completed_missions_count = cursor.fetchone()[0]
+    return completed_missions_count
+
 def clear_console():
     # For Windows, use 'cls', for Mac/Linux, use 'clear'
     if os.name == 'nt':  # Windows
@@ -1493,10 +1499,6 @@ print(airports[1])
 
 currentMission = False
 
-cursor = connection.cursor()
-cursor.execute("SELECT COUNT(*) FROM mission_accomplished WHERE game_id = %s", (player,))
-result = cursor.fetchone()
-
 websivut = {
     "ghostrepo.net": """
     ghostrepo.net
@@ -1604,13 +1606,20 @@ https://creativecommons.org/licenses/by/3.0/
 # travel_to("EFHK")
 
 # PÄÄOHJELMA
-if result[0] == 0:
+completed_missions_count = check_completed_missions()
+if completed_missions_count == 0:
     mission0()
-if result[0] == 1:
+    completed_missions_count = check_completed_missions()
+
+if completed_missions_count == 1:
     mission1()
-if result[0] == 2:
+    completed_missions_count = check_completed_missions()
+
+if completed_missions_count == 2:
     mission2()
-if result[0] == 3:
+    completed_missions_count = check_completed_missions()
+
+if completed_missions_count == 3:
     winGame(player)
     winScreen()
     endScreen()
