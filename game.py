@@ -354,6 +354,7 @@ def reset():
     if playerDeleteQuery == "Y" or playerDeleteQuery == "y":
         cursor = connection.cursor()
         cursor.execute("DELETE FROM game WHERE id = %s", (player,))
+        cursor.execute("DELETE FROM mission_accomplished WHERE game_id = %s", (player,))
         cursor.close()
     elif playerDeleteQuery == "N" or playerDeleteQuery == "n":
         pauseMenu()
