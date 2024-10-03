@@ -422,7 +422,6 @@ def init(connection):
 
 def mission0():
     # Mission 0 - Tutorial
-    # After playerGreeting
     input(f"USER: Gh0stP@cket sent: cool moves '{player}' lmao. (HELPER.PY:[Enter]: (Input whatever to progress)): ")
 
     joinInput = input(f"User: Gh0stP@cket sent: wanna join? (HELPER.PY: Type yes if you want to join.): ")
@@ -454,10 +453,7 @@ def mission0():
               byeAndEat****
               $ echo 'System integrity compromised.'
               """)
-
-        # Probably needs a loop that doesn't swap to function call right away after receiving a message.
-        # Player should/could lose the game here for giving a wrong answer maybe(?) For the keks.
-        # loseTheGame()
+        loseGame(player)
 
     # Player checks given website through the web-tab
     # enterWebUrl("requiredUrl")
@@ -1418,14 +1414,14 @@ https://creativecommons.org/licenses/by/3.0/
 #loseGame(player)
 #winGame(player)
 #optionMenu()
-pauseMenu()
+#pauseMenu()
 
 #Svetlanan funktiot
 #travel_menu("FI")
 #travel_to("EFHK")
 
 #PÄÄOHJELMA
-#mission0()
+mission0()
 #mission1()
 #mission2()
 #winGame()
