@@ -11,6 +11,7 @@ import os
 import mysql.connector
 import random
 
+
 connection = mysql.connector.connect(
          host='127.0.0.1',
          port= 3306,
