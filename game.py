@@ -1160,6 +1160,7 @@ def mission1():
                     cursor.close()
                     print(Style.RESET_ALL)
                     travel_to(airports[2])
+
                     break
 
                 elif moveOption == "3":
@@ -1297,6 +1298,7 @@ def mission1():
                     cursor.close()
                     print(Style.RESET_ALL)
                     travel_to(airports[2])
+
                     break
 
     #######################################################################################################################
