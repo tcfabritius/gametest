@@ -11,7 +11,6 @@ import os
 import mysql.connector
 import random
 
-
 connection = mysql.connector.connect(
          host='127.0.0.1',
          port= 3306,
@@ -21,7 +20,7 @@ connection = mysql.connector.connect(
          autocommit=True
          )
 
-
+########################################################################################################################
 # FUNKTIOT ALKAA
 def clear_console():
     # For Windows, use 'cls', for Mac/Linux, use 'clear'
@@ -286,7 +285,7 @@ def loseGame(player):
 
     goBack = input("Press Enter to go back to Main Menu: ")
     if goBack == "":
-        PauseMenu()
+        pauseMenu()
     return
 
 def winGame(player):
@@ -315,7 +314,7 @@ def winGame(player):
 
     goBack = input("Press Enter to go back to Main Menu: ")
     if goBack == "":
-        PauseMenu()
+        pauseMenu()
     return
 
 def optionMenu():
@@ -333,7 +332,7 @@ def optionMenu():
     elif choice == 3:
         openShop()
     elif choice == 4:
-        PauseMenu()
+        pauseMenu()
 
 def openShop():
     print("Kauppa")
@@ -349,9 +348,9 @@ def reset():
         cursor.close()
         connection.close()
     elif playerDeleteQuery == "N" or playerDeleteQuery == "n":
-        PauseMenu()
+            pauseMenu()
 
-def PauseMenu():
+def pauseMenu():
     print("Pause Menu\n1.Start Game\n2.Delete Player\n3.Quit Game\n ")
 
     choice = int(input("Enter your choice: "))
@@ -589,8 +588,8 @@ def mission0():
     print(f"(HELPER.PY:[Enter]): Guided mission protocol over. Good luck {player}")
     print(Style.RESET_ALL)
 
-# Biotech aiheinen tehtävä
 def mission1():
+    # Biotech aiheinen tehtävä
     print("Mission 1")
     input("NeuraGenix is renowned for its implant technology. "
               "\nBreach NeuraGenix's systems and steal the classified ”Nexus”-project. "
@@ -1173,8 +1172,8 @@ def mission1Tasks():
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
 
-# Encryption aiheinen tehtävä
 def mission2():
+    # Encryption aiheinen tehtävä
     print("Mission 2")
     input("Cipherium Technologies is reputed to engage in covert operations, "
           "\nusing their cutting-edge encryption to shield corruption and protect dubious corporations from public eye. "
@@ -1382,7 +1381,7 @@ https://creativecommons.org/licenses/by/3.0/
 #print(tmp)
 #tmp = calcCO2("EFHK","ESSA")
 #print(tmp)
-pay(1,0)
+#pay(1,0)
 
 #MIKON FUNKTIOT
 #mission0()
@@ -1396,11 +1395,11 @@ pay(1,0)
 #loseTheGame()
 #winGame()
 #optionMenu()
+pauseMenu()
 
 #Svetlanan funktiot
 #travel_menu("FI")
 #travel_to("EFHK")
-
 
 #PÄÄOHJELMA
 #mission0()
