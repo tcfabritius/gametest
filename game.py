@@ -689,9 +689,9 @@ def mission0():
     cursor = connection.cursor()
     cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 0))
     connection.commit()
-    cursor.close()
     print(Style.RESET_ALL)
-    travel_to(f"{airports[1]}")
+    travel_to(airports[1])
+    cursor.close()
 
 
 def mission1():
@@ -1171,7 +1171,7 @@ def mission1():
                     connection.commit()
                     cursor.close()
                     print(Style.RESET_ALL)
-                    travel_to(f"{airports[2]}")
+                    travel_to(airports[2])
 
                     break
 
@@ -1309,7 +1309,7 @@ def mission1():
                     connection.commit()
                     cursor.close()
                     print(Style.RESET_ALL)
-                    travel_to(f"{airports[2]}")
+                    travel_to(airports[2])
 
                     break
 
@@ -1488,7 +1488,7 @@ maat = []
 airports = []
 
 player = init()
-#print(airports[1])
+print(airports[1])
 
 currentMission = False
 
@@ -1595,7 +1595,7 @@ https://creativecommons.org/licenses/by/3.0/
 # init()
 # loseGame(player)
 # winGame(player)
-optionMenu()
+# optionMenu()
 # pauseMenu()
 
 # Svetlanan funktiot
