@@ -113,14 +113,14 @@ def raiseThreat(type):
         if threat + 1 > 100:
             loseGame()
         else:
-            cursor.execute("UPDATE threat SET threat = threat +1")
+            cursor.execute("UPDATE threat SET threat = threat +1 WHERE id = %s", (player))
             connection.commit()
 
     if type == "failure":
         if threat + 3 > 100:
             loseGame()
         else:
-            cursor.execute("UPDATE threat SET threat = threat +3")
+            cursor.execute("UPDATE threat SET threat = threat +3 WHERE id = %s", (player))
             connection.commit()
 
     cursor.close()
@@ -129,7 +129,7 @@ def raiseThreat(type):
 def lowerThreat():
     connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("UPDATE threat SET threat = threat - 20")
+    cursor.execute("UPDATE threat SET threat = threat - 20 WHERE id = %s", (player))
     connection.commit()
     cursor.close()
     connection.close()
@@ -150,6 +150,17 @@ def calcCO2(icao1, icao2):
     cursor.close()
     connection.close()
     return paastot
+
+def pay(multiplier):
+    connection.reconnect()
+    cursor = connection.cursor()
+    cursor.execute("SELECT money FROM game WHERE id = %s", (player))
+    money = cursor.fetchone()
+    multiplier * money
+    cursor.execute("UPDATE money SET threat = threat +1 WHERE id = %s", (player))
+    connection.commit()
+    cursor.close()
+    connection.close()
 
 def openWeb(webpage):
     clear_console()
