@@ -333,18 +333,26 @@ def optionMenu():
     # VALINTAMENU
     print("Choose action to proceed:\n1.Hack\n2.Web\n3.Buy\n4.Back to Main Menu ")
 
-    choice = int(input("Enter your choice: "))
-    if choice == 1:
-        if currentMission == True:
-            winScreen()
-        elif currentMission == False:
-            loseGame()
-    elif choice == 2:
-        openWeb()
-    elif choice == 3:
-        openShop()
-    elif choice == 4:
-        pauseMenu()
+    while True:
+        choice = int(input("Enter your choice: "))
+        if choice == 1:
+            if currentMission == True:
+                winScreen()
+                break
+            elif currentMission == False:
+                loseGame()
+                break
+        elif choice == 2:
+            openWeb()
+            break
+        elif choice == 3:
+            openShop()
+            break
+        elif choice == 4:
+            pauseMenu()
+            break
+        else:
+            print("Invalid choice")
 
 
 def openShop():
@@ -1578,7 +1586,7 @@ https://creativecommons.org/licenses/by/3.0/
 # init()
 # loseGame(player)
 # winGame(player)
-# optionMenu()
+optionMenu()
 # pauseMenu()
 
 # Svetlanan funktiot
