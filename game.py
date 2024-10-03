@@ -190,7 +190,7 @@ def travel_to(icao_target):
     # update location
     connection.reconnect()
     cursor = connection.cursor()
-    sql_target = f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = '{travel_co2}' WHERE id ='{player}'"
+    sql_target = f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = co2_consumed+'{travel_co2}' WHERE id ='{player}'"
     cursor.execute(sql_target)
     connection.commit()
 
@@ -209,13 +209,19 @@ def travel_to(icao_target):
     sql_money = f"UPDATE game SET money = (money -'{travel_price}') WHERE id ='{player}'"
     cursor.execute(sql_money)
     connection.commit()
+    connection.reconnect()
+    cursor = connection.cursor()
+    cursor.execute("SELECT game.money FROM game WHERE game.id = %s", (player,))
+    money_left = cursor.fetchone()
+    print(f"Money left in the budget: {money_left[0]}€")
+    #lowerThreat()
     cursor.close()
     connection.close()
 
 def travel_menu(country_code):
     connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("SELECT game.location FROM game, airport WHERE game.id = %s", (player,))
+    cursor.execute("SELECT game.location FROM game WHERE game.id = %s", (player,))
     location_c = cursor.fetchone()
     current_location = location_c[0]
     connection.reconnect()
@@ -237,8 +243,9 @@ def travel_menu(country_code):
 
     # print menu
     print("\nAvailable Airports: \n")
+
     for (a, b, c, d) in zip(icao, names, prices, co2):
-        print(f"{a}  {b} \n      price: {c}; CO2 consumed: {d}\n")
+        print(f"{a}  {b} \n      price: {c}  CO2(ppm): {d}\n")
 
     destination = input("Where do you want to go? Please choose airport code from the list: ")
     # if airport code in airports
@@ -260,18 +267,16 @@ def loseGame(player):
     cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
     co2_left = cursor.fetchone()
     print(f"CO2 left in the budget: {co2_left[0]} ppm")
-    connection.reconnect()
     cursor = connection.cursor()
     # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
     cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
     total_used_co2 = cursor.fetchone()
     print(f"Total used CO2: {total_used_co2[0]} ppm")
-    connection.reconnect()
     cursor = connection.cursor()
     # Tulostetaan jäänyt rahamäärä
     cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
     money_left = cursor.fetchone()
-    print(f"Money left in the budget:{money_left[0]}€")
+    print(f"Money left in the budget: {money_left[0]}€")
     # Suljetaan kursori ja yhteys
     cursor.close()
     connection.close()
@@ -288,17 +293,17 @@ def winGame(player):
     # Luodaan kursori
     cursor = connection.cursor()
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
-    CO2Left = cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("CO2 left in the budget: " + CO2Left + "ppm")
+    cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
+    co2_left = cursor.fetchone()
+    print(f"CO2 left in the budget: {co2_left[0]} ppm")
     # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
-    totalUsedCO2 = cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("Total used CO2: " + totalUsedCO2 + "ppm")
+    cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
+    total_used_co2 = cursor.fetchone()
+    print(f"Total used CO2: {total_used_co2[0]} ppm")
     # Tulostetaan jäänyt rahamäärä
-    moneyLeft = cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
-    connection.commit()
-    print("Money left in the budget: " + moneyLeft + "€")
+    cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
+    money_left = cursor.fetchone()
+    print(f"Money left in the budget:{money_left[0]}€")
     # Suljetaan kursori ja yhteys
     cursor.close()
     connection.close()
@@ -1363,7 +1368,7 @@ https://creativecommons.org/licenses/by/3.0/
 #optionMenu()
 
 #Svetlanan funktiot
-#travel_menu("FI")
+travel_menu("FI")
 
 
 #PÄÄOHJELMA
