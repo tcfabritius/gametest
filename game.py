@@ -253,10 +253,10 @@ def travel_menu(country_code):
 
     # print menu
     print("\nAvailable Airports: \n")
-
+    print(f"{'ICAO':<15}{'Names':<35}{'Price':<15}{'CO2(ppm)':<15}")
     for (a, b, c, d) in zip(icao, names, prices, co2):
-        print(f"{a}  {b} \n      price: {c}  CO2(ppm): {d}\n")
-
+        b = b.split()[0]
+        print(f"{a:<15}{b:<35}{c:<15}{d:<15}")
     destination = input("Where do you want to go? Please choose airport code from the list: ")
     # if airport code in airports
     if destination in icao or destination != "":
@@ -1461,6 +1461,9 @@ def mission2Tasks():
 ########################################################################################################################
 # MAIN
 
+print(Fore.GREEN)
+print(Style.BRIGHT)
+
 # Soitetaan taustamusiikki loopattuna asynkronisesti (ei pysäytä ohjelmaa)
 playback = Playback()  # creates an object for managing playback of a single audio file
 playback.load_file('bgmusicexample.mp3')
@@ -1560,7 +1563,7 @@ https://creativecommons.org/licenses/by/3.0/
 # print(tmp)
 # pay(1,0,1)
 # raiseThreat('failure')
-lowerThreat()
+#lowerThreat()
 
 # MIKON FUNKTIOT
 # mission0()
@@ -1577,7 +1580,7 @@ lowerThreat()
 # pauseMenu()
 
 # Svetlanan funktiot
-# travel_menu("FI")
+travel_menu("FI")
 # travel_to("EFHK")
 
 # PÄÄOHJELMA
