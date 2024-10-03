@@ -677,7 +677,7 @@ def mission0():
     connection.commit()
     cursor.close()
     print(Style.RESET_ALL)
-    travel_to(airports[1])
+    travel_to(f"{airports[1]}")
 
 
 def mission1():
@@ -1157,7 +1157,7 @@ def mission1():
                     connection.commit()
                     cursor.close()
                     print(Style.RESET_ALL)
-                    travel_to(airports[2])
+                    travel_to(f"{airports[2]}")
 
                     break
 
@@ -1295,7 +1295,7 @@ def mission1():
                     connection.commit()
                     cursor.close()
                     print(Style.RESET_ALL)
-                    travel_to(airports[2])
+                    travel_to(f"{airports[2]}")
 
                     break
 
@@ -1474,7 +1474,7 @@ maat = []
 airports = []
 
 player = init()
-print(airports[1])
+#print(airports[1])
 
 currentMission = False
 
