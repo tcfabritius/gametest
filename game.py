@@ -108,20 +108,20 @@ def calcPrice(icao1, icao2):
 def raiseThreat(type):
     connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("SELECT threat FROM game WHERE id = %s", (player))
+    cursor.execute("SELECT threat FROM game WHERE id = %s", (player,))
     threat = cursor.fetchone()
     if type == "stay":
         if threat + 1 > 100:
             loseGame()
         else:
-            cursor.execute("UPDATE threat SET threat = threat +1 WHERE id = %s", (player))
+            cursor.execute("UPDATE threat SET threat = threat +1 WHERE id = %s", (player,))
             connection.commit()
 
     if type == "failure":
         if threat + 3 > 100:
             loseGame()
         else:
-            cursor.execute("UPDATE threat SET threat = threat +3 WHERE id = %s", (player))
+            cursor.execute("UPDATE threat SET threat = threat +3 WHERE id = %s", (player,))
             connection.commit()
 
     cursor.close()
@@ -130,7 +130,7 @@ def raiseThreat(type):
 def lowerThreat():
     connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("UPDATE threat SET threat = threat - 20 WHERE id = %s", (player))
+    cursor.execute("UPDATE threat SET threat = threat - 20 WHERE id = %s", (player,))
     connection.commit()
     cursor.close()
     connection.close()
@@ -160,7 +160,7 @@ def pay(multiplier, mission):
     print(money)
     money = int(money[0])
     money = multiplier * money
-    cursor.execute("UPDATE game SET money = money + %s WHERE id = %s", (money,player))
+    cursor.execute("UPDATE game SET money = money + %s WHERE id = %s", (money,player,))
     connection.commit()
     cursor.close()
     connection.close()
