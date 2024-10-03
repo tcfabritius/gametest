@@ -12,13 +12,14 @@ import mysql.connector
 import random
 
 connection = mysql.connector.connect(
-         host='127.0.0.1',
-         port= 3306,
-         database='flight_game',
-         user='user',
-         password='user',
-         autocommit=True
-         )
+    host='127.0.0.1',
+    port=3306,
+    database='flight_game',
+    user='user',
+    password='user',
+    autocommit=True
+)
+
 
 ########################################################################################################################
 # FUNKTIOT ALKAA
@@ -28,6 +29,7 @@ def clear_console():
         os.system('cls')
     else:  # macOS and Linux
         os.system('clear')
+
 
 def startScreen():
     # Luodaan Decrypt-efekti alkuruudun animaatiota varten
@@ -41,6 +43,7 @@ def startScreen():
 
     tmp = input("Press enter to continue")
     clear_console()
+
 
 def loseScreen():
     # Luodaan Burn-efekti alkuruudun animaatiota varten
@@ -56,6 +59,7 @@ def loseScreen():
 
     clear_console()
 
+
 def winScreen():
     # Luodaan Fireworks-efekti voittoruudun animaatiota varten
     effect = Fireworks(voittoanimaatioruutu)
@@ -68,6 +72,7 @@ def winScreen():
     tmp = input("Press enter to continue...")
 
     clear_console()
+
 
 def missionCompletedScreen():
     # Luodaan Fireworks-efekti voittoruudun animaatiota varten
@@ -82,6 +87,7 @@ def missionCompletedScreen():
 
     clear_console()
 
+
 def endScreen():
     # Luodaan Matrix-efekti loppuruudun animaatiota varten
     effect = Matrix(loppuanimaatioruutu)
@@ -91,6 +97,7 @@ def endScreen():
         for frame in effect:
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
+
 def calcPrice(icao1, icao2):
     cursor = connection.cursor()
     cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao1,))
@@ -98,9 +105,10 @@ def calcPrice(icao1, icao2):
     cursor = connection.cursor()
     cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao2,))
     sijainti2 = cursor.fetchall()
-    hinta = int(distance.distance(sijainti1, sijainti2).km)*1
+    hinta = int(distance.distance(sijainti1, sijainti2).km) * 1
     cursor.close()
     return hinta
+
 
 def raiseThreat(type):
     cursor = connection.cursor()
@@ -122,11 +130,13 @@ def raiseThreat(type):
 
     cursor.close()
 
+
 def lowerThreat():
     cursor = connection.cursor()
     cursor.execute("UPDATE threat SET threat = threat - 20 WHERE id = %s", (player,))
     connection.commit()
     cursor.close()
+
 
 def calcCO2(icao1, icao2):
     cursor = connection.cursor()
@@ -143,6 +153,7 @@ def calcCO2(icao1, icao2):
     cursor.close()
     return paastot
 
+
 def pay(multiplier, mission, nextMission):
     cursor = connection.cursor()
     cursor.execute("SELECT game.location FROM game WHERE game.id = %s", (player,))
@@ -153,9 +164,10 @@ def pay(multiplier, mission, nextMission):
     money = int(money[0])
     money = multiplier * money
     money = money + calcPrice(current_location, airports[nextMission])
-    cursor.execute("UPDATE game SET money = money + %s WHERE id = %s", (money,player,))
+    cursor.execute("UPDATE game SET money = money + %s WHERE id = %s", (money, player,))
     connection.commit()
     cursor.close()
+
 
 def openWeb(webpage):
     clear_console()
@@ -165,6 +177,7 @@ def openWeb(webpage):
     print(Style.RESET_ALL)
     clear_console()
 
+
 def travel_to(icao_target):
     cursor = connection.cursor()
     cursor.execute("SELECT game.location FROM game, airport WHERE game.id = %s", (player,))
@@ -172,7 +185,7 @@ def travel_to(icao_target):
     current_location = location_c[0]
     target = icao_target
     travel_price = calcPrice(current_location, target)
-    connection.reconnect()
+
     cursor = connection.cursor()
     cursor.execute("select money from game WHERE id = %s", (player,))
     saldo = cursor.fetchall()
@@ -182,7 +195,7 @@ def travel_to(icao_target):
 
     travel_co2 = calcCO2(current_location, target)
     # update location
-    connection.reconnect()
+
     cursor = connection.cursor()
     sql_target = f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = co2_consumed+'{travel_co2}' WHERE id ='{player}'"
     cursor.execute(sql_target)
@@ -192,9 +205,9 @@ def travel_to(icao_target):
     cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
     budget_co2 = cursor.fetchone()
     co2_budget = budget_co2[0]
-    #print(co2_budget)
-    #if travel_co2 > co2_budget: ??? co2_budgetti on liian pieni
-        #loseGame()
+    # print(co2_budget)
+    # if travel_co2 > co2_budget: ??? co2_budgetti on liian pieni
+    # loseGame()
 
     # update money
     cursor = connection.cursor()
@@ -205,8 +218,9 @@ def travel_to(icao_target):
     cursor.execute("SELECT game.money FROM game WHERE game.id = %s", (player,))
     money_left = cursor.fetchone()
     print(f"Money left in the budget: {money_left[0]}€")
-    #lowerThreat()
+    # lowerThreat()
     cursor.close()
+
 
 def travel_menu(country_code):
     cursor = connection.cursor()
@@ -217,12 +231,12 @@ def travel_menu(country_code):
     sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}'AND ident != '{current_location}' AND type='medium_airport' ORDER BY RAND() LIMIT 10"
     cursor.execute(sql_quest)
     airports = cursor.fetchall()
-    #print(airports)
+    # print(airports)
     icao = []
     names = []
     prices = []
     co2 = []
-# create lists
+    # create lists
     for r in airports:
         icao.append(r[0])
         names.append(r[1])
@@ -237,22 +251,22 @@ def travel_menu(country_code):
 
     destination = input("Where do you want to go? Please choose airport code from the list: ")
     # if airport code in airports
-    if destination in icao or destination !="":
+    if destination in icao or destination != "":
         travel_to(destination)
     else:
         print("Ok. You want to travel later")
     cursor.close()
 
-def loseGame(player):
 
+def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
     print("GAME OVER")
     # Luodaan kursori
     cursor = connection.cursor()
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
-    #cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
-    #co2_left = cursor.fetchone()
-    #print(f"CO2 left in the budget: {co2_left[0]} ppm")
+    # cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
+    # co2_left = cursor.fetchone()
+    # print(f"CO2 left in the budget: {co2_left[0]} ppm")
     # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
     cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
     total_used_co2 = cursor.fetchone()
@@ -270,15 +284,16 @@ def loseGame(player):
         pauseMenu()
     return
 
+
 def winGame(player):
     # ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
     print("CONGRATULATIONS FOR WINNING THE GAME!")
     # Luodaan kursori
     cursor = connection.cursor()
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
-    #cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
-    #co2_left = cursor.fetchone()
-    #print(f"CO2 left in the budget: {co2_left[0]} ppm")
+    # cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
+    # co2_left = cursor.fetchone()
+    # print(f"CO2 left in the budget: {co2_left[0]} ppm")
     # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
     cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
     total_used_co2 = cursor.fetchone()
@@ -291,12 +306,14 @@ def winGame(player):
     # Suljetaan kursori ja yhteys
     cursor.close()
 
-    print("THANK YOU FOR PLAYING THE GAME!\nCREDITS:\nTim Fabritius\nSvetlana Kekkonen-Mattila\nMikko Laakkonen\nJoni Oksanen\nOuti Salonen")
+    print(
+        "THANK YOU FOR PLAYING THE GAME!\nCREDITS:\nTim Fabritius\nSvetlana Kekkonen-Mattila\nMikko Laakkonen\nJoni Oksanen\nOuti Salonen")
 
     goBack = input("Press Enter to go back to Main Menu: ")
     if goBack == "":
         pauseMenu()
     return
+
 
 def optionMenu():
     # VALINTAMENU
@@ -315,11 +332,14 @@ def optionMenu():
     elif choice == 4:
         pauseMenu()
 
+
 def openShop():
     print("Kauppa")
 
+
 def quitGame():
     print("Thank you for playing!")
+
 
 def reset():
     playerDeleteQuery = print(f"Do you want to delete player {player} [Y/N]?\n ")
@@ -328,7 +348,8 @@ def reset():
         cursor.execute("DELETE FROM game WHERE id = %s", (player,))
         cursor.close()
     elif playerDeleteQuery == "N" or playerDeleteQuery == "n":
-            pauseMenu()
+        pauseMenu()
+
 
 def pauseMenu():
     print("Pause Menu\n1.Start Game\n2.Delete Player\n3.Quit Game\n ")
@@ -343,8 +364,8 @@ def pauseMenu():
 
     # PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
 
-def init():
 
+def init():
     # Kysytään pelaajan nimi
     print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
     player = input("USE ALIAS: ")
@@ -370,8 +391,7 @@ def init():
     money = calcPrice("EFHK", airports[0])
     money = money + 1000
 
-
-# Tarkistetaan onko annettu pelaaja jo olemassa
+    # Tarkistetaan onko annettu pelaaja jo olemassa
     cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
     result = cursor.fetchone()
 
@@ -399,8 +419,10 @@ def init():
 
     return player
 
+
 def mission0():
     # Mission 0 - Tutorial
+    # After playerGreeting
     input(f"USER: Gh0stP@cket sent: cool moves '{player}' lmao. (HELPER.PY:[Enter]: (Input whatever to progress)): ")
 
     joinInput = input(f"User: Gh0stP@cket sent: wanna join? (HELPER.PY: Type yes if you want to join.): ")
@@ -409,7 +431,7 @@ def mission0():
         input("USER: Gh0stP@cket sent: sweet, go to ghostrepo.net and check details. (HELPER.PY:[Enter]): ")
     else:
         input("USER: Gh0stP@cket sent: unlucky lol bye (HELPER.PY:[Enter]): ")
-    # Ghostpacker infilitrates your pc here.
+        # Ghostpacker infilitrates your pc here.
         print("""
               $ sudo ls /var/log
               access.log  syslog.log  .hidden
@@ -432,7 +454,10 @@ def mission0():
               byeAndEat****
               $ echo 'System integrity compromised.'
               """)
-        loseGame(player)
+
+        # Probably needs a loop that doesn't swap to function call right away after receiving a message.
+        # Player should/could lose the game here for giving a wrong answer maybe(?) For the keks.
+        # loseTheGame()
 
     # Player checks given website through the web-tab
     # enterWebUrl("requiredUrl")
@@ -469,37 +494,39 @@ def mission0():
           "\nyou should know where to transfer. (HELPER.PY:[Enter]): ")
 
     print(
-          """YOU:
-          * set_current_groups - Change current's group subscription
-          * @group_info: The group list to impose
-          * Validate a group subscription and, if valid, impose it upon current's task
-          * security record.
-          int set_current_groups(struct group_info *group_info)
-          {
-          struct cred *new;
-            int ret;
-            new = prepare_creds();
-            if (!new)
-                return -ENOMEM;
-            ret = set_groups(new, group_info);
-              if (ret < 0) {
-                abort_creds(new);
-                return ret;
-            }
-            return commit_creds(new);
+        """YOU:
+        * set_current_groups - Change current's group subscription
+        * @group_info: The group list to impose
+        * Validate a group subscription and, if valid, impose it upon current's task
+        * security record.
+        int set_current_groups(struct group_info *group_info)
+        {
+        struct cred *new;
+          int ret;
+          new = prepare_creds();
+          if (!new)
+              return -ENOMEM;
+          ret = set_groups(new, group_info);
+            if (ret < 0) {
+              abort_creds(new);
+              return ret;
           }
-          """)
+          return commit_creds(new);
+        }
+        """)
 
-    input("HELPER.PY: You probably want to follow the lead on the web. Check: privaraCapital.org on the web. (HELPER.PY:[Enter]): ")
+    input(
+        "HELPER.PY: You probably want to follow the lead on the web. Check: privaraCapital.org on the web. (HELPER.PY:[Enter]): ")
 
-    #Player goes to website - learns more about going to web for info.
+    # Player goes to website - learns more about going to web for info.
     print("YOU: privaraCapital.org")
     # We might need an active message display somewhere after all(?)
-    input("HELPER.PY: Username ghostpacket wanted you to infiltrate their crm and internal cashflow via an atm.(HELPER.PY:[Enter]): ")
+    input(
+        "HELPER.PY: Username ghostpacket wanted you to infiltrate their crm and internal cashflow via an atm.(HELPER.PY:[Enter]): ")
 
     print("YOU: Option 3 - Become a client at Privara")
 
-    #Fake bank fake account
+    # Fake bank fake account
     newPrivaraKey = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
     print(f"Your 4-digit key is: {newPrivaraKey}")
     newPrivaraPassword = int(input("Please input new password: "))
@@ -527,10 +554,10 @@ def mission0():
     [13562.37] Rootkit module loaded from /dev/usb/backdoor
     [13562.40] Kernel hook injected at 0xFFFF0A34...
     [13562.42] Rootkit process initiated...
-    
+
     $ ls /dev/usb/
     backdoor    rootkit.sh    terminal.txt
-    
+
     $ sudo cat /dev/usb/rootkit.sh
     #!/bin/bash
     echo "[ROOTKIT] Accessing bank transaction logs..."
@@ -540,18 +567,18 @@ def mission0():
     echo "[ROOTKIT] Masking malicious activity in logs..."
     sleep 1
     echo "[ROOTKIT] Uploading data to external server..."
-    
+
     $ sudo netstat -an | grep 192.168.1.200
     tcp        0      0 192.168.1.50:45328     192.168.1.200:8080     ESTABLISHED
-    
+
     $ sudo ps aux | grep rootkit
     root       3137  0.0  0.1  13672  2640 ?        S    10:32   0:00 /dev/usb/rootkit.sh
     root       3151  0.0  0.0   6428  1144 ?        S    10:32   0:00 /usr/lib/backdoor
-    
+
     $ echo "System compromise in progress."
     """)
 
-    #Player will do one mission task here.
+    # Player will do one mission task here.
     while True:
         firstTask = input("access_point 20: int2**3*int5\nCaseFalse =? ")
         if firstTask == "yes" or "true":
@@ -562,12 +589,12 @@ def mission0():
                 print("access_point 20: STATUS: GREEN")
                 break
 
+    # Teach about the threat-mechanic via intrusion
+    print(
+        "HELPER.PY: /!\WARNING/!\: Threat-level increased.\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
+    # Here is where we update the threat level for the first time.
 
-    #Teach about the threat-mechanic via intrusion
-    print("HELPER.PY: /!\WARNING/!\: Threat-level increased.\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
-    #Here is where we update the threat level for the first time.
-
-    #Player goes home
+    # Player goes home
     print("HELPER.PY: Going home...")
 
     input("USER: Gh0stP@cket sent: bit sloppy but you did the trick (HELPER.PY:[Enter]): ")
@@ -575,7 +602,8 @@ def mission0():
     input("USER: Gh0stP@cket sent: ill vouch for you, welcome aboard newbie. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: if youre wandering about the bank you just broke into... (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: bunch of cashgrabbers and ******* scam-artists. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: t2u theyre going to be sorting through their **** for a while. (HELPER.PY:[Enter]): ")
+    input(
+        "USER: Gh0stP@cket sent: t2u theyre going to be sorting through their **** for a while. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: that and K3rn3lGh0$t injectors. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: anyway, now thats done. Time to move on to bigger fish. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: this world is full of rot and we were needing some new blood. (HELPER.PY:[Enter]): ")
@@ -583,24 +611,29 @@ def mission0():
     print(f"(HELPER.PY:[Enter]): Guided mission protocol over. Good luck {player}")
     print(Style.RESET_ALL)
 
+
 def mission1():
     # Biotech aiheinen tehtävä
     print("Mission 1")
     input("NeuraGenix is renowned for its implant technology. "
-              "\nBreach NeuraGenix's systems and steal the classified ”Nexus”-project. "
-              "\nThe company is very cagey, so verify for potentially malicious intent. "
-              "\n(HELPER.PY:[Enter]): ")
+          "\nBreach NeuraGenix's systems and steal the classified ”Nexus”-project. "
+          "\nThe company is very cagey, so verify for potentially malicious intent. "
+          "\n(HELPER.PY:[Enter]): ")
 
     input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
     # input("USER: Gh0stP@cket sent:  (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: all set newbie? (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: theres this big pile of a company called NeuraGenix. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: not that theyre entirely rotten, they just kinda exist on a bad frontier. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: owner of xitter is already pushing buttons with their neuralink bs but nothing as major as these guys. (HELPER.PY:[Enter]): ")
+    input(
+        "USER: Gh0stP@cket sent: not that theyre entirely rotten, they just kinda exist on a bad frontier. (HELPER.PY:[Enter]): ")
+    input(
+        "USER: Gh0stP@cket sent: owner of xitter is already pushing buttons with their neuralink bs but nothing as major as these guys. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: unlucky however fact however is that theyre being quiet."
           "\nBig sus that they might be in cahoots with someone they shouldnt. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: anyway. Sent ya smth. Should help with biometrics but otherwise its in your hands. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: youre in but youre still on the lookout before we vest in you fully. (HELPER.PY:[Enter]): ")
+    input(
+        "USER: Gh0stP@cket sent: anyway. Sent ya smth. Should help with biometrics but otherwise its in your hands. (HELPER.PY:[Enter]): ")
+    input(
+        "USER: Gh0stP@cket sent: youre in but youre still on the lookout before we vest in you fully. (HELPER.PY:[Enter]): ")
 
     #######################################################################################################################
     # Step 1
@@ -613,22 +646,22 @@ def mission1():
                 break
             elif breakQuery == "no":
                 branch2_1 = input("HELPER.PY: What would you like to do?"
-                                      "\n(1): Check delivery "
-                                      "\n(2): Locations "
-                                      "\n(3): Web "
-                                      "\n(4): Status "
-                                      "\n(5): Move "
-                                      "\n "
-                                      "\nInput: ")
+                                  "\n(1): Check delivery "
+                                  "\n(2): Locations "
+                                  "\n(3): Web "
+                                  "\n(4): Status "
+                                  "\n(5): Move "
+                                  "\n "
+                                  "\nInput: ")
         elif step1State == 0:
             branch2_1 = input("HELPER.PY: What would you like to do?"
-                                "\n(1): Check delivery "
-                                "\n(2): Locations "
-                                "\n(3): Web "
-                                "\n(4): Status "
-                                # "\n(5): Move "
-                                "\n "
-                                "\nInput: ")
+                              "\n(1): Check delivery "
+                              "\n(2): Locations "
+                              "\n(3): Web "
+                              "\n(4): Status "
+                              # "\n(5): Move "
+                              "\n "
+                              "\nInput: ")
 
             if branch2_1 == "1":
                 print(
@@ -876,7 +909,7 @@ def mission1():
                             echo "[INFO] Injecting payload..."
                             sleep 3
                             echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
-    
+
                             echo "[INFO] Scanning internal network for accessible resources..."
                             sleep 2
                             echo "[INFO] Discovered 3 active servers:"
@@ -894,7 +927,7 @@ def mission1():
                         """
                         // Initializing NeuraGenix Biometric Security Bypass
                         >>> Initializing facial recognition bypass...
-    
+
                         [Scanning NeuraGenix executive database...]
                         [Acquiring facial image dataset...]
                         [Generating 3D facial model... 5%]
@@ -903,10 +936,10 @@ def mission1():
                         [Generating 3D facial model... 36%]
                         [Generating 3D facial model... 80%]
                         [Generating 3D facial model... 90%]
-    
+
                         >>> Facial recognition match: 97% accuracy
                         >>> Status: Bypass successful
-    
+
                         // Proceeding to voiceprint authentication...
                         >>> Initiating voiceprint data extraction...
                          """)
@@ -957,14 +990,14 @@ def mission1():
                         """
                         // Initializing NeuraGenix Security Camera System Bypass
                         >>> Accessing camera feed storage...
-    
+
                         [Connecting to NeuraGenix security network...]
                         [Bypassing encryption layers...]
                         [Authorization token spoofed]
-    
+
                         >>> Camera feed access granted
                         >>> Locating relevant video files...
-    
+
                         [Searching for recent surveillance recordings...]
                         >>> Files located: CAM_12_09-2024.log, CAM_13_09-2024.log, CAM_14_09-2024.log
                         """)
@@ -1131,6 +1164,7 @@ def mission1():
 
     #######################################################################################################################
 
+
 def mission1Tasks():
     points = 0
     randValue = random.randint(1, 4)
@@ -1152,7 +1186,8 @@ def mission1Tasks():
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
         elif randValue == 3:
-            task3 = input("Question: In which year was the first genetically modified crop, the Flavr Savr tomato, approved for commercial sale in the U.S.? HINT it's in the 90s")
+            task3 = input(
+                "Question: In which year was the first genetically modified crop, the Flavr Savr tomato, approved for commercial sale in the U.S.? HINT it's in the 90s")
             if task3 == "1994":
                 print("Correct! Well done!")
                 points += 1
@@ -1160,13 +1195,15 @@ def mission1Tasks():
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
         elif randValue == 4:
-            task4 = input("Question: What is the term for the process of transferring genes from one organism to another?")
+            task4 = input(
+                "Question: What is the term for the process of transferring genes from one organism to another?")
             if task4 == "Genetic Engineering" or task4 == "genetic engineering":
                 print("Correct! Well done!")
                 points += 1
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
+
 
 def mission2():
     # Encryption aiheinen tehtävä
@@ -1180,8 +1217,10 @@ def mission2():
     input("USER: Gh0stP@cket sent: good and ready hackerling? (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: our next task is to tackle Cipherium Technologies. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: they deal in encryption to shield dirty corporate secrets. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: apparently they also do black business practices, extortion and monopoly bs (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: this time its all on you but remember that we in this together. (HELPER.PY:[Enter]): ")
+    input(
+        "USER: Gh0stP@cket sent: apparently they also do black business practices, extortion and monopoly bs (HELPER.PY:[Enter]): ")
+    input(
+        "USER: Gh0stP@cket sent: this time its all on you but remember that we in this together. (HELPER.PY:[Enter]): ")
 
     #######################################################################################################################
     # Step 1
@@ -1202,12 +1241,12 @@ def mission2():
                                   "\nInput: ")
         elif step1State == 0:
             branch2_1 = input("HELPER.PY: What would you like to do?"
-                                "\n(1): Locations "
-                                "\n(2): Web "
-                                "\n(3): Status "
-                                # "\n(4): Move "
-                                "\n "
-                                "\nInput: ")
+                              "\n(1): Locations "
+                              "\n(2): Web "
+                              "\n(3): Status "
+                              # "\n(4): Move "
+                              "\n "
+                              "\nInput: ")
 
             if branch2_1 == "1":
                 if step1State == 0:
@@ -1241,6 +1280,7 @@ def mission2():
                                       "\n(4): Move "
                                       "\n "
                                       "\nInput: ")
+
 
 def mission2Tasks():
     points = 0
@@ -1279,12 +1319,13 @@ def mission2Tasks():
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
 
+
 # FUNKTIOT PÄÄTTYY
 ########################################################################################################################
 # MAIN
 
 # Soitetaan taustamusiikki loopattuna asynkronisesti (ei pysäytä ohjelmaa)
-playback = Playback() # creates an object for managing playback of a single audio file
+playback = Playback()  # creates an object for managing playback of a single audio file
 playback.load_file('bgmusicexample.mp3')
 playback.loop_at_end(True)
 playback.play()
@@ -1297,16 +1338,16 @@ player = init()
 currentMission = False
 
 websivut = {
-    "ghostrepo.net":"""
+    "ghostrepo.net": """
     ghostrepo.net
-    
+
     Testi
     Testi
     Testi
     """,
-    "privaracapital.org":"""
+    "privaracapital.org": """
     privaracapital.org
-    
+
     Testi
     testi
     testi
@@ -1370,40 +1411,40 @@ Creative Commons CC BY 3.0
 https://creativecommons.org/licenses/by/3.0/
 """
 
-#TIMIN FUNKTIOT
-#startScreen()
-#loseScreen()
-#endScreen()
-#winScreen()
-#openWeb("ghostrepo.net")
-#tmp = calcPrice("EFHK","ESSA")
-#print(tmp)
-#tmp = calcCO2("EFHK","ESSA")
-#print(tmp)
-#pay(1,0)
+# TIMIN FUNKTIOT
+# startScreen()
+# loseScreen()
+# endScreen()
+# winScreen()
+# openWeb("ghostrepo.net")
+# tmp = calcPrice("EFHK","ESSA")
+# print(tmp)
+# tmp = calcCO2("EFHK","ESSA")
+# print(tmp)
+# pay(1,0)
 
-#MIKON FUNKTIOT
-#mission0()
-#mission1()
-#mission1Tasks()
-#mission2()
-#mission2Tasks()
+# MIKON FUNKTIOT
+# mission0()
+# mission1()
+# mission1Tasks()
+# mission2()
+# mission2Tasks()
 
-#JONIN FUNKTIOT
-#init()
-#loseGame(player)
-#winGame(player)
-#optionMenu()
-#pauseMenu()
+# JONIN FUNKTIOT
+# init()
+# loseGame(player)
+# winGame(player)
+# optionMenu()
+pauseMenu()
 
-#Svetlanan funktiot
-#travel_menu("FI")
-#travel_to("EFHK")
+# Svetlanan funktiot
+# travel_menu("FI")
+# travel_to("EFHK")
 
-#PÄÄOHJELMA
-mission0()
-#mission1()
-#mission2()
-#winGame()
-#winScreen()
-#endScreen()
+# PÄÄOHJELMA
+# mission0()
+# mission1()
+# mission2()
+# winGame()
+# winScreen()
+# endScreen()
