@@ -283,6 +283,9 @@ def loseGame(player):
     cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
     money_left = cursor.fetchone()
     print(f"Money left in the budget: {money_left[0]}€")
+
+    reset()
+
     loseScreen()
     # Suljetaan kursori ja yhteys
     cursor.close()
@@ -310,6 +313,9 @@ def winGame(player):
     cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
     money_left = cursor.fetchone()
     print(f"Money left in the budget:{money_left[0]}€")
+
+    reset()
+
     winScreen()
     # Suljetaan kursori ja yhteys
     cursor.close()
