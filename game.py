@@ -92,7 +92,6 @@ def endScreen():
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
 
 def calcPrice(icao1, icao2):
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao1,))
     sijainti1 = cursor.fetchall()
@@ -101,11 +100,9 @@ def calcPrice(icao1, icao2):
     sijainti2 = cursor.fetchall()
     hinta = int(distance.distance(sijainti1, sijainti2).km)*1
     cursor.close()
-    connection.close()
     return hinta
 
 def raiseThreat(type):
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("SELECT threat FROM game WHERE id = %s", (player,))
     threat = cursor.fetchone()
@@ -124,18 +121,14 @@ def raiseThreat(type):
             connection.commit()
 
     cursor.close()
-    connection.close()
 
 def lowerThreat():
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("UPDATE threat SET threat = threat - 20 WHERE id = %s", (player,))
     connection.commit()
     cursor.close()
-    connection.close()
 
 def calcCO2(icao1, icao2):
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("SELECT latitude_deg, longitude_deg from airport where ident = %s", (icao1,))
     sijainti1 = cursor.fetchall()
@@ -148,21 +141,21 @@ def calcCO2(icao1, icao2):
     else:
         paastot = valimatka * 120
     cursor.close()
-    connection.close()
     return paastot
 
-def pay(multiplier, mission):
-    connection.reconnect()
+def pay(multiplier, mission, nextMission):
     cursor = connection.cursor()
+    cursor.execute("SELECT game.location FROM game WHERE game.id = %s", (player,))
+    location_c = cursor.fetchone()
+    current_location = location_c[0]
     cursor.execute("SELECT pay FROM mission WHERE id = %s", (mission,))
     money = cursor.fetchone()
-    print(money)
     money = int(money[0])
     money = multiplier * money
+    money = money + calcPrice(current_location, airports[nextMission])
     cursor.execute("UPDATE game SET money = money + %s WHERE id = %s", (money,player,))
     connection.commit()
     cursor.close()
-    connection.close()
 
 def openWeb(webpage):
     clear_console()
@@ -173,7 +166,6 @@ def openWeb(webpage):
     clear_console()
 
 def travel_to(icao_target):
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("SELECT game.location FROM game, airport WHERE game.id = %s", (player,))
     location_c = cursor.fetchone()
@@ -196,7 +188,6 @@ def travel_to(icao_target):
     cursor.execute(sql_target)
     connection.commit()
 
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
     budget_co2 = cursor.fetchone()
@@ -206,27 +197,22 @@ def travel_to(icao_target):
         #loseGame()
 
     # update money
-    connection.reconnect()
     cursor = connection.cursor()
     sql_money = f"UPDATE game SET money = (money -'{travel_price}') WHERE id ='{player}'"
     cursor.execute(sql_money)
     connection.commit()
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("SELECT game.money FROM game WHERE game.id = %s", (player,))
     money_left = cursor.fetchone()
     print(f"Money left in the budget: {money_left[0]}€")
     #lowerThreat()
     cursor.close()
-    connection.close()
 
 def travel_menu(country_code):
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("SELECT game.location FROM game WHERE game.id = %s", (player,))
     location_c = cursor.fetchone()
     current_location = location_c[0]
-    connection.reconnect()
     cursor = connection.cursor()
     sql_quest = f"SELECT ident, airport.name FROM airport WHERE iso_country ='{country_code}'AND ident != '{current_location}' AND type='medium_airport' ORDER BY RAND() LIMIT 10"
     cursor.execute(sql_quest)
@@ -256,13 +242,11 @@ def travel_menu(country_code):
     else:
         print("Ok. You want to travel later")
     cursor.close()
-    connection.close()
 
 def loseGame(player):
 
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
     print("GAME OVER")
-    connection.reconnect()
     # Luodaan kursori
     cursor = connection.cursor()
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
@@ -280,7 +264,6 @@ def loseGame(player):
     loseScreen()
     # Suljetaan kursori ja yhteys
     cursor.close()
-    connection.close()
 
     goBack = input("Press Enter to go back to Main Menu: ")
     if goBack == "":
@@ -290,7 +273,6 @@ def loseGame(player):
 def winGame(player):
     # ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
     print("CONGRATULATIONS FOR WINNING THE GAME!")
-    connection.reconnect()
     # Luodaan kursori
     cursor = connection.cursor()
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
@@ -308,7 +290,6 @@ def winGame(player):
     winScreen()
     # Suljetaan kursori ja yhteys
     cursor.close()
-    connection.close()
 
     print("THANK YOU FOR PLAYING THE GAME!\nCREDITS:\nTim Fabritius\nSvetlana Kekkonen-Mattila\nMikko Laakkonen\nJoni Oksanen\nOuti Salonen")
 
@@ -346,7 +327,6 @@ def reset():
         cursor = connection.cursor()
         cursor.execute("DELETE FROM game WHERE id = %s", (player,))
         cursor.close()
-        connection.close()
     elif playerDeleteQuery == "N" or playerDeleteQuery == "n":
             pauseMenu()
 
@@ -355,7 +335,7 @@ def pauseMenu():
 
     choice = int(input("Enter your choice: "))
     if choice == 1:
-        init(connection)
+        init()
     elif choice == 2:
         reset(player)
     elif choice == 3:
@@ -363,7 +343,7 @@ def pauseMenu():
 
     # PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
 
-def init(connection):
+def init():
 
     # Kysytään pelaajan nimi
     print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
@@ -416,7 +396,6 @@ def init(connection):
 
     # Suljetaan kursori ja yhteys
     cursor.close()
-    connection.close()
 
     return player
 
@@ -889,6 +868,7 @@ def mission1():
                     input("USER: K3rn3lGh0$t sent: HEH gotchu now.  (HELPER.PY: [Enter]) ")
                     input(
                         "USER: K3rn3lGh0$t sent: Lmao, don't sweat it. We already had your stuff.  (HELPER.PY: [Enter]) ")
+
                     input(
                         "USER: K3rn3lGh0$t sent: Anyway, sit back. Don't look stiff, I'll help ya out.  (HELPER.PY: [Enter]) ")
                     input(
@@ -1316,7 +1296,7 @@ playback.play()
 maat = []
 airports = []
 
-player = init(connection)
+player = init()
 
 currentMission = False
 
