@@ -436,6 +436,11 @@ def init():
 def mission0():
     # Mission 0 - Tutorial
     # After playerGreeting
+
+    #Mission scoretracking
+    missionScoreMax = 4
+    missionScore = 0
+
     input(f"USER: Gh0stP@cket sent: cool moves '{player}' lmao. (HELPER.PY:[Enter]: (Input whatever to progress)): ")
 
     joinInput = input(f"User: Gh0stP@cket sent: wanna join? (HELPER.PY: Type yes if you want to join.): ")
@@ -468,9 +473,8 @@ def mission0():
               $ echo 'System integrity compromised.'
               """)
 
-        # Probably needs a loop that doesn't swap to function call right away after receiving a message.
-        # Player should/could lose the game here for giving a wrong answer maybe(?) For the keks.
-        # loseTheGame()
+        #Losing game if faulty answer.
+        loseGame(player)
 
     # Player checks given website through the web-tab
     # enterWebUrl("requiredUrl")
@@ -528,8 +532,7 @@ def mission0():
         }
         """)
 
-    input(
-        "HELPER.PY: You probably want to follow the lead on the web. Check: privaraCapital.org on the web. (HELPER.PY:[Enter]): ")
+    input("HELPER.PY: You probably want to follow the lead on the web. Check: privaraCapital.org on the web. (HELPER.PY:[Enter]): ")
 
     # Player goes to website - learns more about going to web for info.
     print("YOU: privaraCapital.org")
@@ -591,16 +594,41 @@ def mission0():
     $ echo "System compromise in progress."
     """)
 
-    # Player will do one mission task here.
+    # Player will tutorial missions here.
     while True:
-        firstTask = input("access_point 20: int2**3*int5\nCaseFalse =? ")
-        if firstTask == "yes" or "true":
+        firstTask = input("access_point 20: int2**3*int5\nCaseFalse =? : ")
+
+        if firstTask == "yes" or firstTask == "true":
             print("ERROR: Critical user error.")
-        elif firstTask == "no" or "false":
+        elif firstTask == "no" or firstTask == "false":
             correctAnswer = int(input("Please input correct variable: "))
             if correctAnswer == 40:
                 print("access_point 20: STATUS: GREEN")
+                missionScore = missionScore + 2
                 break
+        else:
+            print("User error.")
+
+    while True:
+        secondTask = input("system_check 15: 5 * 4?\nCaseFalse =? : ")
+
+        # Käyttäjän vastauksen tarkistus
+        if secondTask == "no" or secondTask == "false":
+            print("system_check 15: STATUS: GREEN")
+            missionScore = missionScore + 1
+            break
+
+        elif secondTask == "yes" or secondTask == "true":
+            print("WARNING: Incorrect response.")
+            correction = int(input("Please input the correct value: "))
+
+            # Varmistetaan oikea vastaus
+            if correction == 20:
+                print("system_check 15: STATUS: GREEN")
+                missionScore = missionScore + 2
+                break
+            else:
+                print("User error.")
 
     # Teach about the threat-mechanic via intrusion
     print(
@@ -622,10 +650,44 @@ def mission0():
     input("USER: Gh0stP@cket sent: this world is full of rot and we were needing some new blood. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: get out there. (HELPER.PY:[Enter]): ")
     print(f"(HELPER.PY:[Enter]): Guided mission protocol over. Good luck {player}")
+    print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
+
+    #Clearing the mission
+    if missionScore == missionScoreMax:
+        scoreModifier = 1.15
+        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+              f"\nPay: {1000*scoreModifier}.")
+    elif missionScore < missionScoreMax:
+        scoreModifier = 0.75
+        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+              f"\nPay: {1000*scoreModifier}.")
+    elif missionScore >= 0:
+        scoreModifier = 0.5
+        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+              f"\nPay: {1000*scoreModifier}.")
+    else:
+        scoreModifier = 0.5
+        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+              f"\nPay: {1000*scoreModifier}.")
+
+    pay(scoreModifier, 0, 1)
+    input("HELPER.PY: Continue? ")
+    missionCompletedScreen()
+    #Update mission status
+    cursor = connection.cursor()
+    cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 0))
+    connection.commit()
+    cursor.close()
     print(Style.RESET_ALL)
+    travel_to(airports[1])
 
 
 def mission1():
+
+    #Mission scoretracking
+    missionScoreMax = 4
+    missionScore = 0
+
     # Biotech aiheinen tehtävä
     print("Mission 1")
     input("NeuraGenix is renowned for its implant technology. "
@@ -1064,11 +1126,42 @@ def mission1():
                         "Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
                     input("You almost forget your laptop, but that will only help sell the trick. ")
                     input("Picking up your stuff, you head out of the building. ")
-                    pay = 1000
-                    print(f"Mission completed. Your reward is: {pay}©")
-                    # Add pay to player cash amount.
 
+                    # Clearing the mission
+                    print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
+                    if missionScore == missionScoreMax:
+                        scoreModifier = 1.15
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+                    elif missionScore == 3:
+                        scoreModifier = 1
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+                    elif missionScore < 3:
+                        scoreModifier = 0.75
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+                    elif missionScore >= 0:
+                        scoreModifier = 0.5
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+                    else:
+                        scoreModifier = 0.3
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+
+                    pay(scoreModifier, 1, 2)
+                    input("HELPER.PY: Continue? ")
+                    missionCompletedScreen()
+                    # Update mission status
+                    cursor = connection.cursor()
+                    cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 1))
+                    connection.commit()
+                    cursor.close()
+                    print(Style.RESET_ALL)
+                    travel_to(airports[2])
                     break
+
                 elif moveOption == "3":
                     input("You head to the bathroom. ")
                     input("Locking yourself in the stall, you begin your work. ")
@@ -1170,9 +1263,40 @@ def mission1():
                     input("HELPER.PY: Your details have been presumably caught by the security cameras. [Enter]")
                     input("HELPER.PY: We can hope that the organization manages to wipe the slate. [Enter]")
                     input("HELPER.PY: Time to finish here. Awaiting further contact. On standby. [Enter]")
-                    pay = 500
-                    print(f"Mission completed. Your reward is: {pay}©")
-                    # Add pay to player cash amount.
+
+                    # Clearing the mission
+                    print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
+                    if missionScore == missionScoreMax:
+                        scoreModifier = 1.15
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+                    elif missionScore == 3:
+                        scoreModifier = 1
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+                    elif missionScore < 3:
+                        scoreModifier = 0.75
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+                    elif missionScore >= 0:
+                        scoreModifier = 0.5
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+                    else:
+                        scoreModifier = 0.3
+                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                              f"\nPay: {1000 * scoreModifier}.")
+
+                    pay(scoreModifier, 1, 2)
+                    input("HELPER.PY: Continue? ")
+                    missionCompletedScreen()
+                    # Update mission status
+                    cursor = connection.cursor()
+                    cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 1))
+                    connection.commit()
+                    cursor.close()
+                    print(Style.RESET_ALL)
+                    travel_to(airports[2])
                     break
 
     #######################################################################################################################
