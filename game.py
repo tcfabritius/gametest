@@ -114,18 +114,20 @@ def raiseThreat(type):
     cursor = connection.cursor()
     cursor.execute("SELECT threat FROM game WHERE id = %s", (player,))
     threat = cursor.fetchone()
+    print(threat)
+    threat = int(threat[0])
     if type == "stay":
         if threat + 1 > 100:
             loseGame()
         else:
-            cursor.execute("UPDATE threat SET threat = threat +1 WHERE id = %s", (player,))
+            cursor.execute("UPDATE game SET threat = threat +1 WHERE id = %s", (player,))
             connection.commit()
 
     if type == "failure":
         if threat + 3 > 100:
             loseGame()
         else:
-            cursor.execute("UPDATE threat SET threat = threat +3 WHERE id = %s", (player,))
+            cursor.execute("UPDATE game SET threat = threat +3 WHERE id = %s", (player,))
             connection.commit()
 
     cursor.close()
@@ -133,8 +135,12 @@ def raiseThreat(type):
 
 def lowerThreat():
     cursor = connection.cursor()
-    cursor.execute("UPDATE threat SET threat = threat - 20 WHERE id = %s", (player,))
-    connection.commit()
+    if threat - 20 > 0:
+        cursor.execute("UPDATE game SET threat = threat - 20 WHERE id = %s", (player,))
+        connection.commit()
+    else:
+        cursor.execute("UPDATE game SET threat = 0 WHERE id = %s", (player,))
+        connection.commit()
     cursor.close()
 
 
@@ -408,6 +414,7 @@ def init():
         cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
         cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
         cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
+        cursor.execute("UPDATE game SET threat = %s WHERE id = %s", (0, player))
         connection.commit()
 
 
@@ -1419,6 +1426,7 @@ https://creativecommons.org/licenses/by/3.0/
 # tmp = calcCO2("EFHK","ESSA")
 # print(tmp)
 # pay(1,0,1)
+raiseThreat('failure')
 
 # MIKON FUNKTIOT
 # mission0()
@@ -1432,7 +1440,7 @@ https://creativecommons.org/licenses/by/3.0/
 # loseGame(player)
 # winGame(player)
 # optionMenu()
-#pauseMenu()
+# pauseMenu()
 
 # Svetlanan funktiot
 # travel_menu("FI")
