@@ -114,7 +114,6 @@ def raiseThreat(type):
     cursor = connection.cursor()
     cursor.execute("SELECT threat FROM game WHERE id = %s", (player,))
     threat = cursor.fetchone()
-    print(threat)
     threat = int(threat[0])
     if type == "stay":
         if threat + 1 > 100:
