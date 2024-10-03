@@ -266,19 +266,18 @@ def loseGame(player):
     # Luodaan kursori
     cursor = connection.cursor()
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
-    cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
-    co2_left = cursor.fetchone()
-    print(f"CO2 left in the budget: {co2_left[0]} ppm")
-    cursor = connection.cursor()
+    #cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
+    #co2_left = cursor.fetchone()
+    #print(f"CO2 left in the budget: {co2_left[0]} ppm")
     # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
     cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
     total_used_co2 = cursor.fetchone()
     print(f"Total used CO2: {total_used_co2[0]} ppm")
-    cursor = connection.cursor()
     # Tulostetaan jäänyt rahamäärä
     cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
     money_left = cursor.fetchone()
     print(f"Money left in the budget: {money_left[0]}€")
+    loseScreen()
     # Suljetaan kursori ja yhteys
     cursor.close()
     connection.close()
@@ -291,13 +290,13 @@ def loseGame(player):
 def winGame(player):
     # ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
     print("CONGRATULATIONS FOR WINNING THE GAME!")
-
+    connection.reconnect()
     # Luodaan kursori
     cursor = connection.cursor()
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
-    cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
-    co2_left = cursor.fetchone()
-    print(f"CO2 left in the budget: {co2_left[0]} ppm")
+    #cursor.execute("SELECT co2_budget FROM game WHERE id = %s", (player,))
+    #co2_left = cursor.fetchone()
+    #print(f"CO2 left in the budget: {co2_left[0]} ppm")
     # Tulostetaan käytetty CO2. Luultavasti tarpeeton, ellei pelissä saa CO2 bonuksia.
     cursor.execute("SELECT co2_consumed FROM game WHERE id = %s", (player,))
     total_used_co2 = cursor.fetchone()
@@ -306,6 +305,7 @@ def winGame(player):
     cursor.execute("SELECT money FROM game WHERE id = %s", (player,))
     money_left = cursor.fetchone()
     print(f"Money left in the budget:{money_left[0]}€")
+    winScreen()
     # Suljetaan kursori ja yhteys
     cursor.close()
     connection.close()
@@ -1392,8 +1392,8 @@ https://creativecommons.org/licenses/by/3.0/
 
 #JONIN FUNKTIOT
 #init()
-#loseTheGame()
-#winGame()
+#loseGame(player)
+#winGame(player)
 #optionMenu()
 pauseMenu()
 
