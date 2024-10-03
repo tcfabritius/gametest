@@ -310,7 +310,7 @@ def winGame(player):
     cursor.close()
     connection.close()
 
-    print("THANK YOU FOR PLAYING THE GAME!\nCREDITS:\nTim Fabritius\nMikko Laakkonen\nJoni Oksanen\nOuti Salonen")
+    print("THANK YOU FOR PLAYING THE GAME!\nCREDITS:\nTim Fabritius\nSvetlana Kekkonen-Mattila\nMikko Laakkonen\nJoni Oksanen\nOuti Salonen")
 
     goBack = input("Press Enter to go back to Main Menu: ")
     if goBack == "":
