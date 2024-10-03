@@ -774,15 +774,15 @@ def mission1():
 
     #######################################################################################################################
     # Step 1
-    step1State = 0
+    step1_1State = 0
     while True:
-        if step1State == 1:
+        if step1_1State == 1:
             breakQuery = input("HELPER.PY: Would you like to move to NeuraGenix? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
                 print("HELPER.PY: Moving to target. ")
                 break
             elif breakQuery == "no":
-                branch2_1 = input("HELPER.PY: What would you like to do?"
+                stateQuery = input("HELPER.PY: What would you like to do?"
                                   "\n(1): Check delivery "
                                   "\n(2): Locations "
                                   "\n(3): Web "
@@ -790,8 +790,8 @@ def mission1():
                                   "\n(5): Move "
                                   "\n "
                                   "\nInput: ")
-        elif step1State == 0:
-            branch2_1 = input("HELPER.PY: What would you like to do?"
+        elif step1_1State == 0:
+            stateQuery = input("HELPER.PY: What would you like to do?"
                               "\n(1): Check delivery "
                               "\n(2): Locations "
                               "\n(3): Web "
@@ -800,38 +800,38 @@ def mission1():
                               "\n "
                               "\nInput: ")
 
-            if branch2_1 == "1":
+            if stateQuery == "1":
                 print("HELPER.PY: You were sent a usb-drive. It seems to contain a bypass-program. "
                       "Note inside says: 'Get me in their intra. -KeGh'")
-            elif branch2_1 == "2":
-                if step1State == 0:
+            elif stateQuery == "2":
+                if step1_1State == 0:
                     # print("HELPER.PY: ")
                     print("HELPER.PY: Current available locations are: "
                           "\n>Home<"
                           "\n ")
-                elif step1State == 1:
+                elif step1_1State == 1:
                     print("HELPER.PY: Current available locations are: "
                           "\n>Home<"
                           "\n*NeuraGenix"
                           "\n ")
-            elif branch2_1 == "3":
+            elif stateQuery == "3":
                 input("HELPER.PY: Searching web for NeuraGenix home page. [Enter]")
                 input("HELPER.PY: Indexing search results. [Enter]")
                 input("HELPER.PY: Location data stored. Analyzing route. [Enter]")
                 print("HELPER.PY: NeuraGenix added to locations-list.")
-                step1State = 1
+                step1_1State = 1
                 print("State updated."
                       "\n ")
-            elif branch2_1 == "4":
+            elif stateQuery == "4":
                 print(f"Your current threat level is: blahblah"
                       f"\n ")
-            elif branch2_1 == "5":
+            elif stateQuery == "5":
                 breakQuery = input("HELPER.PY: Would you like to move to NeuraGenix? (HELPER.PY:[yes/no]): ")
                 if breakQuery == "yes":
                     print("HELPER.PY: Moving to target.")
                     break
                 elif breakQuery == "no":
-                    branch2_1 = input("HELPER.PY: What would you like to do?"
+                    stateQuery = input("HELPER.PY: What would you like to do?"
                                       "\n(1): Check delivery "
                                       "\n(2): Locations "
                                       "\n(3): Web "
@@ -840,491 +840,503 @@ def mission1():
                                       "\n "
                                       "\nInput: ")
 
-        #######################################################################################################################
-        # Step 2
-        print("HELPER.PY: Arrived at NeuraGenix headquarters. ")
-        step2State = 0
-        while True:
-            if step2State == 1:
-                breakQuery = input("HELPER.PY: Head inside NeuraGenix? (HELPER.PY:[yes/no]): ")
-                if breakQuery == "yes":
-                    print("HELPER.PY: Entering building. ")
-                    break
-                elif breakQuery == "no":
-                    branch2_2 = input("HELPER.PY: What would you like to do? "
-                                      "\n(1): Check surroundings"
-                                      "\n(2): Locations "
-                                      "\n(3): Status "
-                                      "\n(4): Move "
-                                      "\n "
-                                      "\nInput: ")
-            elif step2State == 0:
-                branch2_2 = input("HELPER.PY: What would you like to do? "
-                                  "\n(1): Check surroundings"
-                                  "\n(2): Locations "
-                                  "\n(3): Status "
-                                  # "\n(4): Move "
-                                  "\n "
-                                  "\nInput: ")
+    #######################################################################################################################
+    # Step 2
+    print("HELPER.PY: Arrived at NeuraGenix headquarters. ")
+    step1_2State = 0
+    while True:
+        if step1_2State == 1:
+            breakQuery = input("HELPER.PY: Head inside NeuraGenix? (HELPER.PY:[yes/no]): ")
+            if breakQuery == "yes":
+                print("HELPER.PY: Entering building. ")
+                break
+            elif breakQuery == "no":
+                stateQuery = input("HELPER.PY: What would you like to do? "
+                                   "\n(1): Check surroundings"
+                                   "\n(2): Locations "
+                                   "\n(3): Status "
+                                   "\n(4): Move "
+                                   "\n "
+                                   "\nInput: ")
+        elif step1_2State == 0:
+            stateQuery = input("HELPER.PY: What would you like to do? "
+                               "\n(1): Check surroundings"
+                               "\n(2): Locations "
+                               "\n(3): Status "
+                               # "\n(4): Move "
+                               "\n "
+                               "\nInput: ")
 
-            if branch2_2 == "1":
-                input(
-                    "HELPER.PY: You are currently outside NeuraGenix. There are guards posted at the front entrance. [Enter]")
-                input("HELPER.PY: You will not be able to get in with your current status. [Enter]")
-                input(
-                    "HELPER.PY: There's a cafeteria within the block vicinity. We should head on over and perform a local network-scan. [Enter]")
-                print("HELPER.PY: Enroute... Arrived.")
-                print("5 minutes after ordering... ")
+        if stateQuery == "1":
+            input(
+                "HELPER.PY: You are currently outside NeuraGenix. There are guards posted at the front entrance. [Enter]")
+            input("HELPER.PY: You will not be able to get in with your current status. [Enter]")
+            input(
+                "HELPER.PY: There's a cafeteria within the block vicinity. We should head on over and perform a local network-scan. [Enter]")
+            print("HELPER.PY: Enroute... Arrived.")
+            print("5 minutes after ordering... ")
 
-                while True:
-                    print("HELPER.PY: System standby. Showing lan-options. ")
-                    commandExecute = input("HELPER.PY: Execute local network-scan, select desired lan: "
-                                           "\n (1) -freeWifi"
-                                           "\n (2) -beanWifi"
-                                           "\n (3) -visitorWifi"
-                                           "\n Input: ")
-                    if (commandExecute == "1"):
-                        input("HELPER.PY: Network scan underway... ")
-                        input("HELPER.PY: Package analysis 5/65... ")
-                        input("HELPER.PY: Package analysis 17/65... ")
-                        input("HELPER.PY: Package analysis 38/65... ")
-                        input("HELPER.PY: Package analysis complete. ")
-                        input("HELPER.PY: No entry points located. ")
-                    elif (commandExecute == "2"):
-                        input("HELPER.PY: Network scan underway... ")
-                        input("HELPER.PY: Package analysis 5/30... ")
-                        input("HELPER.PY: Package analysis 15/30... ")
-                        input("HELPER.PY: Package analysis complete. ")
-                        input("HELPER.PY: No entry points located. ")
-                    elif (commandExecute == "3"):
-                        input("HELPER.PY: Network scan underway... ")
-                        input("HELPER.PY: Package analysis 23/125... ")
-                        input("HELPER.PY: Package analysis 50/125... ")
-                        input("HELPER.PY: Package analysis 105/125... ")
-                        input("HELPER.PY: Package analysis 118/125... ")
-                        input("HELPER.PY: Package analysis complete. ")
-                        input("HELPER.PY: Potential access point discovered. -DeepScan.init")
-                        print("HELPER.PY: Disovery analysis: Potential VPN entry weakness ")
+            while True:
+                print("HELPER.PY: System standby. Showing lan-options. ")
+                commandExecute = input("HELPER.PY: Execute local network-scan, select desired lan: "
+                                       "\n (1) -freeWifi"
+                                       "\n (2) -beanWifi"
+                                       "\n (3) -visitorWifi"
+                                       "\n Input: ")
+                if (commandExecute == "1"):
+                    input("HELPER.PY: Network scan underway... ")
+                    input("HELPER.PY: Package analysis 5/65... ")
+                    input("HELPER.PY: Package analysis 17/65... ")
+                    input("HELPER.PY: Package analysis 38/65... ")
+                    input("HELPER.PY: Package analysis complete. ")
+                    input("HELPER.PY: No entry points located. ")
+                elif (commandExecute == "2"):
+                    input("HELPER.PY: Network scan underway... ")
+                    input("HELPER.PY: Package analysis 5/30... ")
+                    input("HELPER.PY: Package analysis 15/30... ")
+                    input("HELPER.PY: Package analysis complete. ")
+                    input("HELPER.PY: No entry points located. ")
+                elif (commandExecute == "3"):
+                    input("HELPER.PY: Network scan underway... ")
+                    input("HELPER.PY: Package analysis 23/125... ")
+                    input("HELPER.PY: Package analysis 50/125... ")
+                    input("HELPER.PY: Package analysis 105/125... ")
+                    input("HELPER.PY: Package analysis 118/125... ")
+                    input("HELPER.PY: Package analysis complete. ")
+                    input("HELPER.PY: Potential access point discovered. -DeepScan.init")
+                    print("HELPER.PY: Disovery analysis: Potential VPN entry weakness ")
 
-                        breakIn = input("Deploy probe? [yes/no]: ")
-                        if breakIn == "yes":
-                            input(
-                                """   
-                                echo "[INFO] Initializing connection to target VPN gateway..."
-                                sleep 2
-                                echo "[INFO] Connecting to DataSec Solutions VPN at 198.51.100.7:443"
-                                sleep 3
-                                echo "[SUCCESS] VPN connection established. Bypassing authentication... "
-                                """)
-
-                            # TASKS HERE
-
-                            input("""
-                            echo "[INFO] Firewall breach alerted."
+                    breakIn = input("Deploy probe? [yes/no]: ")
+                    if breakIn == "yes":
+                        input(
+                            """   
+                            echo "[INFO] Initializing connection to target VPN gateway..."
                             sleep 2
-                            echo "[INFO] Break-in protocol underway..."
+                            echo "[INFO] Connecting to DataSec Solutions VPN at 198.51.100.7:443"
                             sleep 3
-                            echo "[SUCCESS] Firewall disabled."
-                            sleep 2
-                            echo "[INFO] Overwriting logs..."
-                            sleep 2 
+                            echo "[SUCCESS] VPN connection established. Bypassing authentication... "
                             """)
 
-                            # TASKS HERE
+                        # TASKS HERE
 
-                            input("""
-                            echo "[INFO] Executing exploit on CVE-2024-1234 - Authentication Bypass Exploit"
-                            sleep 2
-                            echo "[INFO] Injecting payload..."
-                            sleep 3
-                            echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
-                            """)
-
-                            # TASKS HERE
-
-                            input("""
-                            echo "[INFO] Scanning internal network for accessible resources..."
-                            sleep 2
-                            echo "[INFO] Discovered 3 active servers:"
-                            sleep 1
-                            echo "      [1] FileServer01 - 192.168.1.10"
-                            echo "      [2] DatabaseServer - 192.168.1.20"
-                            echo "      [3] MailServer - 192.168.1.30"
-                            sleep 1
-                            echo "[INFO] Attempting to access DatabaseServer..."
-                            sleep 2
-                            echo "[INFO] Failure, biometric security detected."
-                            sleep 1
-                            echo "[INFO] Generating id data."
-                            sleep 1
-                            echo "[SUCCESS] ID data generated."
-                            sleep 1
-                            echo "[SUCCESS] Access id linked with RFID."
-                            sleep 1
-                            echo "[INFO] Command finished. Quitting program... Cleaning logs... "
-                            """)
-                            step2State = 1
-                            print("State updated. "
-                                  "\n")
-                            break
-                        else:
-                            input("HELPER.PY: Entry-probe disabled. Cleaning logs. ")
-
-            elif branch2_2 == "2":
-                if step2State == 0:
-                    print("HELPER.PY: Current available locations are: "
-                          "\n>NeuraGenix<"
-                          "\n ")
-                elif step2State == 1:
-                    print("HELPER.PY: Current available locations are: "
-                          "\n*NeuraGenix"
-                          "\n>Cafeteria<"
-                          "\n ")
-            elif branch2_2 == "3":
-                print(f"Your current threat level is: blahblah"
-                      f"\n ")
-            elif branch2_2 == "4":
-                breakQuery = input("HELPER.PY: Head inside NeuraGenix? (HELPER.PY:[yes/no]): ")
-                if breakQuery == "yes":
-                    print("HELPER.PY: Entering building. ")
-                    break
-                elif breakQuery == "no":
-                    branch2_2 = input("HELPER.PY: What would you like to do?"
-                                      "\n(1): Check surroundings"
-                                      "\n(2): Locations "
-                                      "\n(3): Status "
-                                      "\n(4): Move "
-                                      "\n "
-                                      "\nInput: ")
-
-        #######################################################################################################################
-        # Step 3
-        while True:
-            print("You're stopped by the guards. Flashing your RFID-card, you're given access to the premises."
-                  "\nThough they seem wary, they let you through. You're now within the premises.")
-            branch2_3 = input("HELPER.PY: What would you like to do? "
-                              "\n(1): Check surroundings"
-                              "\n(2): Locations "
-                              "\n(3): Status "
-                              "\n "
-                              "\nInput: ")
-
-            if branch2_3 == "1":
-                print("Before you is a large lobby. You see an info-desk, waiting area with seats and some bathrooms. ")
-                moveOption = input("What would you like to do? "
-                                   "\n (1): Info-desk "
-                                   "\n (2): Waiting area "
-                                   "\n (3): Bathroom ")
-                if moveOption == "1":
-                    input("Going to the info-desk, you try to chat up the attendant."
-                          "\nYou are inquired for your business and contact personnel. ")
-                    input("Trying to smooth talk isn't successful. "
-                          "\nYou are asked to leave the area before the guards will be alerted.")
-                    input("DEBUG: Lose game or penalty here. ")
-                    break
-                elif moveOption == "2":
-                    input("Going to the waiting area, you sit down with a presence. ")
-                    input("Waiting a bit, exuding intended presence, you note ignoring other passerby's. ")
-                    input("Noting the attendant is busy with transfer calls and paperwork. ")
-                    input("You bring out your laptop as if waiting for someone to come pick you up. ")
-                    input("You install the usb you were provided. This brings out an remote access panel. ")
-                    input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
-                    input("USER: K3rn3lGh0$t sent: HEH gotchu now.  (HELPER.PY: [Enter]) ")
-                    input(
-                        "USER: K3rn3lGh0$t sent: Lmao, don't sweat it. We already had your stuff.  (HELPER.PY: [Enter]) ")
-
-                    input(
-                        "USER: K3rn3lGh0$t sent: Anyway, sit back. Don't look stiff, I'll help ya out.  (HELPER.PY: [Enter]) ")
-                    input(
-                        "-KGRoot.init .\clientConnection:500.6904-676@LogPoint:6784.1245.3455.000.000:  (HELPER.PY: [Enter]) ")
-                    input(
-                        """ 
-                            echo "[INFO] Executing exploit on CVE-2024-1234 - Authentication Bypass Exploit"
-                            sleep 2
-                            echo "[INFO] Injecting payload..."
-                            sleep 3
-                            echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
-                            echo "[INFO] Scanning internal network for accessible resources..."
-                            sleep 2
-                            echo "[INFO] Discovered 3 active servers:"
-                            sleep 1
-                            echo "      [1] FileServer01 - 192.168.1.10"
-                            echo "      [2] DatabaseServer - 192.168.1.20"
-                            echo "      [3] MailServer - 192.168.1.30"
-                            sleep 1
-                            echo "[INFO] Attempting to access DatabaseServer..."
-                            sleep 2
-                            echo "[SUCCESS] Secure.server access established. -HANDSHAKE- .kg\ForceOpen.exe."
+                        input("""
+                        echo "[INFO] Firewall breach alerted."
+                        sleep 2
+                        echo "[INFO] Break-in protocol underway..."
+                        sleep 3
+                        echo "[SUCCESS] Firewall disabled."
+                        sleep 2
+                        echo "[INFO] Overwriting logs..."
+                        sleep 2 
                         """)
 
-                    input(
-                        """
-                        // Initializing NeuraGenix Biometric Security Bypass
-                        >>> Initializing facial recognition bypass...
-                        [Scanning NeuraGenix executive database...]
-                        [Acquiring facial image dataset...]
-                        [Generating 3D facial model... 5%]
-                        [Generating 3D facial model... 12%]
-                        [Generating 3D facial model... 54%]
-                        [Generating 3D facial model... 80%]
-                        [Generating 3D facial model... 90%]
-                        >>> Facial recognition match: 97% accuracy
-                        >>> Status: Bypass successful
+                        # TASKS HERE
 
-                        // Proceeding to voiceprint authentication...
-                        >>> Initiating voiceprint data extraction...
-                         """)
-
-                    # TASKS HERE
-
-                    input("""
-                    [Accessing archived audio files...]
-                    [Extracting voice patterns: Frequency, Pitch, Tone...]
-                    [Generating synthetic voice model...2%]
-                    [Generating synthetic voice model...5%]
-                    [Generating synthetic voice model...47%]
-                    [Generating synthetic voice model...78%]
-                    [Generating synthetic voice model...87%]
-
-                    >>> Voiceprint match: 92% accuracy
-                    >>> Status: Bypass successful
-                     """)
-
-                    # TASKS HERE
-
-                    input("""
-                    // Biometric authentication completed
-                    >>> Access granted to secure files
-                    >>> Navigating to "Nexus_Prototype" folder...
-                    [Decrypting folder contents...]
-                    [Data extraction in progress...]
-                    >>> 45% complete...
-                    >>> 80% complete...
-                    >>> 100% complete!
-                    >>> Project Nexus data successfully extracted.
-                    >>> Warning: Security systems triggered. Initiating escape protocol...
-                     """)
-                    input("USER: K3rn3lGh0$t sent: Done, got the packet. Rest is on you. (HELPER.PY: [Enter]) ")
-                    input("HELPER.PY: It would be reasonable to exit the premises. You have however raised suspicion. [Enter]")
-                    input("HELPER.PY: Your details have been presumably caught by the security cameras. [Enter]")
-                    input("HELPER.PY: Before leaving, I suggest scrubbing the data. [Enter]")
-                    input("HELPER.PY: Head to the bathroom for injection. [Enter]")
-                    input("HELPER.PY: Leave your pc to make it seem natural. Use your phone's remote access. [Enter]")
-                    print("You go the bathroom and boot up systemLink. ")
-                    input("HELPER.PY: ..\Exfiltration.exe- [Enter]")
-                    print(
-                        """
-                        // Initializing NeuraGenix Security Camera System Bypass
-                        >>> Accessing camera feed storage...
-                        [Connecting to NeuraGenix security network...]
-                        [Bypassing encryption layers...]
-                        [Authorization token spoofed]
-                        >>> Camera feed access granted
-                        >>> Locating relevant video files...
-                        [Searching for recent surveillance recordings...]
-                        >>> Files located: CAM_12_09-2024.log, CAM_13_09-2024.log, CAM_14_09-2024.log
+                        input("""
+                        echo "[INFO] Executing exploit on CVE-2024-1234 - Authentication Bypass Exploit"
+                        sleep 2
+                        echo "[INFO] Injecting payload..."
+                        sleep 3
+                        echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
                         """)
 
-                    # TASKS HERE
+                        # TASKS HERE
 
-                    input("""
-                    >>> Initiating file corruption sequence...
-                    [Overwriting CAM_12_09-2024.log...]
-                    >>> 25% complete...
-                    >>> 50% complete...
-                    >>> 100% complete - File corrupted
-                     """)
-
-                    # TASKS HERE
-
-                    input("""
-                    [Overwriting CAM_13_09-2024.log...]
-                    >>> 25% complete...
-                    >>> 50% complete...
-                    >>> 100% complete - File corrupted
-                    """)
-
-                    # TASKS HERE
-
-                    input("""
-                    [Overwriting CAM_14_09-2024.log...]
-                    >>> 25% complete...
-                    >>> 50% complete...
-                    >>> 100% complete - File corrupted
-                    >>> Status: All relevant surveillance footage has been erased.
-                    """)
-
-                    # TASKS HERE
-
-                    input("""
-                    >>> Initiating log cleanup...
-                    [Scrubbing access logs...]
-                    >>> Log entries for Camera Access successfully deleted
-                    >>> System audit trail: Clean
-                    >>> Surveillance bypass complete. No trace detected.
-                    """)
-
-                    # TASKS HERE
-
-                    input("You've successfully erased incriminating data. ")
-                    input("Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
-                    input("You almost forget your laptop, but that will only help sell the trick. ")
-                    input("Picking up your stuff, you head out of the building. ")
-
-                    # Clearing the mission
-                    print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
-                    if missionScore == missionScoreMax:
-                        scoreModifier = 1.15
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
-                    elif missionScore == 3:
-                        scoreModifier = 1
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
-                    elif missionScore < 3:
-                        scoreModifier = 0.75
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
-                    elif missionScore >= 0:
-                        scoreModifier = 0.5
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
+                        input("""
+                        echo "[INFO] Scanning internal network for accessible resources..."
+                        sleep 2
+                        echo "[INFO] Discovered 3 active servers:"
+                        sleep 1
+                        echo "      [1] FileServer01 - 192.168.1.10"
+                        echo "      [2] DatabaseServer - 192.168.1.20"
+                        echo "      [3] MailServer - 192.168.1.30"
+                        sleep 1
+                        echo "[INFO] Attempting to access DatabaseServer..."
+                        sleep 2
+                        echo "[INFO] Failure, biometric security detected."
+                        sleep 1
+                        echo "[INFO] Generating id data."
+                        sleep 1
+                        echo "[SUCCESS] ID data generated."
+                        sleep 1
+                        echo "[SUCCESS] Access id linked with RFID."
+                        sleep 1
+                        echo "[INFO] Command finished. Quitting program... Cleaning logs... "
+                        """)
+                        step2State = 1
+                        print("State updated. "
+                              "\n")
+                        break
                     else:
-                        scoreModifier = 0.3
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
+                        input("HELPER.PY: Entry-probe disabled. Cleaning logs. ")
 
-                    pay(scoreModifier, 1, 2)
-                    input("HELPER.PY: Continue? ")
-                    missionCompletedScreen()
-                    # Update mission status
-                    cursor = connection.cursor()
-                    cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 1))
-                    connection.commit()
-                    cursor.close()
-                    print(Style.RESET_ALL)
-                    travel_to(airports[2])
+        elif stateQuery == "2":
+            if step1_2State == 0:
+                print("HELPER.PY: Current available locations are: "
+                      "\n>NeuraGenix<"
+                      "\n ")
+            elif step1_2State == 1:
+                print("HELPER.PY: Current available locations are: "
+                      "\n*NeuraGenix"
+                      "\n>Cafeteria<"
+                      "\n ")
+        elif stateQuery == "3":
+            print(f"Your current threat level is: blahblah"
+                  f"\n ")
+        elif stateQuery == "4":
+            breakQuery = input("HELPER.PY: Head inside NeuraGenix? (HELPER.PY:[yes/no]): ")
+            if breakQuery == "yes":
+                print("HELPER.PY: Entering building. ")
+                break
+            elif breakQuery == "no":
+                stateQuery = input("HELPER.PY: What would you like to do?"
+                                   "\n(1): Check surroundings"
+                                   "\n(2): Locations "
+                                   "\n(3): Status "
+                                   "\n(4): Move "
+                                   "\n "
+                                   "\nInput: ")
 
-                    break
+    #######################################################################################################################
+    # Step 3
+    while True:
+        print("You're stopped by the guards. Flashing your RFID-card, you're given access to the premises."
+              "\nThough they seem wary, they let you through. You're now within the premises.")
+        stateQuery = input("HELPER.PY: What would you like to do? "
+                           "\n(1): Check surroundings"
+                           "\n(2): Locations "
+                           "\n(3): Status "
+                           "\n "
+                           "\nInput: ")
 
-                elif moveOption == "3":
-                    input("You head to the bathroom. ")
-                    input("Locking yourself in the stall, you begin your work. ")
-                    input("You install the usb you were provided. This brings out an remote access panel. ")
-                    input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
-                    input("USER: K3rn3lGh0$t sent: HEH gotchu now.  (HELPER.PY: [Enter]) ")
-                    input("USER: K3rn3lGh0$t sent: Jk. We already had your stuff.  (HELPER.PY: [Enter]) ")
-                    input("USER: K3rn3lGh0$t sent: Anyway, sit back. I'll help ya out. (HELPER.PY: [Enter]) ")
-                    input("-KGRoot.init .\clientConnection:500.6904-676@LogPoint:6784.1245.3455.000.000:  (HELPER.PY: [Enter]) ")
-                    input(""" 
-                            echo "[INFO] Executing exploit on CVE-2024-1234 - Authentication Bypass Exploit"
-                            sleep 2
-                            echo "[INFO] Injecting payload..."
-                            sleep 3
-                            echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
-                            echo "[INFO] Scanning internal network for accessible resources..."
-                            sleep 2
-                            echo "[INFO] Discovered 3 active servers:"
-                            sleep 1
-                            echo "      [1] FileServer01 - 192.168.1.10"
-                            echo "      [2] DatabaseServer - 192.168.1.20"
-                            echo "      [3] MailServer - 192.168.1.30"
-                            sleep 1
-                            echo "[INFO] Attempting to access DatabaseServer..."
-                            sleep 2
-                            echo "[SUCCESS] Secure.server access established. -HANDSHAKE- .kg\ForceOpen.exe."
-                        """)
+        if stateQuery == "1":
+            print(
+                "Before you is a large lobby. You see an info-desk, waiting area with seats and some bathrooms. ")
+            moveOption = input("What would you like to do? "
+                               "\n (1): Info-desk "
+                               "\n (2): Waiting area "
+                               "\n (3): Bathroom ")
+            if moveOption == "1":
+                input("Going to the info-desk, you try to chat up the attendant."
+                      "\nYou are inquired for your business and contact personnel. ")
+                input("Trying to smooth talk isn't successful. "
+                      "\nYou are asked to leave the area before the guards will be alerted.")
+                input("DEBUG: Lose game or penalty here. ")
+                break
+            elif moveOption == "2":
+                input("Going to the waiting area, you sit down with a presence. ")
+                input("Waiting a bit, exuding intended presence, you note ignoring other passerby's. ")
+                input("Noting the attendant is busy with transfer calls and paperwork. ")
+                input("You bring out your laptop as if waiting for someone to come pick you up. ")
+                input("You install the usb you were provided. This brings out an remote access panel. ")
+                input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
+                input("USER: K3rn3lGh0$t sent: HEH gotchu now.  (HELPER.PY: [Enter]) ")
+                input(
+                    "USER: K3rn3lGh0$t sent: Lmao, don't sweat it. We already had your stuff.  (HELPER.PY: [Enter]) ")
 
-                    input("""
-                        // Initializing NeuraGenix Biometric Security Bypass
-                        >>> Initializing facial recognition bypass...
-                        [Scanning NeuraGenix executive database...]
-                        [Acquiring facial image dataset...]
-                        [Generating 3D facial model... 5%]
-                        [Generating 3D facial model... 34%]
-                        [Generating 3D facial model... 80%]
-                        [Generating 3D facial model... 90%]
-                        >>> Facial recognition match: 97% accuracy
-                        >>> Status: Bypass successful
-                        // Proceeding to voiceprint authentication...
-                        >>> Initiating voiceprint data extraction...
-                         """)
+                input(
+                    "USER: K3rn3lGh0$t sent: Anyway, sit back. Don't look stiff, I'll help ya out.  (HELPER.PY: [Enter]) ")
+                input(
+                    "-KGRoot.init .\clientConnection:500.6904-676@LogPoint:6784.1245.3455.000.000:  (HELPER.PY: [Enter]) ")
+                input(
+                    """ 
+                        echo "[INFO] Executing exploit on CVE-2024-1234 - Authentication Bypass Exploit"
+                        sleep 2
+                        echo "[INFO] Injecting payload..."
+                        sleep 3
+                        echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
+                        echo "[INFO] Scanning internal network for accessible resources..."
+                        sleep 2
+                        echo "[INFO] Discovered 3 active servers:"
+                        sleep 1
+                        echo "      [1] FileServer01 - 192.168.1.10"
+                        echo "      [2] DatabaseServer - 192.168.1.20"
+                        echo "      [3] MailServer - 192.168.1.30"
+                        sleep 1
+                        echo "[INFO] Attempting to access DatabaseServer..."
+                        sleep 2
+                        echo "[SUCCESS] Secure.server access established. -HANDSHAKE- .kg\ForceOpen.exe."
+                    """)
 
-                    # TASKS HERE
-
-                    input("""
-                    [Accessing archived audio files...]
-                    [Extracting voice patterns: Frequency, Pitch, Tone...]
-                    [Generating synthetic voice model...6%]
-                    [Generating synthetic voice model...15%]
-                    [Generating synthetic voice model...68%]
-                    [Generating synthetic voice model...87%]
-                    >>> Voiceprint match: 92% accuracy
+                input(
+                    """
+                    // Initializing NeuraGenix Biometric Security Bypass
+                    >>> Initializing facial recognition bypass...
+                    [Scanning NeuraGenix executive database...]
+                    [Acquiring facial image dataset...]
+                    [Generating 3D facial model... 5%]
+                    [Generating 3D facial model... 12%]
+                    [Generating 3D facial model... 54%]
+                    [Generating 3D facial model... 80%]
+                    [Generating 3D facial model... 90%]
+                    >>> Facial recognition match: 97% accuracy
                     >>> Status: Bypass successful
+
+                    // Proceeding to voiceprint authentication...
+                    >>> Initiating voiceprint data extraction...
                      """)
 
-                    # TASKS HERE
+                # TASKS HERE
 
-                    input("""
-                    // Biometric authentication completed
-                    >>> Access granted to secure files
-                    >>> Navigating to "Nexus_Prototype" folder...
-                    [Decrypting folder contents...]
-                    [Data extraction in progress...]
-                    >>> 45% complete...
-                    >>> 80% complete...
-                    >>> 100% complete!
-                    >>> Project Nexus data successfully extracted.
-                    >>> Warning: Security systems triggered. Initiating escape protocol...
+                input("""
+                [Accessing archived audio files...]
+                [Extracting voice patterns: Frequency, Pitch, Tone...]
+                [Generating synthetic voice model...2%]
+                [Generating synthetic voice model...5%]
+                [Generating synthetic voice model...47%]
+                [Generating synthetic voice model...78%]
+                [Generating synthetic voice model...87%]
+
+                >>> Voiceprint match: 92% accuracy
+                >>> Status: Bypass successful
+                 """)
+
+                # TASKS HERE
+
+                input("""
+                // Biometric authentication completed
+                >>> Access granted to secure files
+                >>> Navigating to "Nexus_Prototype" folder...
+                [Decrypting folder contents...]
+                [Data extraction in progress...]
+                >>> 45% complete...
+                >>> 80% complete...
+                >>> 100% complete!
+                >>> Project Nexus data successfully extracted.
+                >>> Warning: Security systems triggered. Initiating escape protocol...
+                 """)
+                input("USER: K3rn3lGh0$t sent: Done, got the packet. Rest is on you. (HELPER.PY: [Enter]) ")
+                input(
+                    "HELPER.PY: It would be reasonable to exit the premises. You have however raised suspicion. [Enter]")
+                input("HELPER.PY: Your details have been presumably caught by the security cameras. [Enter]")
+                input("HELPER.PY: Before leaving, I suggest scrubbing the data. [Enter]")
+                input("HELPER.PY: Head to the bathroom for injection. [Enter]")
+                input(
+                    "HELPER.PY: Leave your pc to make it seem natural. Use your phone's remote access. [Enter]")
+                print("You go the bathroom and boot up systemLink. ")
+                input("HELPER.PY: ..\Exfiltration.exe- [Enter]")
+                print(
+                    """
+                    // Initializing NeuraGenix Security Camera System Bypass
+                    >>> Accessing camera feed storage...
+                    [Connecting to NeuraGenix security network...]
+                    [Bypassing encryption layers...]
+                    [Authorization token spoofed]
+                    >>> Camera feed access granted
+                    >>> Locating relevant video files...
+                    [Searching for recent surveillance recordings...]
+                    >>> Files located: CAM_12_09-2024.log, CAM_13_09-2024.log, CAM_14_09-2024.log
+                    """)
+
+                # TASKS HERE
+
+                input("""
+                >>> Initiating file corruption sequence...
+                [Overwriting CAM_12_09-2024.log...]
+                >>> 25% complete...
+                >>> 50% complete...
+                >>> 100% complete - File corrupted
+                 """)
+
+                # TASKS HERE
+
+                input("""
+                [Overwriting CAM_13_09-2024.log...]
+                >>> 25% complete...
+                >>> 50% complete...
+                >>> 100% complete - File corrupted
+                """)
+
+                # TASKS HERE
+
+                input("""
+                [Overwriting CAM_14_09-2024.log...]
+                >>> 25% complete...
+                >>> 50% complete...
+                >>> 100% complete - File corrupted
+                >>> Status: All relevant surveillance footage has been erased.
+                """)
+
+                # TASKS HERE
+
+                input("""
+                >>> Initiating log cleanup...
+                [Scrubbing access logs...]
+                >>> Log entries for Camera Access successfully deleted
+                >>> System audit trail: Clean
+                >>> Surveillance bypass complete. No trace detected.
+                """)
+
+                # TASKS HERE
+
+                input("You've successfully erased incriminating data. ")
+                input(
+                    "Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
+                input("You almost forget your laptop, but that will only help sell the trick. ")
+                input("Picking up your stuff, you head out of the building. ")
+
+                # Clearing the mission
+                print(
+                    f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
+                if missionScore == missionScoreMax:
+                    scoreModifier = 1.15
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                elif missionScore == 3:
+                    scoreModifier = 1
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                elif missionScore < 3:
+                    scoreModifier = 0.75
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                elif missionScore >= 0:
+                    scoreModifier = 0.5
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                else:
+                    scoreModifier = 0.3
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+
+                pay(scoreModifier, 1, 2)
+                input("HELPER.PY: Continue? ")
+                missionCompletedScreen()
+                # Update mission status
+                cursor = connection.cursor()
+                cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)",
+                               (player, 1))
+                connection.commit()
+                cursor.close()
+                print(Style.RESET_ALL)
+                travel_to(airports[2])
+
+                break
+
+            elif moveOption == "3":
+                input("You head to the bathroom. ")
+                input("Locking yourself in the stall, you begin your work. ")
+                input("You install the usb you were provided. This brings out an remote access panel. ")
+                input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
+                input("USER: K3rn3lGh0$t sent: HEH gotchu now.  (HELPER.PY: [Enter]) ")
+                input("USER: K3rn3lGh0$t sent: Jk. We already had your stuff.  (HELPER.PY: [Enter]) ")
+                input("USER: K3rn3lGh0$t sent: Anyway, sit back. I'll help ya out. (HELPER.PY: [Enter]) ")
+                input(
+                    "-KGRoot.init .\clientConnection:500.6904-676@LogPoint:6784.1245.3455.000.000:  (HELPER.PY: [Enter]) ")
+                input(""" 
+                        echo "[INFO] Executing exploit on CVE-2024-1234 - Authentication Bypass Exploit"
+                        sleep 2
+                        echo "[INFO] Injecting payload..."
+                        sleep 3
+                        echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
+                        echo "[INFO] Scanning internal network for accessible resources..."
+                        sleep 2
+                        echo "[INFO] Discovered 3 active servers:"
+                        sleep 1
+                        echo "      [1] FileServer01 - 192.168.1.10"
+                        echo "      [2] DatabaseServer - 192.168.1.20"
+                        echo "      [3] MailServer - 192.168.1.30"
+                        sleep 1
+                        echo "[INFO] Attempting to access DatabaseServer..."
+                        sleep 2
+                        echo "[SUCCESS] Secure.server access established. -HANDSHAKE- .kg\ForceOpen.exe."
+                    """)
+
+                input("""
+                    // Initializing NeuraGenix Biometric Security Bypass
+                    >>> Initializing facial recognition bypass...
+                    [Scanning NeuraGenix executive database...]
+                    [Acquiring facial image dataset...]
+                    [Generating 3D facial model... 5%]
+                    [Generating 3D facial model... 34%]
+                    [Generating 3D facial model... 80%]
+                    [Generating 3D facial model... 90%]
+                    >>> Facial recognition match: 97% accuracy
+                    >>> Status: Bypass successful
+                    // Proceeding to voiceprint authentication...
+                    >>> Initiating voiceprint data extraction...
                      """)
 
-                    input("USER: K3rn3lGh0$t sent: Done, got the packet. Rest is on you. (HELPER.PY: [Enter]) ")
-                    input("Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
-                    input("By the time you leave the area, you are contacted. ")
-                    input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
-                    input("USER: Gh0stP@cket sent: yo ***h*l* you forgot to scrub the data. (HELPER.PY:[Enter]): ")
-                    input("USER: Gh0stP@cket sent: we got the prototype-data and backdoor access t2u, but this was a miss. (HELPER.PY:[Enter]): ")
-                    input("USER: Gh0stP@cket sent: we'll mask your entry with a ddos cleanup. (HELPER.PY:[Enter]): ")
-                    input("USER: Gh0stP@cket sent: next time you better do it proper. (HELPER.PY:[Enter]): ")
-                    input("HELPER.PY: Your details have been presumably caught by the security cameras. [Enter]")
-                    input("HELPER.PY: We can hope that the organization manages to wipe the slate. [Enter]")
-                    input("HELPER.PY: Time to finish here. Awaiting further contact. On standby. [Enter]")
+                # TASKS HERE
 
-                    # Clearing the mission
-                    print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
-                    if missionScore == missionScoreMax:
-                        scoreModifier = 1.15
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
-                    elif missionScore == 3:
-                        scoreModifier = 1
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
-                    elif missionScore < 3:
-                        scoreModifier = 0.75
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
-                    elif missionScore >= 0:
-                        scoreModifier = 0.5
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
-                    else:
-                        scoreModifier = 0.3
-                        input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
-                              f"\nPay: {1000 * scoreModifier}.")
+                input("""
+                [Accessing archived audio files...]
+                [Extracting voice patterns: Frequency, Pitch, Tone...]
+                [Generating synthetic voice model...6%]
+                [Generating synthetic voice model...15%]
+                [Generating synthetic voice model...68%]
+                [Generating synthetic voice model...87%]
+                >>> Voiceprint match: 92% accuracy
+                >>> Status: Bypass successful
+                 """)
 
-                    pay(scoreModifier, 1, 2)
-                    input("HELPER.PY: Continue? ")
-                    missionCompletedScreen()
-                    # Update mission status
-                    cursor = connection.cursor()
-                    cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 1))
-                    connection.commit()
-                    cursor.close()
-                    print(Style.RESET_ALL)
-                    travel_to(airports[2])
+                # TASKS HERE
 
-                    break
+                input("""
+                // Biometric authentication completed
+                >>> Access granted to secure files
+                >>> Navigating to "Nexus_Prototype" folder...
+                [Decrypting folder contents...]
+                [Data extraction in progress...]
+                >>> 45% complete...
+                >>> 80% complete...
+                >>> 100% complete!
+                >>> Project Nexus data successfully extracted.
+                >>> Warning: Security systems triggered. Initiating escape protocol...
+                 """)
+
+                input("USER: K3rn3lGh0$t sent: Done, got the packet. Rest is on you. (HELPER.PY: [Enter]) ")
+                input(
+                    "Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
+                input("By the time you leave the area, you are contacted. ")
+                input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
+                input("USER: Gh0stP@cket sent: yo ***h*l* you forgot to scrub the data. (HELPER.PY:[Enter]): ")
+                input(
+                    "USER: Gh0stP@cket sent: we got the prototype-data and backdoor access t2u, but this was a miss. (HELPER.PY:[Enter]): ")
+                input(
+                    "USER: Gh0stP@cket sent: we'll mask your entry with a ddos cleanup. (HELPER.PY:[Enter]): ")
+                input("USER: Gh0stP@cket sent: next time you better do it proper. (HELPER.PY:[Enter]): ")
+                input("HELPER.PY: Your details have been presumably caught by the security cameras. [Enter]")
+                input("HELPER.PY: We can hope that the organization manages to wipe the slate. [Enter]")
+                input("HELPER.PY: Time to finish here. Awaiting further contact. On standby. [Enter]")
+
+                # Clearing the mission
+                print(
+                    f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
+                if missionScore == missionScoreMax:
+                    scoreModifier = 1.15
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                elif missionScore == 3:
+                    scoreModifier = 1
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                elif missionScore < 3:
+                    scoreModifier = 0.75
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                elif missionScore >= 0:
+                    scoreModifier = 0.5
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                else:
+                    scoreModifier = 0.3
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+
+                pay(scoreModifier, 1, 2)
+                input("HELPER.PY: Continue? ")
+                missionCompletedScreen()
+                # Update mission status
+                cursor = connection.cursor()
+                cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)",
+                               (player, 1))
+                connection.commit()
+                cursor.close()
+                print(Style.RESET_ALL)
+                travel_to(airports[2])
+
+                break
 
     #######################################################################################################################
 
@@ -1389,9 +1401,50 @@ def mission2():
     #######################################################################################################################
     # Step 1
     # Locate mission critical data
-    step3_1State = 0
+    step2_1State = 0
     while True:
-        if step1State == 1:
+        if step2_1State == 1:
+            breakQuery = input("HELPER.PY: Would you like to enter the Cipherium Tech.? (HELPER.PY:[yes/no]): ")
+            if breakQuery == "yes":
+                print("HELPER.PY: Moving to target. ")
+                break
+            elif breakQuery == "no":
+                stateQuery = input("HELPER.PY: What would you like to do?"
+                                  "\n(1): Locations "
+                                  "\n(2): Web "
+                                  "\n(3): Status "
+                                  "\n(4): Move "
+                                  "\n "
+                                  "\nInput: ")
+        elif step2_1State == 0:
+            stateQuery = input("HELPER.PY: What would you like to do?"
+                              "\n(1): Locations "
+                              "\n(2): Web "
+                              "\n(3): Status "
+                              # "\n(4): Move "
+                              "\n "
+                              "\nInput: ")
+
+        if stateQuery == "1":
+            if step2_1State == 0:
+                # print("HELPER.PY: ")
+                print("HELPER.PY: Current available locations are: "
+                      "\n>Home<"
+                      "\n ")
+            elif step2_1State == 1:
+                print("HELPER.PY: Current available locations are: "
+                      "\n>Home<"
+                      "\n*Cipherium"
+                      "\n ")
+        elif stateQuery == "2":
+            input("WIP: Web content for Cipherium....")
+            step2_1State = 1
+            print("State updated."
+                  "\n ")
+        elif stateQuery == "3":
+            print(f"Your current threat level is: blahblah"
+                  f"\n ")
+        elif stateQuery == "4":
             breakQuery = input("HELPER.PY: Would you like to move to Cipherium Tech.? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
                 print("HELPER.PY: Moving to target. ")
@@ -1404,55 +1457,79 @@ def mission2():
                                   "\n(4): Move "
                                   "\n "
                                   "\nInput: ")
-        elif step1State == 0:
-            branch2_1 = input("HELPER.PY: What would you like to do?"
-                              "\n(1): Locations "
-                              "\n(2): Web "
-                              "\n(3): Status "
-                              # "\n(4): Move "
-                              "\n "
-                              "\nInput: ")
-
-            if branch2_1 == "1":
-                if step1State == 0:
-                    # print("HELPER.PY: ")
-                    print("HELPER.PY: Current available locations are: "
-                          "\n>Home<"
-                          "\n ")
-                elif step1State == 1:
-                    print("HELPER.PY: Current available locations are: "
-                          "\n>Home<"
-                          "\n*Cipherium"
-                          "\n ")
-            elif branch2_1 == "2":
-                input("WIP: Web content for Cipherium....")
-                step1State = 1
-                print("State updated."
-                      "\n ")
-            elif branch2_1 == "3":
-                print(f"Your current threat level is: blahblah"
-                      f"\n ")
-            elif branch2_1 == "4":
-                breakQuery = input("HELPER.PY: Would you like to move to Cipherium Tech.? (HELPER.PY:[yes/no]): ")
-                if breakQuery == "yes":
-                    print("HELPER.PY: Moving to target. ")
-                    break
-                elif breakQuery == "no":
-                    branch2_1 = input("HELPER.PY: What would you like to do?"
-                                      "\n(1): Locations "
-                                      "\n(2): Web "
-                                      "\n(3): Status "
-                                      "\n(4): Move "
-                                      "\n "
-                                      "\nInput: ")
 
     #######################################################################################################################
     # Step 2
     # Breach premises, find access to mainframe, obtain encryption key, plant tracker
-    step3_2State = 0
+    input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
+    input("USER: Gh0stP@cket sent: U will need some help with this one. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: we have a mole nearby. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: they have an fake id which you can use to get in. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: once in, you will have to plant the given device in mainframe. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: they will find it eventually, so you have to hide it for long enough. (HELPER.PY:[Enter]): ")
+    step2_2State = 0
     while True:
-        print("Step 2")
-        break
+
+        if step2_2State == 1:
+            breakQuery = input("HELPER.PY: Would you like to move to Inner complex? (HELPER.PY:[yes/no]): ")
+            if breakQuery == "yes":
+                print("HELPER.PY: Moving to target. ")
+                break
+            elif breakQuery == "no":
+                stateQuery = input("HELPER.PY: What would you like to do?"
+                                  "\n(1): Check surroundings "
+                                  "\n(2): Status "
+                                  "\n(3): Move "
+                                  "\n "
+                                  "\nInput: ")
+        elif step2_2State == 0:
+            stateQuery = input("HELPER.PY: What would you like to do?"
+                              "\n(1): Check surroundings "
+                              "\n(2): Status "
+                              # "\n(3): Move "
+                              "\n "
+                              "\nInput: ")
+
+        if stateQuery == "1":
+            if step2_2State == 0:
+                # input("HELPER.PY: ")
+                input("HELPER.PY: You're near the Cipherium main-building. [Enter] ")
+                input("HELPER.PY: Your next move should be to find the mole. [Enter] ")
+                wantToBroadcast = input("HELPER.PY: Would you like to perform a safe broadcast? [yes/no] ")
+                if wantToBroadcast == "yes":
+                    input("HELPER.PY: Broadcasting. . . . ")
+                    input(". . . .")
+                    input(". . .")
+                    input(".. . . . ..")
+                    input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
+                    input("Anon: Sent: Watch out. ")
+                    print("Your head is suddenly hit with an annoying pain. ")
+                    print("Falling on your feet is a id-card. Seems to fit the bill. ")
+                    print("You put the id-card on your neck. ")
+                    input("Anon: Sent: PUZZLE TO MAINFRAME HERE")
+                else:
+                    return
+
+            elif step2_2State == 1:
+                print("HELPER.PY: Current available locations are: "
+                      "\n>Home<"
+                      "\n*Cipherium"
+                      "\n ")
+        elif stateQuery == "2":
+            print(f"Your current threat level is: blahblah"
+                  f"\n ")
+        elif stateQuery == "3":
+            breakQuery = input("HELPER.PY: Would you like to move to Inner complex? (HELPER.PY:[yes/no]): ")
+            if breakQuery == "yes":
+                print("HELPER.PY: Moving to target. ")
+                break
+            elif breakQuery == "no":
+                branch2_1 = input("HELPER.PY: What would you like to do?"
+                                  "\n(1): Check surroundings "
+                                  "\n(2): Status "
+                                  "\n(3): Move "
+                                  "\n "
+                                  "\nInput: ")
 
     #######################################################################################################################
     # Step 3
