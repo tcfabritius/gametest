@@ -631,8 +631,7 @@ def mission0():
                 print("User error.")
 
     # Teach about the threat-mechanic via intrusion
-    print(
-        "HELPER.PY: /!\WARNING/!\: Threat-level increased.\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
+    print("HELPER.PY: /!\WARNING/!\: Threat-level increased.\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
     # Here is where we update the threat level for the first time.
 
     # Player goes home
@@ -1476,6 +1475,7 @@ maat = []
 airports = []
 
 player = init()
+print(airports[1])
 
 currentMission = False
 
