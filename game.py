@@ -387,9 +387,6 @@ def init():
         global airports
         airports.append(airport[0][0])
 
-    # Lasketaan alkuraha
-    money = calcPrice("EFHK", airports[0])
-    money = money + 1000
 
     # Tarkistetaan onko annettu pelaaja jo olemassa
     cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
@@ -404,15 +401,15 @@ def init():
         print(f"Welcome, {player}! Your alias has been created.")
 
         # Annetaan uudelle pelaajalle sijainti
-        cursor.execute("UPDATE game SET location = %s WHERE id = %s", ('EFHK', player))
+        cursor.execute("UPDATE game SET location = %s WHERE id = %s", (airports[0], player))
         connection.commit()
 
         # Annetaan uudelle pelaajalle lähtötiedot
         cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
         cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
-        cursor.execute("UPDATE game SET money = %s WHERE id = %s", (money, player))
+        cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
         connection.commit()
-        travel_to(airports[0])
+
 
     # Suljetaan kursori ja yhteys
     cursor.close()
@@ -1421,7 +1418,7 @@ https://creativecommons.org/licenses/by/3.0/
 # print(tmp)
 # tmp = calcCO2("EFHK","ESSA")
 # print(tmp)
-# pay(1,0)
+# pay(1,0,1)
 
 # MIKON FUNKTIOT
 # mission0()
@@ -1435,7 +1432,7 @@ https://creativecommons.org/licenses/by/3.0/
 # loseGame(player)
 # winGame(player)
 # optionMenu()
-pauseMenu()
+#pauseMenu()
 
 # Svetlanan funktiot
 # travel_menu("FI")
