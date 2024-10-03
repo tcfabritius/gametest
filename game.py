@@ -99,10 +99,10 @@ def endScreen():
 
 
 def calcPrice(icao1, icao2):
-    cursor = connection.cursor()
+    cursor = connection.cursor(buffered=True)
     cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao1,))
     sijainti1 = cursor.fetchall()
-    cursor = connection.cursor()
+    cursor = connection.cursor(buffered=True)
     cursor.execute("select latitude_deg, longitude_deg from airport where ident = %s", (icao2,))
     sijainti2 = cursor.fetchall()
     hinta = int(distance.distance(sijainti1, sijainti2).km) * 1
@@ -186,14 +186,14 @@ def openWeb(webpage):
 
 
 def travel_to(icao_target):
-    cursor = connection.cursor()
+    cursor = connection.cursor(buffered=True)
     cursor.execute("SELECT game.location FROM game, airport WHERE game.id = %s", (player,))
     location_c = cursor.fetchone()
     current_location = location_c[0]
     target = icao_target
     travel_price = calcPrice(current_location, target)
 
-    cursor = connection.cursor()
+    cursor = connection.cursor(buffered=True)
     cursor.execute("select money from game WHERE id = %s", (player,))
     saldo = cursor.fetchall()
     atm_saldo = int(saldo[0][0])
@@ -203,12 +203,12 @@ def travel_to(icao_target):
     travel_co2 = calcCO2(current_location, target)
     # update location
 
-    cursor = connection.cursor()
+    cursor = connection.cursor(buffered=True)
     sql_target = f"UPDATE game SET location = (SELECT ident FROM airport WHERE ident = '{target}'),co2_consumed = co2_consumed+'{travel_co2}' WHERE id ='{player}'"
     cursor.execute(sql_target)
     connection.commit()
 
-    cursor = connection.cursor()
+    ccursor = connection.cursor(buffered=True)
     cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
     budget_co2 = cursor.fetchone()
     co2_budget = budget_co2[0]
@@ -217,16 +217,16 @@ def travel_to(icao_target):
     # loseGame()
 
     # update money
-    cursor = connection.cursor()
+    cursor = connection.cursor(buffered=True)
     sql_money = f"UPDATE game SET money = (money -'{travel_price}') WHERE id ='{player}'"
     cursor.execute(sql_money)
     connection.commit()
-    cursor = connection.cursor()
+    cursor = connection.cursor(buffered=True)
     cursor.execute("SELECT game.money FROM game WHERE game.id = %s", (player,))
     money_left = cursor.fetchone()
     print(f"Money left in the budget: {money_left[0]}€")
     # lowerThreat()
-    cursor.close()
+
 
 
 def travel_menu(country_code):
@@ -678,9 +678,9 @@ def mission0():
 
     pay(scoreModifier, 0, 1)
     input("HELPER.PY: Continue? ")
-    missionCompletedScreen()
+    #missionCompletedScreen()
     #Update mission status
-    cursor = connection.cursor()
+    cursor = connection.cursor(buffered=True)
     cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 0))
     connection.commit()
     print(Style.RESET_ALL)
