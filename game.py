@@ -36,7 +36,6 @@ def clear_console():
     else:  # macOS and Linux
         os.system('clear')
 
-
 def startScreen():
     # Luodaan Decrypt-efekti alkuruudun animaatiota varten
     effect = Decrypt(alkuanimaatioruutu)
@@ -49,7 +48,6 @@ def startScreen():
 
     tmp = input("Press enter to continue")
     clear_console()
-
 
 def loseScreen():
     # Luodaan Burn-efekti alkuruudun animaatiota varten
@@ -65,7 +63,6 @@ def loseScreen():
 
     clear_console()
 
-
 def winScreen():
     # Luodaan Fireworks-efekti voittoruudun animaatiota varten
     effect = Fireworks(voittoanimaatioruutu)
@@ -78,7 +75,6 @@ def winScreen():
     tmp = input("Press enter to continue...")
 
     clear_console()
-
 
 def missionCompletedScreen():
     # Luodaan Fireworks-efekti voittoruudun animaatiota varten
@@ -93,7 +89,6 @@ def missionCompletedScreen():
 
     clear_console()
 
-
 def endScreen():
     # Luodaan Matrix-efekti loppuruudun animaatiota varten
     effect = Matrix(loppuanimaatioruutu)
@@ -102,7 +97,6 @@ def endScreen():
     with effect.terminal_output() as terminal:
         for frame in effect:
             terminal.print(frame)  # Tulostetaan animaation kukin kehys terminaaliin
-
 
 def calcPrice(icao1, icao2):
     cursor = connection.cursor(buffered=True)
@@ -113,7 +107,6 @@ def calcPrice(icao1, icao2):
     sijainti2 = cursor.fetchall()
     hinta = int(distance.distance(sijainti1, sijainti2).km) * 1
     return hinta
-
 
 def raiseThreat(type):
     cursor = connection.cursor()
@@ -136,7 +129,6 @@ def raiseThreat(type):
 
     cursor.close()
 
-
 def lowerThreat():
     cursor = connection.cursor()
     cursor.execute("SELECT threat FROM game WHERE id = %s", (player,))
@@ -149,7 +141,6 @@ def lowerThreat():
         cursor.execute("UPDATE game SET threat = 0 WHERE id = %s", (player,))
         connection.commit()
     cursor.close()
-
 
 def calcCO2(icao1, icao2):
     cursor = connection.cursor()
@@ -166,7 +157,6 @@ def calcCO2(icao1, icao2):
     cursor.close()
     return paastot
 
-
 def pay(multiplier, mission, nextMission):
     cursor = connection.cursor()
     cursor.execute("SELECT game.location FROM game WHERE game.id = %s", (player,))
@@ -181,12 +171,83 @@ def pay(multiplier, mission, nextMission):
     connection.commit()
     cursor.close()
 
-
 def openWeb(webpage):
     clear_console()
-    print("")
     print(Fore.GREEN + websivut[webpage])
-    tmp = input("Press enter to exit web browser")
+    if webpage == "ghostrepo.net":
+        input(
+            """
+            ||||G H O S T R E P O. N E T|||
+            --Index--
+            * Home
+            * Plans
+            * Secret sauce...
+            * Blog
+            * gfdksd
+            * dsjhkfg
+            hhdd122453rw
+            --.... 
+            """)
+        input(
+            """
+            gotunow
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>GhostRepo</title>
+            <style>
+                body { background: black; color: #0f0; font-family: monospace; text-align: center; }
+                a { color: #0f0; text-decoration: none; }
+                a:hover { color: red; }
+            </style>
+            """)
+
+        input("""
+            </head>
+            <body>
+            <h1>WELCOME TO GHOSTREPO</h1>
+            <p>Access Restricted. <a href="#" onclick="hack()">Click to Proceed</a></p>
+        
+            <script>
+                function hack() {
+                    alert('System compromised. Data collection initiated.');
+                    // Fake malware code simulation
+                    console.log('Collecting system data...');
+                }
+            </script>
+            </body>
+            """)
+    elif webpage == "privaraCapital.org":
+        input(
+        """
+        <!DOCTYPE html>
+        lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Privara Capital</title>
+            <style>
+                body { background: #111; color: #ddd; font-family: monospace; text-align: center; padding-top: 50px; }
+                a { color: #f33; } a:hover { color: #f55; }
+            </style>
+        </head>
+        <body>
+        
+        """)
+        input("""
+            <h1>Privara Capital</h1>
+            <p>Access restricted. <a href="#" onclick="access()">Click to Proceed</a></p>
+            <script>
+                function access() {
+                    if (prompt("Enter access key:") === "PRIVARA123") {
+                        document.body.innerHTML = '<h2>Access Granted</h2><p>Loading assets...</p>';} 
+                        else {document.body.innerHTML = '<h2>Access Denied</h2>';
+                    }}
+            </script>
+        </body>
+        
+        """)
+    print(Fore.GREEN + websivut[webpage])
+    tmp = input("Press enter to exit web browser ")
     print(Style.RESET_ALL)
     clear_console()
 
@@ -233,7 +294,6 @@ def travel_to(icao_target):
     money_left = cursor.fetchone()
     print(f"Money left in the budget: {money_left[0]}€")
     # lowerThreat()
-
 
 
 def travel_menu(country_code):
@@ -349,7 +409,7 @@ def optionMenu():
                 loseGame()
                 break
         elif choice == 2:
-            openWeb()
+            openWeb("null")
             break
         elif choice == 3:
             openShop()
@@ -460,7 +520,9 @@ def mission0():
     #Mission scoretracking
     missionScoreMax = 4
     missionScore = 0
-
+    input("HELPER.PY: Standing by. Type anything to initiate ImIn-protocol: ")
+    input("Brute accessing domain... 'PhantomGrid'")
+    input("Entry aborted: STATUS: Critical program failure")
     input(f"USER: Gh0stP@cket sent: cool moves '{player}' lmao. (HELPER.PY:[Enter]: (Input whatever to progress)): ")
 
     joinInput = input(f"User: Gh0stP@cket sent: wanna join? (HELPER.PY: Type yes if you want to join.): ")
@@ -470,13 +532,16 @@ def mission0():
     else:
         input("USER: Gh0stP@cket sent: unlucky lol bye (HELPER.PY:[Enter]): ")
         # Ghostpacker infilitrates your pc here.
-        print("""
+        input("""
               $ sudo ls /var/log
               access.log  syslog.log  .hidden
               $ sudo cat /var/log/.hidden
               Error: Permission Denied
               $ sudo chmod 777 /var/log/.hidden
               $ sudo cat /var/log/.hidden
+              
+              """)
+        input("""
               [ROOTKIT] Installing stealth modules...
               [ROOTKIT] Patching kernel hooks...
               [ROOTKIT] Redirecting network traffic to 192.168.1.100...
@@ -484,6 +549,9 @@ def mission0():
               [ROOTKIT] Erasing traces from /var/log/...
               [ROOTKIT] Operation complete. System compromised.
               $ sudo ls /dev/
+              
+                """)
+        input("""
               tty1  tty2  null  zero  backdoor  sd0
               $ ps aux | grep -i backdoor
               root      1337  0.0  0.0  0.0    /usr/lib/backdoor.sh
@@ -491,6 +559,7 @@ def mission0():
               Error: Process cannot be terminated
               byeAndEat****
               $ echo 'System integrity compromised.'
+              
               """)
 
         #Losing game if faulty answer.
@@ -498,20 +567,26 @@ def mission0():
 
     # Player checks given website through the web-tab
     # enterWebUrl("requiredUrl")
-    print("YOU: ghostrepo.net")
+    webQuery1 = input("Please enter url: ")
+    while webQuery1 != "ghostrepo.net":
+        if webQuery1 == "ghostrepo.net":
+            openWeb(webQuery1)
+        else:
+            print("404: Page not found.")
+            webQuery1 = input("Please enter url: ")
 
     input("USER: Gh0stP@cket sent: lol ty (HELPER.PY:[Enter]): ")
 
-    print("""
+    input("""
           $ sudo chmod 777 /var/log/.hidden
           $ sudo cat /var/log/.hidden
           [ROOTKIT] Installing stealth modules...
           [ROOTKIT] Patching kernel hooks...
-          [ROOTKIT] Redirecting network traffic to 192.168.1.100...
           [ROOTKIT] Disabling system logging...
-          [ROOTKIT] Erasing traces from /var/log/...
           [ROOTKIT] Operation complete. System compromised.
           $ sudo ls /dev/
+          """)
+    input("""
           tty1  tty2  null  zero  backdoor  sd0
           $ ps aux | grep -i backdoor
           root      1337  0.0  0.0  0.0    /usr/lib/backdoor.sh
@@ -520,42 +595,21 @@ def mission0():
           """)
 
     input("User: Gh0stP@cket sent: pretty incredible you walked right in that. (HELPER.PY:[Enter]): ")
-
     input("User: Gh0stP@cket sent: Figured you might be bit brighter. (HELPER.PY:[Enter]): ")
-
     input("User: Gh0stP@cket sent: w/e.\nif you want your encrypted files back without being spread to whoever, "
-          "we need to have some insurance. (HELPER.PY:[Enter]): ")
-
+          "we need some insurance. (HELPER.PY:[Enter]): ")
     input("User: Gh0stP@cket sent: you got in through the backdoor we set up for eager beavers scuch as you."
-          "\nfind a way in to privara capital."
-          "\nyou should know where to transfer. (HELPER.PY:[Enter]): ")
-
-    print(
-        """YOU:
-        * set_current_groups - Change current's group subscription
-        * @group_info: The group list to impose
-        * Validate a group subscription and, if valid, impose it upon current's task
-        * security record.
-        int set_current_groups(struct group_info *group_info)
-        {
-        struct cred *new;
-          int ret;
-          new = prepare_creds();
-          if (!new)
-              return -ENOMEM;
-          ret = set_groups(new, group_info);
-            if (ret < 0) {
-              abort_creds(new);
-              return ret;
-          }
-          return commit_creds(new);
-        }
-        """)
-
+          "\ntarget is privara capital. Get to it.")
     input("HELPER.PY: You probably want to follow the lead on the web. Check: privaraCapital.org on the web. (HELPER.PY:[Enter]): ")
 
     # Player goes to website - learns more about going to web for info.
-    print("YOU: privaraCapital.org")
+    webQuery2 = input("Please enter url: ")
+    while webQuery2 != "privaraCapital.org":
+        if webQuery2 == "privaraCapital.org":
+            openWeb(webQuery2)
+        else:
+            print("404: Page not found.")
+            webQuery2 = input("Please enter url: ")
     # We might need an active message display somewhere after all(?)
     input(
         "HELPER.PY: Username ghostpacket wanted you to infiltrate their crm and internal cashflow via an atm.(HELPER.PY:[Enter]): ")
@@ -565,35 +619,41 @@ def mission0():
     # Fake bank fake account
     newPrivaraKey = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
     print(f"Your 4-digit key is: {newPrivaraKey}")
-    newPrivaraPassword = int(input("Please input new password: "))
+    while True:
+        newPrivaraPassword = int(input("Please input new password (4 numbers): "))
+        if newPrivaraKey == "":
+            print("Invalid password. Please, try again. ")
+        else:
+            break
 
     print("Password set.")
     input("HELPER.PY: Please take mental note of these credentials. (HELPER.PY:[Enter]): ")
 
-    privaraKey = int(input(f"Please input your 4-letter id: "))
-    privaraPassword = int(input(f"Please input your password: "))
     while True:
+        privaraKey = int(input(f"Please input your 4-letter id: "))
+        privaraPassword = int(input(f"Please input your password: "))
         if privaraPassword == newPrivaraPassword and privaraKey == newPrivaraKey:
             print("Log in successful.")
             break
         else:
             print("Log in failed.")
             input("HELPER.PY: Please try again. (HELPER.PY:[Enter]): ")
-            privaraKey = input(f"Please input your 4-letter id: ")
-            privaraPassword = input(f"Please input your password: ")
 
-    print("YOU: USE: rootkit")
-    print("""
+    input("What would you like to do? "
+          "\n(Enter) Use rootkit")
+    input("Deploying rootkit...")
+    input("""
     $ sudo dmesg | tail
     [13562.33] USB device 3-1: New USB device connected, idVendor=16d0, idProduct=0af2
     [13562.35] USB device 3-1: HID device initialized
     [13562.37] Rootkit module loaded from /dev/usb/backdoor
     [13562.40] Kernel hook injected at 0xFFFF0A34...
     [13562.42] Rootkit process initiated...
-
     $ ls /dev/usb/
     backdoor    rootkit.sh    terminal.txt
+    """)
 
+    input("""
     $ sudo cat /dev/usb/rootkit.sh
     #!/bin/bash
     echo "[ROOTKIT] Accessing bank transaction logs..."
@@ -603,14 +663,11 @@ def mission0():
     echo "[ROOTKIT] Masking malicious activity in logs..."
     sleep 1
     echo "[ROOTKIT] Uploading data to external server..."
-
     $ sudo netstat -an | grep 192.168.1.200
     tcp        0      0 192.168.1.50:45328     192.168.1.200:8080     ESTABLISHED
-
     $ sudo ps aux | grep rootkit
     root       3137  0.0  0.1  13672  2640 ?        S    10:32   0:00 /dev/usb/rootkit.sh
     root       3151  0.0  0.0   6428  1144 ?        S    10:32   0:00 /usr/lib/backdoor
-
     $ echo "System compromise in progress."
     """)
 
@@ -624,7 +681,7 @@ def mission0():
             correctAnswer = int(input("Please input correct variable: "))
             if correctAnswer == 40:
                 print("access_point 20: STATUS: GREEN")
-                missionScore = missionScore + 2
+                missionScore =+ 2
                 break
         else:
             print("User error.")
@@ -635,7 +692,7 @@ def mission0():
         # Käyttäjän vastauksen tarkistus
         if secondTask == "no" or secondTask == "false":
             print("system_check 15: STATUS: GREEN")
-            missionScore = missionScore + 1
+            missionScore = missionScore + 2
             break
 
         elif secondTask == "yes" or secondTask == "true":
@@ -645,7 +702,7 @@ def mission0():
             # Varmistetaan oikea vastaus
             if correction == 20:
                 print("system_check 15: STATUS: GREEN")
-                missionScore = missionScore + 2
+                missionScore = missionScore + 1
                 break
             else:
                 print("User error.")
@@ -655,19 +712,13 @@ def mission0():
     # Here is where we update the threat level for the first time.
 
     # Player goes home
-    print("HELPER.PY: Going home...")
+    print("Going home...")
 
-    input("USER: Gh0stP@cket sent: bit sloppy but you did the trick (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: package in money out, nice work (HELPER.PY:[Enter]): ")
+    input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
+    input("USER: Gh0stP@cket sent: that did the trick (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: ill vouch for you, welcome aboard newbie. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: if youre wandering about the bank you just broke into... (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: bunch of cashgrabbers and ******* scam-artists. (HELPER.PY:[Enter]): ")
-    input(
-        "USER: Gh0stP@cket sent: t2u theyre going to be sorting through their **** for a while. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: that and K3rn3lGh0$t injectors. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: t2u theyre going to be sorting through their **** for a while. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: anyway, now thats done. Time to move on to bigger fish. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: this world is full of rot and we were needing some new blood. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: get out there. (HELPER.PY:[Enter]): ")
     print(f"(HELPER.PY:[Enter]): Guided mission protocol over. Good luck {player}")
     print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
 
@@ -702,32 +753,24 @@ def mission0():
 
 
 def mission1():
-
     #Mission scoretracking
-    missionScoreMax = 4
+    missionScoreMax = 10
     missionScore = 0
 
     # Biotech aiheinen tehtävä
     print("Mission 1")
-    input("NeuraGenix is renowned for its implant technology. "
-          "\nBreach NeuraGenix's systems and steal the classified ”Nexus”-project. "
-          "\nThe company is very cagey, so verify for potentially malicious intent. "
-          "\n(HELPER.PY:[Enter]): ")
+    #Description-print here
 
     input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
     # input("USER: Gh0stP@cket sent:  (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: all set newbie? (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: theres this big pile of a company called NeuraGenix. (HELPER.PY:[Enter]): ")
-    input(
-        "USER: Gh0stP@cket sent: not that theyre entirely rotten, they just kinda exist on a bad frontier. (HELPER.PY:[Enter]): ")
-    input(
-        "USER: Gh0stP@cket sent: owner of xitter is already pushing buttons with their neuralink bs but nothing as major as these guys. (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: unlucky however fact however is that theyre being quiet."
-          "\nBig sus that they might be in cahoots with someone they shouldnt. (HELPER.PY:[Enter]): ")
-    input(
-        "USER: Gh0stP@cket sent: anyway. Sent ya smth. Should help with biometrics but otherwise its in your hands. (HELPER.PY:[Enter]): ")
-    input(
-        "USER: Gh0stP@cket sent: youre in but youre still on the lookout before we vest in you fully. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: next on the list: NeuraGenix. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: they got press attention due to some ethical issues relating to workers and testing procedures."
+          "(HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: not that theyre entirely rotten, they just kinda exist on a bad frontier. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: unlucky however fact however is that theyre being quiet. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: sent ya smth. Should help with biometrics but otherwise its in your hands. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: youre in but youre still on the lookout before we vest in you fully. (HELPER.PY:[Enter]): ")
 
     #######################################################################################################################
     # Step 1
@@ -758,8 +801,8 @@ def mission1():
                               "\nInput: ")
 
             if branch2_1 == "1":
-                print(
-                    "HELPER.PY: You were sent a usb-drive. It seems to contain a bypass-program. Note inside says: 'Get me in their intra. -KeGh'")
+                print("HELPER.PY: You were sent a usb-drive. It seems to contain a bypass-program. "
+                      "Note inside says: 'Get me in their intra. -KeGh'")
             elif branch2_1 == "2":
                 if step1State == 0:
                     # print("HELPER.PY: ")
@@ -855,10 +898,8 @@ def mission1():
                         input("HELPER.PY: No entry points located. ")
                     elif (commandExecute == "3"):
                         input("HELPER.PY: Network scan underway... ")
-                        input("HELPER.PY: Package analysis 5/125... ")
                         input("HELPER.PY: Package analysis 23/125... ")
                         input("HELPER.PY: Package analysis 50/125... ")
-                        input("HELPER.PY: Package analysis 78/125... ")
                         input("HELPER.PY: Package analysis 105/125... ")
                         input("HELPER.PY: Package analysis 118/125... ")
                         input("HELPER.PY: Package analysis complete. ")
@@ -1003,7 +1044,6 @@ def mission1():
                             echo "[INFO] Injecting payload..."
                             sleep 3
                             echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
-
                             echo "[INFO] Scanning internal network for accessible resources..."
                             sleep 2
                             echo "[INFO] Discovered 3 active servers:"
@@ -1021,16 +1061,13 @@ def mission1():
                         """
                         // Initializing NeuraGenix Biometric Security Bypass
                         >>> Initializing facial recognition bypass...
-
                         [Scanning NeuraGenix executive database...]
                         [Acquiring facial image dataset...]
                         [Generating 3D facial model... 5%]
                         [Generating 3D facial model... 12%]
-                        [Generating 3D facial model... 34%]
-                        [Generating 3D facial model... 36%]
+                        [Generating 3D facial model... 54%]
                         [Generating 3D facial model... 80%]
                         [Generating 3D facial model... 90%]
-
                         >>> Facial recognition match: 97% accuracy
                         >>> Status: Bypass successful
 
@@ -1044,10 +1081,8 @@ def mission1():
                     [Accessing archived audio files...]
                     [Extracting voice patterns: Frequency, Pitch, Tone...]
                     [Generating synthetic voice model...2%]
-                    [Generating synthetic voice model...6%]
                     [Generating synthetic voice model...5%]
-                    [Generating synthetic voice model...15%]
-                    [Generating synthetic voice model...68%]
+                    [Generating synthetic voice model...47%]
                     [Generating synthetic voice model...78%]
                     [Generating synthetic voice model...87%]
 
@@ -1061,19 +1096,16 @@ def mission1():
                     // Biometric authentication completed
                     >>> Access granted to secure files
                     >>> Navigating to "Nexus_Prototype" folder...
-
                     [Decrypting folder contents...]
                     [Data extraction in progress...]
                     >>> 45% complete...
                     >>> 80% complete...
                     >>> 100% complete!
-
                     >>> Project Nexus data successfully extracted.
                     >>> Warning: Security systems triggered. Initiating escape protocol...
                      """)
                     input("USER: K3rn3lGh0$t sent: Done, got the packet. Rest is on you. (HELPER.PY: [Enter]) ")
-                    input(
-                        "HELPER.PY: It would be reasonable to exit the premises. You have however raised suspicion. [Enter]")
+                    input("HELPER.PY: It would be reasonable to exit the premises. You have however raised suspicion. [Enter]")
                     input("HELPER.PY: Your details have been presumably caught by the security cameras. [Enter]")
                     input("HELPER.PY: Before leaving, I suggest scrubbing the data. [Enter]")
                     input("HELPER.PY: Head to the bathroom for injection. [Enter]")
@@ -1084,14 +1116,11 @@ def mission1():
                         """
                         // Initializing NeuraGenix Security Camera System Bypass
                         >>> Accessing camera feed storage...
-
                         [Connecting to NeuraGenix security network...]
                         [Bypassing encryption layers...]
                         [Authorization token spoofed]
-
                         >>> Camera feed access granted
                         >>> Locating relevant video files...
-
                         [Searching for recent surveillance recordings...]
                         >>> Files located: CAM_12_09-2024.log, CAM_13_09-2024.log, CAM_14_09-2024.log
                         """)
@@ -1122,7 +1151,6 @@ def mission1():
                     >>> 25% complete...
                     >>> 50% complete...
                     >>> 100% complete - File corrupted
-
                     >>> Status: All relevant surveillance footage has been erased.
                     """)
 
@@ -1130,19 +1158,16 @@ def mission1():
 
                     input("""
                     >>> Initiating log cleanup...
-
                     [Scrubbing access logs...]
                     >>> Log entries for Camera Access successfully deleted
                     >>> System audit trail: Clean
-
                     >>> Surveillance bypass complete. No trace detected.
                     """)
 
                     # TASKS HERE
 
                     input("You've successfully erased incriminating data. ")
-                    input(
-                        "Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
+                    input("Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
                     input("You almost forget your laptop, but that will only help sell the trick. ")
                     input("Picking up your stuff, you head out of the building. ")
 
@@ -1188,19 +1213,15 @@ def mission1():
                     input("You install the usb you were provided. This brings out an remote access panel. ")
                     input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
                     input("USER: K3rn3lGh0$t sent: HEH gotchu now.  (HELPER.PY: [Enter]) ")
-                    input(
-                        "USER: K3rn3lGh0$t sent: Lmao, don't sweat it. We already had your stuff.  (HELPER.PY: [Enter]) ")
+                    input("USER: K3rn3lGh0$t sent: Jk. We already had your stuff.  (HELPER.PY: [Enter]) ")
                     input("USER: K3rn3lGh0$t sent: Anyway, sit back. I'll help ya out. (HELPER.PY: [Enter]) ")
-                    input(
-                        "-KGRoot.init .\clientConnection:500.6904-676@LogPoint:6784.1245.3455.000.000:  (HELPER.PY: [Enter]) ")
-                    input(
-                        """ 
+                    input("-KGRoot.init .\clientConnection:500.6904-676@LogPoint:6784.1245.3455.000.000:  (HELPER.PY: [Enter]) ")
+                    input(""" 
                             echo "[INFO] Executing exploit on CVE-2024-1234 - Authentication Bypass Exploit"
                             sleep 2
                             echo "[INFO] Injecting payload..."
                             sleep 3
                             echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
-
                             echo "[INFO] Scanning internal network for accessible resources..."
                             sleep 2
                             echo "[INFO] Discovered 3 active servers:"
@@ -1214,23 +1235,17 @@ def mission1():
                             echo "[SUCCESS] Secure.server access established. -HANDSHAKE- .kg\ForceOpen.exe."
                         """)
 
-                    input(
-                        """
+                    input("""
                         // Initializing NeuraGenix Biometric Security Bypass
                         >>> Initializing facial recognition bypass...
-
                         [Scanning NeuraGenix executive database...]
                         [Acquiring facial image dataset...]
                         [Generating 3D facial model... 5%]
-                        [Generating 3D facial model... 12%]
                         [Generating 3D facial model... 34%]
-                        [Generating 3D facial model... 36%]
                         [Generating 3D facial model... 80%]
                         [Generating 3D facial model... 90%]
-
                         >>> Facial recognition match: 97% accuracy
                         >>> Status: Bypass successful
-
                         // Proceeding to voiceprint authentication...
                         >>> Initiating voiceprint data extraction...
                          """)
@@ -1240,14 +1255,10 @@ def mission1():
                     input("""
                     [Accessing archived audio files...]
                     [Extracting voice patterns: Frequency, Pitch, Tone...]
-                    [Generating synthetic voice model...2%]
                     [Generating synthetic voice model...6%]
-                    [Generating synthetic voice model...5%]
                     [Generating synthetic voice model...15%]
                     [Generating synthetic voice model...68%]
-                    [Generating synthetic voice model...78%]
                     [Generating synthetic voice model...87%]
-
                     >>> Voiceprint match: 92% accuracy
                     >>> Status: Bypass successful
                      """)
@@ -1258,28 +1269,23 @@ def mission1():
                     // Biometric authentication completed
                     >>> Access granted to secure files
                     >>> Navigating to "Nexus_Prototype" folder...
-
                     [Decrypting folder contents...]
                     [Data extraction in progress...]
                     >>> 45% complete...
                     >>> 80% complete...
                     >>> 100% complete!
-
                     >>> Project Nexus data successfully extracted.
                     >>> Warning: Security systems triggered. Initiating escape protocol...
                      """)
+
                     input("USER: K3rn3lGh0$t sent: Done, got the packet. Rest is on you. (HELPER.PY: [Enter]) ")
-                    input(
-                        "Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
+                    input("Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
                     input("By the time you leave the area, you are contacted. ")
                     input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
                     input("USER: Gh0stP@cket sent: yo ***h*l* you forgot to scrub the data. (HELPER.PY:[Enter]): ")
-                    input(
-                        "USER: Gh0stP@cket sent: we got the prototype-data and backdoor access t2u, but this was a miss. (HELPER.PY:[Enter]): ")
-                    input(
-                        "USER: Gh0stP@cket sent: we'll mask your entry with a ddos, that way we can remove evidence. (HELPER.PY:[Enter]): ")
-                    input(
-                        "USER: Gh0stP@cket sent: next time you better do this **** proper. Remember were watching you. (HELPER.PY:[Enter]): ")
+                    input("USER: Gh0stP@cket sent: we got the prototype-data and backdoor access t2u, but this was a miss. (HELPER.PY:[Enter]): ")
+                    input("USER: Gh0stP@cket sent: we'll mask your entry with a ddos cleanup. (HELPER.PY:[Enter]): ")
+                    input("USER: Gh0stP@cket sent: next time you better do it proper. (HELPER.PY:[Enter]): ")
                     input("HELPER.PY: Your details have been presumably caught by the security cameras. [Enter]")
                     input("HELPER.PY: We can hope that the organization manages to wipe the slate. [Enter]")
                     input("HELPER.PY: Time to finish here. Awaiting further contact. On standby. [Enter]")
@@ -1364,25 +1370,26 @@ def mission1Tasks():
 
 
 def mission2():
+    #Mission scoretracking
+    missionScoreMax = 10
+    missionScore = 0
+
     # Encryption aiheinen tehtävä
-    print("Mission 2")
-    input("Cipherium Technologies is reputed to engage in covert operations, "
-          "\nusing their cutting-edge encryption to shield corruption and protect dubious corporations from public eye. "
-          "\nFind the dirt and reveal it.")
+    print("HELPER.PY: Mission 2")
+    #Description-print here
 
     input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
     # input("USER: Gh0stP@cket sent:  (HELPER.PY:[Enter]): ")
-    input("USER: Gh0stP@cket sent: good and ready hackerling? (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: good and ready newbie? (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: our next task is to tackle Cipherium Technologies. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: they deal in encryption to shield dirty corporate secrets. (HELPER.PY:[Enter]): ")
-    input(
-        "USER: Gh0stP@cket sent: apparently they also do black business practices, extortion and monopoly bs (HELPER.PY:[Enter]): ")
-    input(
-        "USER: Gh0stP@cket sent: this time its all on you but remember that we in this together. (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: apparently they also do black business practices, extortion and monopoly bs (HELPER.PY:[Enter]): ")
+    input("USER: Gh0stP@cket sent: this time its all on you but remember that we in this together. (HELPER.PY:[Enter]): ")
 
     #######################################################################################################################
     # Step 1
-    step1State = 0
+    # Locate mission critical data
+    step3_1State = 0
     while True:
         if step1State == 1:
             breakQuery = input("HELPER.PY: Would you like to move to Cipherium Tech.? (HELPER.PY:[yes/no]): ")
@@ -1439,6 +1446,21 @@ def mission2():
                                       "\n "
                                       "\nInput: ")
 
+    #######################################################################################################################
+    # Step 2
+    # Breach premises, find access to mainframe, obtain encryption key, plant tracker
+    step3_2State = 0
+    while True:
+        print("Step 2")
+        break
+
+    #######################################################################################################################
+    # Step 3
+    # Cleanup and exit
+    step3_3State = 0
+    while True:
+        print("Step 3")
+        break
 
 def mission2Tasks():
     points = 0
