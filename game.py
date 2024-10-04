@@ -258,7 +258,7 @@ def openWeb(webpage):
         """)
     print(Fore.GREEN + websivut[webpage])
     tmp = input("Press enter to exit web browser ")
-    print(Style.RESET_ALL)
+
     clear_console()
 
 
@@ -761,7 +761,7 @@ def mission0():
     cursor = connection.cursor(buffered=True)
     cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 0))
     connection.commit()
-    print(Style.RESET_ALL)
+
     travel_to(airports[1])
     cursor.close()
 
@@ -1222,7 +1222,7 @@ def mission1():
                                (player, 1))
                 connection.commit()
                 cursor.close()
-                print(Style.RESET_ALL)
+
                 travel_to(airports[2])
 
                 break
@@ -1347,7 +1347,7 @@ def mission1():
                                (player, 1))
                 connection.commit()
                 cursor.close()
-                print(Style.RESET_ALL)
+
                 travel_to(airports[2])
 
                 break
@@ -1740,7 +1740,6 @@ def mission2():
                                (player, 2))
                 connection.commit()
                 cursor.close()
-                print(Style.RESET_ALL)
 
                 break
 
