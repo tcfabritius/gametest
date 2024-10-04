@@ -1406,7 +1406,7 @@ def mission2():
         if step2_1State == 1:
             breakQuery = input("HELPER.PY: Would you like to enter the Cipherium Tech.? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
-                print("HELPER.PY: Moving to target. ")
+                print("Moving to target. ")
                 break
             elif breakQuery == "no":
                 stateQuery = input("HELPER.PY: What would you like to do?"
@@ -1447,7 +1447,7 @@ def mission2():
         elif stateQuery == "4":
             breakQuery = input("HELPER.PY: Would you like to move to Cipherium Tech.? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
-                print("HELPER.PY: Moving to target. ")
+                print("Moving to target. ")
                 break
             elif breakQuery == "no":
                 branch2_1 = input("HELPER.PY: What would you like to do?"
@@ -1460,7 +1460,7 @@ def mission2():
 
     #######################################################################################################################
     # Step 2
-    # Breach premises, find access to mainframe, obtain encryption key, plant tracker
+    # Breach premises, find access to mainframe
     input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
     input("USER: Gh0stP@cket sent: U will need some help with this one. (HELPER.PY:[Enter]): ")
     input("USER: Gh0stP@cket sent: we have a mole nearby. (HELPER.PY:[Enter]): ")
@@ -1469,12 +1469,12 @@ def mission2():
     input("USER: Gh0stP@cket sent: they will find it eventually, so you have to hide it for long enough. (HELPER.PY:[Enter]): ")
     step2_2State = 0
     while True:
-
         if step2_2State == 1:
             breakQuery = input("HELPER.PY: Would you like to move to Inner complex? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
-                print("HELPER.PY: Moving to target. ")
+                print("Moving in. ")
                 break
+
             elif breakQuery == "no":
                 stateQuery = input("HELPER.PY: What would you like to do?"
                                   "\n(1): Check surroundings "
@@ -1482,6 +1482,7 @@ def mission2():
                                   "\n(3): Move "
                                   "\n "
                                   "\nInput: ")
+
         elif step2_2State == 0:
             stateQuery = input("HELPER.PY: What would you like to do?"
                               "\n(1): Check surroundings "
@@ -1504,27 +1505,31 @@ def mission2():
                     input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
                     input("Anon: Sent: Watch out. ")
                     print("Your head is suddenly hit with an annoying pain. ")
-                    print("Falling on your feet is a id-card. Seems to fit the bill. ")
+                    print("Falling on your feet is a id-card and a package. Seems to fit the bill. ")
                     print("You put the id-card on your neck. ")
-                    input("Anon: Sent: PUZZLE TO MAINFRAME HERE")
+                    input("Anon: Sent: <, >, ^, ^, < (HELPER.PY:[Enter]) ")
+                    input("HELPER.PY: I would argue that these are directions to the mainframe. [Enter]")
+                    step2_2State = 1
+                    print("State updated."
+                          "\n ")
                 else:
                     return
 
             elif step2_2State == 1:
                 print("HELPER.PY: Current available locations are: "
-                      "\n>Home<"
-                      "\n*Cipherium"
-                      "\n ")
+                      "\n>Cipherium, outside<"
+                      "\n")
         elif stateQuery == "2":
             print(f"Your current threat level is: blahblah"
                   f"\n ")
         elif stateQuery == "3":
             breakQuery = input("HELPER.PY: Would you like to move to Inner complex? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
-                print("HELPER.PY: Moving to target. ")
+                print("Moving in. ")
                 break
+
             elif breakQuery == "no":
-                branch2_1 = input("HELPER.PY: What would you like to do?"
+                stateQuery = input("HELPER.PY: What would you like to do?"
                                   "\n(1): Check surroundings "
                                   "\n(2): Status "
                                   "\n(3): Move "
@@ -1533,11 +1538,53 @@ def mission2():
 
     #######################################################################################################################
     # Step 3
-    # Cleanup and exit
-    step3_3State = 0
+    # obtain encryption key, plant tracker, cleanup and exit
+    step2_3State = 0
     while True:
-        print("Step 3")
-        break
+        if step2_3State == 1:
+            breakQuery = input("HELPER.PY: Head home? (HELPER.PY:[yes/no]): ")
+            if breakQuery == "yes":
+                print("Going home ")
+                break
+            elif breakQuery == "no":
+                stateQuery = input("HELPER.PY: What would you like to do? "
+                                   "\n(1): Check surroundings "
+                                   "\n(2): Status "
+                                   "\n(3): Move "
+                                   "\n "
+                                   "\nInput: ")
+        elif step2_3State == 0:
+            stateQuery = input("HELPER.PY: What would you like to do? "
+                               "\n(1): Check surroundings "
+                               "\n(2): Status "
+                               # "\n(3): Move "
+                               "\n "
+                               "\nInput: ")
+
+        if stateQuery == "1":
+            # input("HELPER.PY: ")
+            input("Moving onward to the front door, you're let through no problem with your id on display.")
+            input("In the lobby, you see security scan, helpdesk and IT.")
+            stateQuery = input("HELPER.PY: What would you like to do? "
+                               "\n(1): Head to the security scan. "
+                               "\n(2): Head to helpdesk. "
+                               "\n(3): Head to IT. ")
+
+        elif stateQuery == "2":
+            print(f"Your current threat level is: blahblah"
+                  f"\n ")
+        elif stateQuery == "3":
+            breakQuery = input("HELPER.PY: Would you like to move to Inner complex? (HELPER.PY:[yes/no]): ")
+            if breakQuery == "yes":
+                print("Moving in. ")
+                break
+            elif breakQuery == "no":
+                stateQuery = input("HELPER.PY: What would you like to do?"
+                                  "\n(1): Check surroundings "
+                                  "\n(2): Status "
+                                  "\n(3): Move "
+                                  "\n "
+                                  "\nInput: ")
 
 def mission2Tasks():
     points = 0
