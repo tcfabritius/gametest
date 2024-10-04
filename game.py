@@ -406,30 +406,31 @@ def winGame(player):
     return
 
 
-def optionMenu():
-    # VALINTAMENU
-    print("Choose action to proceed:\n1.Hack\n2.Web\n3.Buy\n4.Back to Main Menu ")
-
-    while True:
-        choice = int(input("Enter your choice: "))
-        if choice == 1:
-            if currentMission == True:
-                winScreen()
-                break
-            elif currentMission == False:
-                loseGame()
-                break
-        elif choice == 2:
-            openWeb("null")
-            break
-        elif choice == 3:
-            openShop()
-            break
-        elif choice == 4:
-            pauseMenu()
-            break
-        else:
-            print("Invalid choice")
+# *** POISTETTU OMIAISUUS ***
+# def optionMenu():
+#    # VALINTAMENU
+#    print("Choose action to proceed:\n1.Hack\n2.Web\n3.Buy\n4.Back to Main Menu ")
+#
+#    while True:
+#        choice = int(input("Enter your choice: "))
+#        if choice == 1:
+#            if currentMission == True:
+#                winScreen()
+#                break
+#            elif currentMission == False:
+#                loseGame()
+#                break
+#        elif choice == 2:
+#            openWeb("null")
+#            break
+#        elif choice == 3:
+#            openShop()
+#            break
+#        elif choice == 4:
+#            pauseMenu()
+#            break
+#        else:
+#            print("Invalid choice")
 
 
 def openShop():
