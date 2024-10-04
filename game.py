@@ -189,7 +189,7 @@ def pay2(multiplier, mission):
 
 def openWeb(webpage):
     clear_console()
-    print(Fore.GREEN + websivut[webpage])
+    #print(Fore.GREEN + websivut[webpage])
     if webpage == "ghostrepo.net":
         input(
             """
@@ -835,8 +835,8 @@ def mission1():
                 print("State updated."
                       "\n ")
             elif stateQuery == "4":
-                print(f"Your current threat level is: blahblah"
-                      f"\n ")
+                getThreat()
+                print("")
             elif stateQuery == "5":
                 breakQuery = input("HELPER.PY: Would you like to move to NeuraGenix? (HELPER.PY:[yes/no]): ")
                 if breakQuery == "yes":
@@ -981,7 +981,6 @@ def mission1():
                         break
                     else:
                         input("HELPER.PY: Entry-probe disabled. Cleaning logs. ")
-
         elif stateQuery == "2":
             if step1_2State == 0:
                 print("HELPER.PY: Current available locations are: "
@@ -993,8 +992,8 @@ def mission1():
                       "\n>Cafeteria<"
                       "\n ")
         elif stateQuery == "3":
-            print(f"Your current threat level is: blahblah"
-                  f"\n ")
+            getThreat()
+            print("")
         elif stateQuery == "4":
             breakQuery = input("HELPER.PY: Head inside NeuraGenix? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
@@ -1021,7 +1020,7 @@ def mission1():
                            "\n "
                            "\nInput: ")
 
-        if stateQuery == "1":
+        if stateQuery == 1:
             print(
                 "Before you is a large lobby. You see an info-desk, waiting area with seats and some bathrooms. ")
             moveOption = input("What would you like to do? "
@@ -1349,6 +1348,13 @@ def mission1():
                 travel_to(airports[2])
 
                 break
+        elif stateQuery == 2:
+            print("HELPER.PY: Current available locations are: "
+                  "\n>NeuraGenix (inside)<"
+                  "\n ")
+        elif stateQuery == 3:
+            getThreat()
+            print("")
 
     #######################################################################################################################
 
@@ -1452,8 +1458,8 @@ def mission2():
             print("State updated."
                   "\n ")
         elif stateQuery == "3":
-            print(f"Your current threat level is: blahblah"
-                  f"\n ")
+            getThreat()
+            print("")
         elif stateQuery == "4":
             breakQuery = input("HELPER.PY: Would you like to move to Cipherium Tech.? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
@@ -1531,8 +1537,8 @@ def mission2():
                       "\n>Cipherium, outside<"
                       "\n")
         elif stateQuery == "2":
-            print(f"Your current threat level is: blahblah"
-                  f"\n ")
+            getThreat()
+            print("")
         elif stateQuery == "3":
             breakQuery = input("HELPER.PY: Would you like to move to Inner complex? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
@@ -1738,22 +1744,31 @@ def mission2():
                 cursor.close()
 
                 break
-
+            elif roomSurvey == "3":
+                print("Shit")
         elif stateQuery == "2":
-            print(f"Your current threat level is: blahblah"
-                  f"\n ")
+            getThreat()
+            print("")
         elif stateQuery == "3":
-            breakQuery = input("HELPER.PY: Head home? (HELPER.PY:[yes/no]): ")
-            if breakQuery == "yes":
-                print("Going home. ")
-                break
-            elif breakQuery == "no":
-                stateQuery = input("HELPER.PY: What would you like to do?"
-                                  "\n(1): Check surroundings "
-                                  "\n(2): Status "
-                                  "\n(3): Move "
-                                  "\n "
-                                  "\nInput: ")
+            if step2_3State == 1:
+                breakQuery = input("HELPER.PY: Head home? (HELPER.PY:[yes/no]): ")
+                if breakQuery == "yes":
+                    print("Going home. ")
+                    break
+                elif breakQuery == "no":
+                    stateQuery = input("HELPER.PY: What would you like to do?"
+                                      "\n(1): Check surroundings "
+                                      "\n(2): Status "
+                                      "\n(3): Move "
+                                      "\n "
+                                      "\nInput: ")
+            elif step2_3State == 0:
+                stateQuery = input("HELPER.PY: What would you like to do? "
+                                   "\n(1): Check surroundings "
+                                   "\n(2): Status "
+                                   # "\n(3): Move "
+                                   "\n "
+                                   "\nInput: ")
 
 def mission2Tasks():
     points = 0
