@@ -171,6 +171,16 @@ def pay(multiplier, mission, nextMission):
     connection.commit()
     cursor.close()
 
+def pay2(multiplier, mission):
+    cursor = connection.cursor()
+    cursor.execute("SELECT pay FROM mission WHERE id = %s", (mission,))
+    money = cursor.fetchone()
+    money = int(money[0])
+    money = multiplier * money
+    cursor.execute("UPDATE game SET money = money + %s WHERE id = %s", (money, player,))
+    connection.commit()
+    cursor.close()
+
 def openWeb(webpage):
     clear_console()
     print(Fore.GREEN + websivut[webpage])
