@@ -406,7 +406,7 @@ def winGame(player):
     return
 
 
-# *** POISTETTU OMIAISUUS ***
+# *** POISTETTU OMINAISUUS ***
 # def optionMenu():
 #    # VALINTAMENU
 #    print("Choose action to proceed:\n1.Hack\n2.Web\n3.Buy\n4.Back to Main Menu ")
