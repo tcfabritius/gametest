@@ -525,6 +525,28 @@ def mission_country(maat):
     cursor.close()
     return country[0][0]
 
+def init():
+    # Kysytään pelaajan nimi
+    print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
+    player = input("USE ALIAS: ")
+
+    # Luodaan kursori
+    cursor = connection.cursor()
+    # Maiden arpominen
+    countries_sql = f"SELECT iso_country FROM country ORDER BY RAND() LIMIT 3"
+    result = cursor.execute(countries_sql)
+    countries = cursor.fetchall()
+    for country in countries:
+        global maat
+        maat.append(country[0])
+
+    for maa in maat:
+        airports_sql = f"SELECT ident FROM airport WHERE iso_country = '{maa}' ORDER BY RAND() LIMIT 1"
+        result = cursor.execute(airports_sql)
+        airport = cursor.fetchall()
+        global airports
+        airports.append(airport[0][0])
+
         # Tarkistetaan onko annettu pelaaja jo olemassa
         cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
         result = cursor.fetchone()
@@ -552,6 +574,7 @@ def mission_country(maat):
         cursor.close()
 
         return player
+
 
 def mission0():
     # Mission 0 - Tutorial
