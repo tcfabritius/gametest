@@ -20,7 +20,6 @@ connection = mysql.connector.connect(
     autocommit=True
 )
 
-
 ########################################################################################################################
 # FUNKTIOT ALKAA
 def check_completed_missions():
@@ -268,7 +267,6 @@ def openWeb(webpage):
 
     clear_console()
 
-
 def travel_to(icao_target):
     cursor = connection.cursor(buffered=True)
 
@@ -312,7 +310,6 @@ def travel_to(icao_target):
     print(f"Money left in the budget: {money_left[0]}€")
     # lowerThreat()
 
-
 def travel_menu(country_code):
     cursor = connection.cursor()
     cursor.execute("SELECT game.location FROM game WHERE game.id = %s", (player,))
@@ -348,7 +345,6 @@ def travel_menu(country_code):
         print("Ok. You want to travel later")
     cursor.close()
 
-
 def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
     print("GAME OVER")
@@ -378,7 +374,6 @@ def loseGame(player):
     if goBack == "":
         pauseMenu()
     return
-
 
 def winGame(player):
     # ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
@@ -439,7 +434,6 @@ def winGame(player):
 #        else:
 #            print("Invalid choice")
 
-
 def openShop():
     print("Kauppa")
 
@@ -447,7 +441,6 @@ def openShop():
 
 def quitGame():
     print("Thank you for playing!")
-
 
 def reset():
     playerDeleteQuery = print(f"Do you want to delete player {player} [Y/N]?\n ")
@@ -458,7 +451,6 @@ def reset():
         cursor.close()
     elif playerDeleteQuery == "N" or playerDeleteQuery == "n":
         pauseMenu()
-
 
 def pauseMenu():
     print("Pause Menu\n1.Start Game\n2.Delete Player\n3.Quit Game\n ")
@@ -478,7 +470,6 @@ def pauseMenu():
             print("Invalid choice")
 
     # PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
-
 
 def init():
     # Kysytään pelaajan nimi
@@ -531,7 +522,6 @@ def init():
     cursor.close()
 
     return player
-
 
 def mission0():
     # Mission 0 - Tutorial
@@ -622,12 +612,12 @@ def mission0():
           "we need some insurance. (HELPER.PY:[Enter]): ")
     input("User: Gh0stP@cket sent: you got in through the backdoor we set up for eager beavers scuch as you."
           "\ntarget is privara capital. Get to it.")
-    input("HELPER.PY: You probably want to follow the lead on the web. Check: privaraCapital.org on the web. (HELPER.PY:[Enter]): ")
+    input("HELPER.PY: You probably want to follow the lead on the web. Check: privaracapital.org on the web. (HELPER.PY:[Enter]): ")
 
     # Player goes to website - learns more about going to web for info.
     webQuery2 = input("Please enter url: ")
     while True:
-        if webQuery2 == "privaraCapital.org":
+        if webQuery2 == "privaracapital.org":
             openWeb(webQuery2)
             break
         else:
@@ -637,7 +627,7 @@ def mission0():
     input(
         "HELPER.PY: Username ghostpacket wanted you to infiltrate their crm and internal cashflow via an atm.(HELPER.PY:[Enter]): ")
 
-    print("YOU: Option 3 - Become a client at Privara")
+    print("HELPER.PY: Become a client at Privara?")
 
     # Fake bank fake account
     newPrivaraKey = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
@@ -773,7 +763,6 @@ def mission0():
 
     travel_to(airports[1])
     cursor.close()
-
 
 def mission1():
     #Mission scoretracking
@@ -986,7 +975,7 @@ def mission1():
                         sleep 1
                         echo "[INFO] Command finished. Quitting program... Cleaning logs... "
                         """)
-                        step2State = 1
+                        step1_2State = 1
                         print("State updated. "
                               "\n")
                         break
@@ -1363,7 +1352,6 @@ def mission1():
 
     #######################################################################################################################
 
-
 def mission1Tasks():
     points = 0
     randValue = random.randint(1, 4)
@@ -1402,7 +1390,6 @@ def mission1Tasks():
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
-
 
 def mission2():
     #Mission scoretracking
@@ -1767,7 +1754,6 @@ def mission2():
                                   "\n(3): Move "
                                   "\n "
                                   "\nInput: ")
-
 
 def mission2Tasks():
     points = 0
