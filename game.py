@@ -534,6 +534,7 @@ def mission0():
     input("HELPER.PY: Standing by. Type anything to initiate ImIn-protocol: ")
     input("Brute accessing domain... 'PhantomGrid'")
     input("Entry aborted: STATUS: Critical program failure")
+    input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
     input(f"USER: Gh0stP@cket sent: cool moves '{player}' lmao. (HELPER.PY:[Enter]: (Input whatever to progress)): ")
 
     joinInput = input(f"User: Gh0stP@cket sent: wanna join? (HELPER.PY: Type yes if you want to join.): ")
@@ -579,9 +580,10 @@ def mission0():
     # Player checks given website through the web-tab
     # enterWebUrl("requiredUrl")
     webQuery1 = input("Please enter url: ")
-    while webQuery1 != "ghostrepo.net":
+    while True:
         if webQuery1 == "ghostrepo.net":
             openWeb(webQuery1)
+            break
         else:
             print("404: Page not found.")
             webQuery1 = input("Please enter url: ")
@@ -615,9 +617,10 @@ def mission0():
 
     # Player goes to website - learns more about going to web for info.
     webQuery2 = input("Please enter url: ")
-    while webQuery2 != "privaraCapital.org":
+    while True:
         if webQuery2 == "privaraCapital.org":
             openWeb(webQuery2)
+            break
         else:
             print("404: Page not found.")
             webQuery2 = input("Please enter url: ")
@@ -1728,7 +1731,7 @@ def mission2():
                     input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
                           f"\nPay: {1000 * scoreModifier}.")
 
-                pay(scoreModifier, 1, 2)
+                pay2(scoreModifier, 2)
                 input("HELPER.PY: Continue? ")
                 missionCompletedScreen()
                 # Update mission status
@@ -1756,7 +1759,6 @@ def mission2():
                                   "\n(3): Move "
                                   "\n "
                                   "\nInput: ")
-
 
 
 def mission2Tasks():
@@ -1814,7 +1816,7 @@ maat = []
 airports = []
 
 player = init()
-print(airports[1])
+startScreen()
 
 currentMission = False
 
