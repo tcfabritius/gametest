@@ -525,35 +525,33 @@ def mission_country(maat):
     cursor.close()
     return country[0][0]
 
+        # Tarkistetaan onko annettu pelaaja jo olemassa
+        cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
+        result = cursor.fetchone()
 
-    # Tarkistetaan onko annettu pelaaja jo olemassa
-    cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
-    result = cursor.fetchone()
+        if result[0] > 0:
+            print(f"Welcome back, {player}!")
+        else:
+            # Luodaan uusi pelaaja
+            cursor.execute("INSERT INTO game(id) VALUES (%s)", (player,))
+            connection.commit()
+            print(f"Welcome, {player}! Your alias has been created.")
 
-    if result[0] > 0:
-        print(f"Welcome back, {player}!")
-    else:
-        # Luodaan uusi pelaaja
-        cursor.execute("INSERT INTO game(id) VALUES (%s)", (player,))
-        connection.commit()
-        print(f"Welcome, {player}! Your alias has been created.")
+            # Annetaan uudelle pelaajalle sijainti
+            cursor.execute("UPDATE game SET location = %s WHERE id = %s", (airports[0], player))
+            connection.commit()
 
-        # Annetaan uudelle pelaajalle sijainti
-        cursor.execute("UPDATE game SET location = %s WHERE id = %s", (airports[0], player))
-        connection.commit()
+            # Annetaan uudelle pelaajalle lähtötiedot
+            cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
+            cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
+            cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
+            cursor.execute("UPDATE game SET threat = %s WHERE id = %s", (0, player))
+            connection.commit()
 
-        # Annetaan uudelle pelaajalle lähtötiedot
-        cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
-        cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
-        cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
-        cursor.execute("UPDATE game SET threat = %s WHERE id = %s", (0, player))
-        connection.commit()
+        # Suljetaan kursori ja yhteys
+        cursor.close()
 
-
-    # Suljetaan kursori ja yhteys
-    cursor.close()
-
-    return player
+        return player
 
 def mission0():
     # Mission 0 - Tutorial
