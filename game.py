@@ -189,7 +189,7 @@ def pay2(multiplier, mission):
 
 def openWeb(webpage):
     clear_console()
-    print(Fore.GREEN + websivut[webpage])
+    #print(Fore.GREEN + websivut[webpage])
     if webpage == "ghostrepo.net":
         input(
             """
@@ -308,7 +308,7 @@ def travel_to(icao_target):
     cursor.execute("SELECT game.money FROM game WHERE game.id = %s", (player,))
     money_left = cursor.fetchone()
     print(f"Money left in the budget: {money_left[0]}€")
-    # lowerThreat()
+    lowerThreat()
 
 def travel_menu(country_code):
     cursor = connection.cursor()
@@ -407,6 +407,22 @@ def winGame(player):
         pauseMenu()
     return
 
+# location
+def mission_airport(ident):
+    cursor = connection.cursor(buffered=True)
+    sql_quest = f"SELECT airport.name FROM airport WHERE ident = '{ident}'"
+    cursor.execute(sql_quest)
+    airport = cursor.fetchall()
+    cursor.close()
+    return airport[0][0]
+
+def mission_country(maat):
+    cursor = connection.cursor(buffered=True)
+    sql_quest = f"SELECT name FROM country WHERE iso_country = '{maat}'"
+    cursor.execute(sql_quest)
+    country = cursor.fetchall()
+    cursor.close()
+    return country[0][0]
 """
 # *** POISTETTU OMINAISUUS ***
 # def optionMenu():
@@ -493,6 +509,22 @@ def init():
         global airports
         airports.append(airport[0][0])
 
+def mission_airport(ident):
+    cursor = connection.cursor(buffered=True)
+    sql_quest = f"SELECT airport.name FROM airport WHERE ident = '{ident}'"
+    cursor.execute(sql_quest)
+    airport = cursor.fetchall()
+    cursor.close()
+    return airport[0][0]
+
+def mission_country(maat):
+    cursor = connection.cursor(buffered=True)
+    sql_quest = f"SELECT name FROM country WHERE iso_country = '{maat}'"
+    cursor.execute(sql_quest)
+    country = cursor.fetchall()
+    cursor.close()
+    return country[0][0]
+
 
     # Tarkistetaan onko annettu pelaaja jo olemassa
     cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
@@ -526,7 +558,10 @@ def init():
 def mission0():
     # Mission 0 - Tutorial
     # After playerGreeting
-
+    #mission location/ country
+    airport= mission_airport(airports[0])
+    country = mission_country(maat[0])
+    print(f"You arrived to {airport} in {country}")
     #Mission scoretracking
     missionScoreMax = 4
     missionScore = 0
@@ -631,7 +666,7 @@ def mission0():
 
     # Fake bank fake account
     newPrivaraKey = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
-    print(f"Your 4-digit key is: {newPrivaraKey}")
+    print(f"Your 4-digit key id is: {newPrivaraKey}")
     while True:
         newPrivaraPassword = int(input("Please input new password (4 numbers): "))
         if newPrivaraKey == "":
@@ -643,7 +678,8 @@ def mission0():
     input("HELPER.PY: Please take mental note of these credentials. (HELPER.PY:[Enter]): ")
 
     while True:
-        privaraKey = int(input(f"Please input your 4-letter id: "))
+
+        privaraKey = int(input(f"Please input your 4-number id: "))
         privaraPassword = int(input(f"Please input your password: "))
         if privaraPassword == newPrivaraPassword and privaraKey == newPrivaraKey:
             print("Log in successful.")
@@ -710,7 +746,7 @@ def mission0():
 
         elif secondTask == "yes" or secondTask == "true":
             print("WARNING: Incorrect response.")
-            correction = int(input("Please input the correct value: "))
+            correction = input("Please input the correct value: ")
 
             # Varmistetaan oikea vastaus
             if correction == 20:
@@ -768,6 +804,11 @@ def mission1():
     #Mission scoretracking
     missionScoreMax = 10
     missionScore = 0
+
+    # mission location/ country
+    airport1= mission_airport(airports[1])
+    country1 = mission_country(maat[1])
+    print(f"You arrived to {airport1} in {country1}")
 
     # Biotech aiheinen tehtävä
     print("Mission 1")
@@ -835,8 +876,8 @@ def mission1():
                 print("State updated."
                       "\n ")
             elif stateQuery == "4":
-                print(f"Your current threat level is: blahblah"
-                      f"\n ")
+                getThreat()
+                print("")
             elif stateQuery == "5":
                 breakQuery = input("HELPER.PY: Would you like to move to NeuraGenix? (HELPER.PY:[yes/no]): ")
                 if breakQuery == "yes":
@@ -981,7 +1022,6 @@ def mission1():
                         break
                     else:
                         input("HELPER.PY: Entry-probe disabled. Cleaning logs. ")
-
         elif stateQuery == "2":
             if step1_2State == 0:
                 print("HELPER.PY: Current available locations are: "
@@ -993,8 +1033,8 @@ def mission1():
                       "\n>Cafeteria<"
                       "\n ")
         elif stateQuery == "3":
-            print(f"Your current threat level is: blahblah"
-                  f"\n ")
+            getThreat()
+            print("")
         elif stateQuery == "4":
             breakQuery = input("HELPER.PY: Head inside NeuraGenix? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
@@ -1021,7 +1061,7 @@ def mission1():
                            "\n "
                            "\nInput: ")
 
-        if stateQuery == "1":
+        if stateQuery == 1:
             print(
                 "Before you is a large lobby. You see an info-desk, waiting area with seats and some bathrooms. ")
             moveOption = input("What would you like to do? "
@@ -1349,6 +1389,13 @@ def mission1():
                 travel_to(airports[2])
 
                 break
+        elif stateQuery == 2:
+            print("HELPER.PY: Current available locations are: "
+                  "\n>NeuraGenix (inside)<"
+                  "\n ")
+        elif stateQuery == 3:
+            getThreat()
+            print("")
 
     #######################################################################################################################
 
@@ -1395,6 +1442,11 @@ def mission2():
     #Mission scoretracking
     missionScoreMax = 10
     missionScore = 0
+
+    # mission location/ country
+    airport2 = mission_airport(airports[2])
+    country2 = mission_country(maat[2])
+    print(f"You arrived to {airport2} in {country2}")
 
     # Encryption aiheinen tehtävä
     print("HELPER.PY: Mission 2")
@@ -1452,8 +1504,8 @@ def mission2():
             print("State updated."
                   "\n ")
         elif stateQuery == "3":
-            print(f"Your current threat level is: blahblah"
-                  f"\n ")
+            getThreat()
+            print("")
         elif stateQuery == "4":
             breakQuery = input("HELPER.PY: Would you like to move to Cipherium Tech.? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
@@ -1531,8 +1583,8 @@ def mission2():
                       "\n>Cipherium, outside<"
                       "\n")
         elif stateQuery == "2":
-            print(f"Your current threat level is: blahblah"
-                  f"\n ")
+            getThreat()
+            print("")
         elif stateQuery == "3":
             breakQuery = input("HELPER.PY: Would you like to move to Inner complex? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
@@ -1738,22 +1790,31 @@ def mission2():
                 cursor.close()
 
                 break
-
+            elif roomSurvey == "3":
+                print("Shit")
         elif stateQuery == "2":
-            print(f"Your current threat level is: blahblah"
-                  f"\n ")
+            getThreat()
+            print("")
         elif stateQuery == "3":
-            breakQuery = input("HELPER.PY: Head home? (HELPER.PY:[yes/no]): ")
-            if breakQuery == "yes":
-                print("Going home. ")
-                break
-            elif breakQuery == "no":
-                stateQuery = input("HELPER.PY: What would you like to do?"
-                                  "\n(1): Check surroundings "
-                                  "\n(2): Status "
-                                  "\n(3): Move "
-                                  "\n "
-                                  "\nInput: ")
+            if step2_3State == 1:
+                breakQuery = input("HELPER.PY: Head home? (HELPER.PY:[yes/no]): ")
+                if breakQuery == "yes":
+                    print("Going home. ")
+                    break
+                elif breakQuery == "no":
+                    stateQuery = input("HELPER.PY: What would you like to do?"
+                                      "\n(1): Check surroundings "
+                                      "\n(2): Status "
+                                      "\n(3): Move "
+                                      "\n "
+                                      "\nInput: ")
+            elif step2_3State == 0:
+                stateQuery = input("HELPER.PY: What would you like to do? "
+                                   "\n(1): Check surroundings "
+                                   "\n(2): Status "
+                                   # "\n(3): Move "
+                                   "\n "
+                                   "\nInput: ")
 
 def mission2Tasks():
     points = 0
@@ -1965,6 +2026,8 @@ https://creativecommons.org/licenses/by/3.0/
 # Svetlanan funktiot
 # travel_menu("FI")
 # travel_to("EFHK")
+#mission_airport(airports[0])
+#mission_country(maat[0])
 
 #INTRO
 startScreen()
