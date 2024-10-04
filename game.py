@@ -108,6 +108,13 @@ def calcPrice(icao1, icao2):
     hinta = int(distance.distance(sijainti1, sijainti2).km) * 1
     return hinta
 
+def getThreat():
+    cursor = connection.cursor()
+    cursor.execute("SELECT threat FROM game WHERE id = %s", (player,))
+    threat = cursor.fetchone()
+    threat = int(threat[0])
+    return threat
+
 def raiseThreat(type):
     cursor = connection.cursor()
     cursor.execute("SELECT threat FROM game WHERE id = %s", (player,))
@@ -405,7 +412,7 @@ def winGame(player):
         pauseMenu()
     return
 
-
+"""
 # *** POISTETTU OMINAISUUS ***
 # def optionMenu():
 #    # VALINTAMENU
@@ -436,6 +443,7 @@ def winGame(player):
 def openShop():
     print("Kauppa")
 
+"""
 
 def quitGame():
     print("Thank you for playing!")
