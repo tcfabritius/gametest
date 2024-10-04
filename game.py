@@ -1580,8 +1580,8 @@ def mission2():
                 input("Gazing upon a strange looking device and asking you what it is, you are dumbfound. ")
                 input("Fight or flight-response kicks in, but you are caught quite easily. ")
                 input("End of the line. Mission status: Critical failure. ")
-                break
                 loseGame(player)
+                break
             elif roomSurvey == "2":
                 print("Heading to helpdesk, you bring about the package you were carrying. ")
                 input("You tell the person in a polite manner, "
@@ -1597,6 +1597,8 @@ def mission2():
                 print("Trackers detected. ")
                 trackerId = input("HELPER.PY: Please input linked tracker id: ")
                 attempts = 0
+
+                #Tracking package
                 while trackerId != 204:
                     attempts += 1
                     print("No tracker with given id in range. ")
@@ -1614,13 +1616,127 @@ def mission2():
                         loseGame(player)
                         break
 
+                print("You follow the tracked path. (HELPER.PY: Input tracked path: ) ")
+                trackPath1 = input("Tracked path is? (No spaces): ")
+                if trackPath1 == "^,^,<,>":
+                    input("You manage to navigate efficiently to the post room. ")
+                    missionScore =+1
+                elif trackPath1 != "^,^,<,>":
+                    input("You find your way after fumbling about. ")
+                    missionScore =-1
+
+                input("You enter the mailroom in a hurry and ask about a prototype-package. ")
+                input("You tell the mailroom person, that there was a critical bug in the package which needs to be resolved. ")
+                input("Confused but cooperating, the staffmember gives the package. ")
+                input("You thank the worker with relief, stating that it could have been critically dangerous to send it as is. ")
+                input("The worker seemed relieved and happy. ")
+
+                input("Holding the package once more. It is now time to find a way to the mainframe. ")
+                mainFrameDirections = input("HELPER.PY: Do you still remember the provided directions?"
+                                            "\n(Direction, no spaces): ")
+
+                if mainFrameDirections == "<,>,^,^,<":
+                    print("You make your way through the large building complex. You skillfully avert eyes and seem natural in your movement. ")
+                    missionScore =+1
+                elif mainFrameDirections != "<,>,^,^,<":
+                    print("You take a long time to find your way in the complex. By the time you arrive, 1,5 hours have passed. ")
+                    #Increase threat
+                    missionScore =-1
+
+                print("You head inside the mainframe. ")
+                input("You navigate the room to find a remote corner as hidden from public view as possible. ")
+                input("Installing the device, you begin the process of file decryption. ")
+                input("HELPER.PY: Injecting data parser algorithm.")
+
+                #TASK HERE
+                #SCORE
+
+                input(
+                """
+                import _package
+                protected: handshake(message, duration):
+                    print(message, end="", flush=True)
+                    for _ in range(duration):
+                        time.sleep(0.5)
+                        print(".", end="", flush=True)
+                """)
+
+                #TASK HERE
+                #SCORE
+
+                input("""
+                print()
+                protected: data_collection():
+                    print("Initiating data extraction.")
+                    display_loading_message("Datalink", 5)
+                    display_loading_message("Download", 7)
+                    print("Analysis:")
+                """)
+
+                #TASK HERE
+                #SCORE
+
+                input("""
+                for i in range(5):
+                        data_size = random.randint(100, 500)
+                        time.sleep(1)
+                        print(f  Package analysis: {i+1}/5: {data_size} Mt)
+                    display_loading_message(Verify, 5)
+                    print(Extraction)
+                    print(Parse)
+                    print(Sending data)
+                data_collection()
+                """)
+
+                input("HELPER.PY: Datalink established. ")
+                input("Mission parameters completed. Time to leave. ")
+                print("You leave the premises, leaving the tracker behind."
+                      "\nIt should be able to gather incriminating evidence in due time.")
+
+                # Clearing the mission
+                print(
+                    f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
+                if missionScore == missionScoreMax:
+                    scoreModifier = 1.15
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                elif missionScore == 3:
+                    scoreModifier = 1
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                elif missionScore < 3:
+                    scoreModifier = 0.75
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                elif missionScore >= 0:
+                    scoreModifier = 0.5
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+                else:
+                    scoreModifier = 0.3
+                    input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
+                          f"\nPay: {1000 * scoreModifier}.")
+
+                pay(scoreModifier, 1, 2)
+                input("HELPER.PY: Continue? ")
+                missionCompletedScreen()
+                # Update mission status
+                cursor = connection.cursor()
+                cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)",
+                               (player, 2))
+                connection.commit()
+                cursor.close()
+                print(Style.RESET_ALL)
+
+                break
+
         elif stateQuery == "2":
             print(f"Your current threat level is: blahblah"
                   f"\n ")
         elif stateQuery == "3":
-            breakQuery = input("HELPER.PY: Would you like to move to Inner complex? (HELPER.PY:[yes/no]): ")
+            breakQuery = input("HELPER.PY: Head home? (HELPER.PY:[yes/no]): ")
             if breakQuery == "yes":
-                print("Moving in. ")
+                print("Going home. ")
                 break
             elif breakQuery == "no":
                 stateQuery = input("HELPER.PY: What would you like to do?"
@@ -1629,6 +1745,8 @@ def mission2():
                                   "\n(3): Move "
                                   "\n "
                                   "\nInput: ")
+
+
 
 def mission2Tasks():
     points = 0
