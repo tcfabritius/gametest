@@ -308,7 +308,7 @@ def travel_to(icao_target):
     cursor.execute("SELECT game.money FROM game WHERE game.id = %s", (player,))
     money_left = cursor.fetchone()
     print(f"Money left in the budget: {money_left[0]}€")
-    # lowerThreat()
+    lowerThreat()
 
 def travel_menu(country_code):
     cursor = connection.cursor()
@@ -407,6 +407,22 @@ def winGame(player):
         pauseMenu()
     return
 
+# location
+def mission_airport(ident):
+    cursor = connection.cursor(buffered=True)
+    sql_quest = f"SELECT airport.name FROM airport WHERE ident = '{ident}'"
+    cursor.execute(sql_quest)
+    airport = cursor.fetchall()
+    cursor.close()
+    return airport[0][0]
+
+def mission_country(maat):
+    cursor = connection.cursor(buffered=True)
+    sql_quest = f"SELECT name FROM country WHERE iso_country = '{maat}'"
+    cursor.execute(sql_quest)
+    country = cursor.fetchall()
+    cursor.close()
+    return country[0][0]
 """
 # *** POISTETTU OMINAISUUS ***
 # def optionMenu():
@@ -493,6 +509,22 @@ def init():
         global airports
         airports.append(airport[0][0])
 
+def mission_airport(ident):
+    cursor = connection.cursor(buffered=True)
+    sql_quest = f"SELECT airport.name FROM airport WHERE ident = '{ident}'"
+    cursor.execute(sql_quest)
+    airport = cursor.fetchall()
+    cursor.close()
+    return airport[0][0]
+
+def mission_country(maat):
+    cursor = connection.cursor(buffered=True)
+    sql_quest = f"SELECT name FROM country WHERE iso_country = '{maat}'"
+    cursor.execute(sql_quest)
+    country = cursor.fetchall()
+    cursor.close()
+    return country[0][0]
+
 
     # Tarkistetaan onko annettu pelaaja jo olemassa
     cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
@@ -526,7 +558,10 @@ def init():
 def mission0():
     # Mission 0 - Tutorial
     # After playerGreeting
-
+    #mission location/ country
+    airport= mission_airport(airports[0])
+    country = mission_country(maat[0])
+    print(f"You arrived to {airport} in {country}")
     #Mission scoretracking
     missionScoreMax = 4
     missionScore = 0
@@ -631,7 +666,7 @@ def mission0():
 
     # Fake bank fake account
     newPrivaraKey = random.randint(1000, 9999)  # Luo satunnaisen 4-numeroisen avaintunnuksen
-    print(f"Your 4-digit key is: {newPrivaraKey}")
+    print(f"Your 4-digit key id is: {newPrivaraKey}")
     while True:
         newPrivaraPassword = int(input("Please input new password (4 numbers): "))
         if newPrivaraKey == "":
@@ -643,7 +678,8 @@ def mission0():
     input("HELPER.PY: Please take mental note of these credentials. (HELPER.PY:[Enter]): ")
 
     while True:
-        privaraKey = int(input(f"Please input your 4-letter id: "))
+
+        privaraKey = int(input(f"Please input your 4-number id: "))
         privaraPassword = int(input(f"Please input your password: "))
         if privaraPassword == newPrivaraPassword and privaraKey == newPrivaraKey:
             print("Log in successful.")
@@ -710,7 +746,7 @@ def mission0():
 
         elif secondTask == "yes" or secondTask == "true":
             print("WARNING: Incorrect response.")
-            correction = int(input("Please input the correct value: "))
+            correction = input("Please input the correct value: ")
 
             # Varmistetaan oikea vastaus
             if correction == 20:
@@ -768,6 +804,11 @@ def mission1():
     #Mission scoretracking
     missionScoreMax = 10
     missionScore = 0
+
+    # mission location/ country
+    airport1= mission_airport(airports[1])
+    country1 = mission_country(maat[1])
+    print(f"You arrived to {airport1} in {country1}")
 
     # Biotech aiheinen tehtävä
     print("Mission 1")
@@ -1402,6 +1443,11 @@ def mission2():
     missionScoreMax = 10
     missionScore = 0
 
+    # mission location/ country
+    airport2 = mission_airport(airports[2])
+    country2 = mission_country(maat[2])
+    print(f"You arrived to {airport2} in {country2}")
+
     # Encryption aiheinen tehtävä
     print("HELPER.PY: Mission 2")
     #Description-print here
@@ -1933,6 +1979,8 @@ https://creativecommons.org/licenses/by/3.0/
 # Svetlanan funktiot
 # travel_menu("FI")
 # travel_to("EFHK")
+#mission_airport(airports[0])
+#mission_country(maat[0])
 
 #INTRO
 startScreen()
