@@ -485,30 +485,6 @@ def pauseMenu():
         else:
             print("Invalid choice")
 
-    # PELAAJAN NIMEN KYSYMINEN JA ALKUTIETOJEN ASETTELU. AIKAISEMMAN PELAAJAN TUNNISTAMINEN
-
-def init():
-    # Kysytään pelaajan nimi
-    print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
-    player = input("USE ALIAS: ")
-
-    # Luodaan kursori
-    cursor = connection.cursor()
-    # Maiden arpominen
-    countries_sql = f"SELECT iso_country FROM country ORDER BY RAND() LIMIT 3"
-    result = cursor.execute(countries_sql)
-    countries = cursor.fetchall()
-    for country in countries:
-        global maat
-        maat.append(country[0])
-
-    for maa in maat:
-        airports_sql = f"SELECT ident FROM airport WHERE iso_country = '{maa}' ORDER BY RAND() LIMIT 1"
-        result = cursor.execute(airports_sql)
-        airport = cursor.fetchall()
-        global airports
-        airports.append(airport[0][0])
-
 def mission_airport(ident):
     cursor = connection.cursor(buffered=True)
     sql_quest = f"SELECT airport.name FROM airport WHERE ident = '{ident}'"
@@ -530,50 +506,66 @@ def init():
     print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
     player = input("USE ALIAS: ")
 
-    # Luodaan kursori
     cursor = connection.cursor()
     # Maiden arpominen
-    countries_sql = f"SELECT iso_country FROM country ORDER BY RAND() LIMIT 3"
-    result = cursor.execute(countries_sql)
+    countries_sql = "SELECT iso_country FROM country ORDER BY RAND() LIMIT 3"
+    cursor.execute(countries_sql)
     countries = cursor.fetchall()
+
+    global maat
+    maat.clear()  # Clear previous values to avoid duplicates or lingering data
     for country in countries:
-        global maat
         maat.append(country[0])
+
+    global airports
+    airports.clear()  # Clear previous values
 
     for maa in maat:
         airports_sql = f"SELECT ident FROM airport WHERE iso_country = '{maa}' ORDER BY RAND() LIMIT 1"
-        result = cursor.execute(airports_sql)
+
+        cursor.execute(airports_sql)
         airport = cursor.fetchall()
-        global airports
-        airports.append(airport[0][0])
 
-        # Tarkistetaan onko annettu pelaaja jo olemassa
-        cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
-        result = cursor.fetchone()
+        # Debug print to see the fetched airport
+        print(f"Fetched airport for {maa}: {airport}")
 
-        if result[0] > 0:
-            print(f"Welcome back, {player}!")
+        # Ensure the query returned at least one result
+        if airport:
+            airports.append(airport[0][0])
         else:
-            # Luodaan uusi pelaaja
-            cursor.execute("INSERT INTO game(id) VALUES (%s)", (player,))
-            connection.commit()
-            print(f"Welcome, {player}! Your alias has been created.")
+            print(f"No airport found for country: {maa}")
 
-            # Annetaan uudelle pelaajalle sijainti
-            cursor.execute("UPDATE game SET location = %s WHERE id = %s", (airports[0], player))
-            connection.commit()
+    print(maat)
+    print(airports)
+    input("...")
 
-            # Annetaan uudelle pelaajalle lähtötiedot
-            cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
-            cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
-            cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
-            cursor.execute("UPDATE game SET threat = %s WHERE id = %s", (0, player))
-            connection.commit()
+    # Tarkistetaan onko annettu pelaaja jo olemassa
+    cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
+    result = cursor.fetchone()
 
-        # Suljetaan kursori ja yhteys
-        cursor.close()
+    if result[0] > 0:
+        print(f"Welcome back, {player}!")
+    else:
+        # Luodaan uusi pelaaja
+        cursor.execute("INSERT INTO game(id) VALUES (%s)", (player,))
+        connection.commit()
+        print(f"Welcome, {player}! Your alias has been created.")
 
-        return player
+        # Annetaan uudelle pelaajalle sijainti
+        cursor.execute("UPDATE game SET location = %s WHERE id = %s", (airports[0], player))
+        connection.commit()
+
+        # Annetaan uudelle pelaajalle lähtötiedot
+        cursor.execute("UPDATE game SET co2_consumed = %s WHERE id = %s", (0, player))
+        cursor.execute("UPDATE game SET co2_budget = %s WHERE id = %s", (1000, player))
+        cursor.execute("UPDATE game SET money = %s WHERE id = %s", (1000, player))
+        cursor.execute("UPDATE game SET threat = %s WHERE id = %s", (0, player))
+        connection.commit()
+
+    # Suljetaan kursori ja yhteys
+    cursor.close()
+
+    return player
 
 
 def mission0():
