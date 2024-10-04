@@ -1816,7 +1816,6 @@ maat = []
 airports = []
 
 player = init()
-startScreen()
 
 currentMission = False
 
@@ -1925,6 +1924,9 @@ https://creativecommons.org/licenses/by/3.0/
 # Svetlanan funktiot
 # travel_menu("FI")
 # travel_to("EFHK")
+
+#INTRO
+startScreen()
 
 # PÄÄOHJELMA
 completed_missions_count = check_completed_missions()
