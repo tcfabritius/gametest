@@ -595,7 +595,7 @@ def mission0():
           """)
 
     input("User: Gh0stP@cket sent: pretty incredible you walked right in that. (HELPER.PY:[Enter]): ")
-    input("User: Gh0stP@cket sent: Figured you might be bit brighter. (HELPER.PY:[Enter]): ")
+    input("User: Gh0stP@cket sent: figured you might be bit brighter. (HELPER.PY:[Enter]): ")
     input("User: Gh0stP@cket sent: w/e.\nif you want your encrypted files back without being spread to whoever, "
           "we need some insurance. (HELPER.PY:[Enter]): ")
     input("User: Gh0stP@cket sent: you got in through the backdoor we set up for eager beavers scuch as you."
@@ -1501,14 +1501,15 @@ def mission2():
                     input("HELPER.PY: Broadcasting. . . . ")
                     input(". . . .")
                     input(". . .")
-                    input(".. . . . ..")
+                    input(".. .. . ..")
                     input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
                     input("Anon: Sent: Watch out. ")
                     print("Your head is suddenly hit with an annoying pain. ")
                     print("Falling on your feet is a id-card and a package. Seems to fit the bill. ")
                     print("You put the id-card on your neck. ")
-                    input("Anon: Sent: <, >, ^, ^, < (HELPER.PY:[Enter]) ")
-                    input("HELPER.PY: I would argue that these are directions to the mainframe. [Enter]")
+                    input("Anon: Sent: <, >, ^, ^, <. Track id: 204 (HELPER.PY:[Enter]) ")
+                    input("HELPER.PY: I would argue that these are directions to the mainframe. "
+                          "\nPlease take mental note of these instructions. [Enter] ")
                     step2_2State = 1
                     print("State updated."
                           "\n ")
@@ -1565,10 +1566,53 @@ def mission2():
             # input("HELPER.PY: ")
             input("Moving onward to the front door, you're let through no problem with your id on display.")
             input("In the lobby, you see security scan, helpdesk and IT.")
-            stateQuery = input("HELPER.PY: What would you like to do? "
+            roomSurvey = input("HELPER.PY: What would you like to do? "
                                "\n(1): Head to the security scan. "
                                "\n(2): Head to helpdesk. "
                                "\n(3): Head to IT. ")
+
+            if roomSurvey == "1":
+                print("You head to the security scan. ")
+                input("You are asked to place your belongings on a security screening. ")
+                input("To prevent suspicion, you comply. "
+                      "\nOnly then you do realize that you had a suspicious package with you. ")
+                input("The operator suspends the process so as to check the package. ")
+                input("Gazing upon a strange looking device and asking you what it is, you are dumbfound. ")
+                input("Fight or flight-response kicks in, but you are caught quite easily. ")
+                input("End of the line. Mission status: Critical failure. ")
+                break
+                loseGame(player)
+            elif roomSurvey == "2":
+                print("Heading to helpdesk, you bring about the package you were carrying. ")
+                input("You tell the person in a polite manner, "
+                       "\nthat you are busy but that you were asked by your boss to mail "
+                       "a prototype encryption-device to a client. ")
+                input("You write a fake address quickly to inform them where it should go. ")
+                input("Slightly confused, but cooperative, "
+                       "\nthe person takes the package to the mailroom as you head in with your id. ")
+                input("You take another left from where the assistant was headed but stay in wait after the turn. ")
+                input("You take out your laptop. ")
+                input("HELPER.PY: How can I help? ")
+                input("HELPER.PY: .\main\-systemLink.enableTracker() ")
+                print("Trackers detected. ")
+                trackerId = input("HELPER.PY: Please input linked tracker id: ")
+                attempts = 0
+                while trackerId != 204:
+                    attempts += 1
+                    print("No tracker with given id in range. ")
+                    if trackerId == 204:
+                        input("Connection established. Tracking.")
+                        input("Tracking...")
+                        input("Tracking..")
+                        input("Path built, result:"
+                              "\n ^, ^, <, >")
+                        break
+                    elif attempts > 4:
+                        print("No trackers in range. ")
+                        input("Tracker is out of range, it will be near impossible to recover the package. ")
+                        input("You have no choice but leave the premises. Mission failed.")
+                        loseGame(player)
+                        break
 
         elif stateQuery == "2":
             print(f"Your current threat level is: blahblah"
