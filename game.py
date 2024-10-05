@@ -121,14 +121,14 @@ def raiseThreat(type):
     threat = int(threat[0])
     if type == "stay":
         if threat + 1 > 100:
-            loseGame()
+            loseGame(player)
         else:
             cursor.execute("UPDATE game SET threat = threat +1 WHERE id = %s", (player,))
             connection.commit()
 
     if type == "failure":
         if threat + 3 > 100:
-            loseGame()
+            loseGame(player)
         else:
             cursor.execute("UPDATE game SET threat = threat +3 WHERE id = %s", (player,))
             connection.commit()
@@ -291,7 +291,7 @@ def travel_to(icao_target):
     cursor.execute(sql_target)
     connection.commit()
 
-    ccursor = connection.cursor(buffered=True)
+    cursor = connection.cursor(buffered=True)
     cursor.execute("SELECT game.co2_budget FROM game WHERE game.id = %s", (player,))
     budget_co2 = cursor.fetchone()
     co2_budget = budget_co2[0]
@@ -485,60 +485,52 @@ def pauseMenu():
         else:
             print("Invalid choice")
 
-def mission_airport(ident):
-    cursor = connection.cursor(buffered=True)
-    sql_quest = f"SELECT airport.name FROM airport WHERE ident = '{ident}'"
-    cursor.execute(sql_quest)
-    airport = cursor.fetchall()
-    cursor.close()
-    return airport[0][0]
+def init_maat():
+    global maat
 
-def mission_country(maat):
     cursor = connection.cursor(buffered=True)
-    sql_quest = f"SELECT name FROM country WHERE iso_country = '{maat}'"
-    cursor.execute(sql_quest)
-    country = cursor.fetchall()
-    cursor.close()
-    return country[0][0]
+    # Maiden arpominen
+    countries_sql = "SELECT iso_country FROM country ORDER BY RAND() LIMIT 3"
+    cursor.execute(countries_sql)
+    countries = cursor.fetchall()
+
+    maat.clear()  # Clear previous values to avoid duplicates or lingering data
+    for country in countries:
+        maat.append(country[0])
+
+def init_airports():
+    global airports
+    while len(airports)<3:
+        init_maat()
+
+        airports.clear()  # Clear previous values
+        cursor = connection.cursor(buffered=True)
+        for maa in maat:
+            airports_sql = f"SELECT ident FROM airport WHERE iso_country = '{maa}' ORDER BY RAND() LIMIT 1"
+
+            cursor.execute(airports_sql)
+            airport = cursor.fetchall()
+
+            # Debug print to see the fetched airport
+            print(f"Fetched airport for {maa}: {airport}")
+
+            # Ensure the query returned at least one result
+            if airport:
+                airports.append(airport[0][0])
+            else:
+                print(f"No airport found for country: {maa}")
+
 
 def init():
     # Kysytään pelaajan nimi
     print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
     player = input("USE ALIAS: ")
 
-    cursor = connection.cursor()
-    # Maiden arpominen
-    countries_sql = "SELECT iso_country FROM country ORDER BY RAND() LIMIT 3"
-    cursor.execute(countries_sql)
-    countries = cursor.fetchall()
-
-    global maat
-    maat.clear()  # Clear previous values to avoid duplicates or lingering data
-    for country in countries:
-        maat.append(country[0])
-
-    global airports
-    airports.clear()  # Clear previous values
-
-    for maa in maat:
-        airports_sql = f"SELECT ident FROM airport WHERE iso_country = '{maa}' ORDER BY RAND() LIMIT 1"
-
-        cursor.execute(airports_sql)
-        airport = cursor.fetchall()
-
-        # Debug print to see the fetched airport
-        print(f"Fetched airport for {maa}: {airport}")
-
-        # Ensure the query returned at least one result
-        if airport:
-            airports.append(airport[0][0])
-        else:
-            print(f"No airport found for country: {maa}")
-
-    print(maat)
-    print(airports)
-    input("...")
-
+    init_airports()
+    #print(maat)
+    #print(airports)
+    #input("...")
+    cursor = connection.cursor(buffered=True)
     # Tarkistetaan onko annettu pelaaja jo olemassa
     cursor.execute("SELECT COUNT(*) FROM game WHERE id = %s", (player,))
     result = cursor.fetchone()
@@ -2038,13 +2030,14 @@ https://creativecommons.org/licenses/by/3.0/
 # Svetlanan funktiot
 # travel_menu("FI")
 # travel_to("EFHK")
-#mission_airport(airports[0])
-#mission_country(maat[0])
+#mission_airport(airports[1])
+#mission_country(maat[1])
 
 #INTRO
-startScreen()
+#startScreen()
 
 # PÄÄOHJELMA
+
 completed_missions_count = check_completed_missions()
 if completed_missions_count == 0:
     mission0()
