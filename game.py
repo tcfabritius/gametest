@@ -1629,7 +1629,7 @@ def mission2():
                 input("HELPER.PY: You're near the Cipherium main-building. [Enter] ")
                 input("HELPER.PY: Your next move should be to find the mole. [Enter] ")
                 wantToBroadcast = input("HELPER.PY: Would you like to perform a safe broadcast? [yes/no] ")
-                while wantToBroadcast != "yes":
+                while True:
                     if wantToBroadcast == "yes":
                         input("HELPER.PY: Broadcasting. . . . ")
                         input(". . . .")
@@ -1652,8 +1652,9 @@ def mission2():
                               "\n ")
                         break
                     else:
-                        print("HELPER.PY: We need to get in touch with the mole. ")
+                        input("HELPER.PY: We need to get in touch with the mole. ")
                         print(" ")
+                        wantToBroadcast = input("HELPER.PY: Would you like to perform a safe broadcast? [yes/no] ")
 
             elif step2_2State == 1:
                 print("HELPER.PY: Current available locations are: "
@@ -1744,18 +1745,21 @@ def mission2():
                 attempts = 0
 
                 #Tracking package
-                while trackerId != 204:
-                    attempts += 1
+                while True:
                     print("HELPER.PY: No tracker with given id in range. ")
-                    if trackerId == 204:
+                    if trackerId == "204":
                         input("HELPER.PY: Connection established. Tracking.")
                         input("HELPER.PY: Tracking...")
                         input("HELPER.PY:Tracking..")
                         input("HELPER.PY: Path built, result:"
                               "\n ^, ^, <, >")
                         break
+                    elif trackerId != "204":
+                        attempts += 1
+                        print("HELPER.PY: No suck tracker in range. ")
+                        trackerId = input("HELPER.PY: Please input linked tracker id: ")
                     elif attempts > 4:
-                        print("HELPER.PY: No trackers in range. ")
+                        print("HELPER.PY: No more trackers in range. Terminating.")
                         input("* Tracker is out of range, it will be near impossible to recover the package. ")
                         input("* You have no choice but leave the premises. Mission failed.")
                         loseGame(player)
@@ -1899,22 +1903,27 @@ def mission2():
                 input("HELPER.PY: How can I help? ")
                 input("HELPER.PY: .\main\-systemLink.enableTracker() ")
                 print("Trackers detected. ")
+
+                # Tracking package
                 trackerId = input("HELPER.PY: Please input linked tracker id: ")
                 attempts = 0
 
                 # Tracking package
-                while trackerId != 204:
-                    attempts += 1
+                while True:
                     print("HELPER.PY: No tracker with given id in range. ")
-                    if trackerId == 204:
+                    if trackerId == "204":
                         input("HELPER.PY: Connection established. Tracking.")
                         input("HELPER.PY: Tracking...")
                         input("HELPER.PY:Tracking..")
                         input("HELPER.PY: Path built, result:"
-                              "\n.....")
+                              "\n ^, ^, <, >")
                         break
+                    elif trackerId != "204":
+                        attempts += 1
+                        print("HELPER.PY: No suck tracker in range. ")
+                        trackerId = input("HELPER.PY: Please input linked tracker id: ")
                     elif attempts > 4:
-                        print("HELPER.PY: No trackers in range. ")
+                        print("HELPER.PY: No more trackers in range. Terminating.")
                         input("* Tracker is out of range, it will be near impossible to recover the package. ")
                         input("* You have no choice but leave the premises. Mission failed.")
                         loseGame(player)
@@ -2035,9 +2044,6 @@ def mission2():
                 cursor.close()
 
                 break
-
-
-
         elif query2_3 == "2":
             threatLevel = getThreat()
             print(f"HELPER.PY: Analyzing... Threat index is: {threatLevel}")
