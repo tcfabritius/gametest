@@ -728,6 +728,7 @@ def mission0():
             if correctAnswer == 40:
                 print("access_point 20: STATUS: GREEN ")
                 missionScore =+ 2
+                print(f"HELPER.PY: Mission progress: {missionScore} / {missionScoreMax}")
                 break
         else:
             print("User error. ")
@@ -738,17 +739,18 @@ def mission0():
         # Käyttäjän vastauksen tarkistus
         if secondTask == "no" or secondTask == "false":
             print("system_check 15: STATUS: GREEN ")
-            missionScore = missionScore + 2
+            missionScore =+ 2
+            print(f"HELPER.PY: Mission progress: {missionScore} / {missionScoreMax}")
             break
 
         elif secondTask == "yes" or secondTask == "true":
             print("WARNING: Incorrect response. ")
             correction = input("Please input the correct value: ")
 
-            # Varmistetaan oikea vastaus
             if correction == 20:
                 print("system_check 15: STATUS: GREEN ")
-                missionScore = missionScore + 1
+                missionScore =+ 1
+                print(f"HELPER.PY: Mission progress: {missionScore} / {missionScoreMax}")
                 break
             else:
                 print("User error. ")
@@ -792,7 +794,7 @@ def mission0():
 
     pay(scoreModifier, 0, 1)
     input("HELPER.PY: Continue? ")
-    #missionCompletedScreen()
+    missionCompletedScreen()
     #Update mission status
     cursor = connection.cursor(buffered=True)
     cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 0))
@@ -803,7 +805,7 @@ def mission0():
 
 def mission1():
     #Mission scoretracking
-    missionScoreMax = 10
+    missionScoreMax = 11
     missionScore = 0
     print(Fore.GREEN)
     print("Mission 1")
@@ -1119,7 +1121,8 @@ def mission1():
                       "\nYou are inquired for your business and contact personnel. ")
                 input("* Trying to smooth talk isn't successful. "
                       "\nYou are asked to leave the area before the guards will be alerted.")
-                input("* DEBUG: Lose game or penalty here. ")
+                print("HELPER.PY: Critical mission failure.")
+                loseGame(player)
                 break
             elif moveOption == "2":
                 input("* Going to the waiting area, you sit down with a presence. ")
@@ -1359,11 +1362,11 @@ def mission1():
 
                 # Clearing the mission
                 print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
-                if missionScore == missionScoreMax:
+                if missionScore >= missionScoreMax:
                     scoreModifier = 1.15
                     input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
                           f"\nPay: {1000 * scoreModifier}.")
-                elif missionScore == 3:
+                elif missionScore >= 3:
                     scoreModifier = 1
                     input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
                           f"\nPay: {1000 * scoreModifier}.")
@@ -1513,13 +1516,12 @@ def mission1():
                 input("HELPER.PY: Time to finish here. Awaiting further contact. On standby. [Enter]")
 
                 # Clearing the mission
-                print(
-                    f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
-                if missionScore == missionScoreMax:
+                print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
+                if missionScore >= missionScoreMax:
                     scoreModifier = 1.15
                     input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
                           f"\nPay: {1000 * scoreModifier}.")
-                elif missionScore == 3:
+                elif missionScore >= 3:
                     scoreModifier = 1
                     input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
                           f"\nPay: {1000 * scoreModifier}.")
@@ -1606,7 +1608,7 @@ def mission1Tasks(points):
 
 def mission2():
     #Mission scoretracking
-    missionScoreMax = 10
+    missionScoreMax = 6
     missionScore = 0
     print(Fore.GREEN)
     print("HELPER.PY: Mission 2")
@@ -1977,11 +1979,11 @@ def mission2():
 
                 # Clearing the mission
                 print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
-                if missionScore == missionScoreMax:
+                if missionScore >= missionScoreMax:
                     scoreModifier = 1.15
                     input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
                           f"\nPay: {1000 * scoreModifier}.")
-                elif missionScore == 3:
+                elif missionScore >= 3:
                     scoreModifier = 1
                     input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
                           f"\nPay: {1000 * scoreModifier}.")
@@ -2149,11 +2151,11 @@ def mission2():
 
                 # Clearing the mission
                 print(f"HELPER.PY: Mission completed, score: {missionScore} / {missionScoreMax}. Base Pay: 1000©")
-                if missionScore == missionScoreMax:
+                if missionScore >= missionScoreMax:
                     scoreModifier = 1.15
                     input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
                           f"\nPay: {1000 * scoreModifier}.")
-                elif missionScore == 3:
+                elif missionScore >= 3:
                     scoreModifier = 1
                     input(f"Score modifier: {missionScore}/{missionScoreMax} = {scoreModifier}."
                           f"\nPay: {1000 * scoreModifier}.")
