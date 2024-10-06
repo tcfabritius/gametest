@@ -975,7 +975,8 @@ def mission1():
                             """)
 
                         # TASKS HERE
-                        mission1Tasks(missionScore)
+                        addScore = mission1Tasks(missionScore)
+                        missionScore+=addScore
                         print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                         threatLevel = getThreat()
                         print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -996,7 +997,8 @@ def mission1():
                         """)
 
                         # TASKS HERE
-                        mission1Tasks(missionScore)
+                        addScore = mission1Tasks(missionScore)
+                        missionScore += addScore
                         print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                         threatLevel = getThreat()
                         print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1014,7 +1016,8 @@ def mission1():
                         """)
 
                         # TASKS HERE
-                        mission1Tasks(missionScore)
+                        addScore = mission1Tasks(missionScore)
+                        missionScore += addScore
                         print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                         threatLevel = getThreat()
                         print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1157,7 +1160,8 @@ def mission1():
                     """)
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1190,7 +1194,8 @@ def mission1():
                      """)
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1214,7 +1219,8 @@ def mission1():
                  """)
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1264,7 +1270,8 @@ def mission1():
                     """)
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1282,7 +1289,8 @@ def mission1():
                  """)
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1297,7 +1305,8 @@ def mission1():
                 input(">>> 100% complete - File corrupted")
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1313,7 +1322,8 @@ def mission1():
                 input(">>> Status: All relevant surveillance footage has been erased.")
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1332,7 +1342,8 @@ def mission1():
                 input(">>> Surveillance bypass complete. No trace detected.")
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1435,7 +1446,8 @@ def mission1():
                      """)
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1458,7 +1470,8 @@ def mission1():
                 """)
 
                 # TASKS HERE
-                mission1Tasks(missionScore)
+                addScore = mission1Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1581,7 +1594,7 @@ def mission1Tasks(points):
                 raiseThreat("failure")
         elif randValue == 4:
             task4 = input(
-                "Question: What is the term for the process of transferring genes from one organism to another?")
+                "Question: What is the term for the process of transferring genes from one organism to another? ")
             if task4 == "Genetic Engineering" or task4 == "genetic engineering":
                 print("access_point_status: GREEN")
                 points += 1
@@ -1894,7 +1907,8 @@ def mission2():
                 input("HELPER.PY: Injecting data parser algorithm. ")
 
                 #TASK HERE
-                mission2Tasks(missionScore)
+                addScore = mission2Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1914,7 +1928,8 @@ def mission2():
                 """)
 
                 #TASK HERE
-                mission2Tasks(missionScore)
+                addScore = mission2Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -1933,7 +1948,8 @@ def mission2():
                 """)
 
                 #TASK HERE
-                mission2Tasks(missionScore)
+                addScore = mission2Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -2063,7 +2079,8 @@ def mission2():
                 input("HELPER.PY: Injecting data parser algorithm. ")
 
                 # TASK HERE
-                mission2Tasks(missionScore)
+                addScore = mission2Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -2083,7 +2100,8 @@ def mission2():
                     """)
 
                 # TASK HERE
-                mission2Tasks(missionScore)
+                addScore = mission2Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
@@ -2102,7 +2120,8 @@ def mission2():
                     """)
 
                 # TASK HERE
-                mission2Tasks(missionScore)
+                addScore = mission2Tasks(missionScore)
+                missionScore += addScore
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
