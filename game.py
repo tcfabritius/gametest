@@ -978,6 +978,10 @@ def mission1():
                             """)
 
                         # TASKS HERE
+                        mission1Tasks(missionScore)
+                        print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                        threatLevel = getThreat()
+                        print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                         input("""
                         echo "[INFO] Firewall breach alerted."
@@ -991,6 +995,10 @@ def mission1():
                         """)
 
                         # TASKS HERE
+                        mission1Tasks(missionScore)
+                        print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                        threatLevel = getThreat()
+                        print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                         input("""
                         echo "[INFO] Executing exploit on CVE-2024-1234 - Authentication Bypass Exploit"
@@ -1001,6 +1009,10 @@ def mission1():
                         """)
 
                         # TASKS HERE
+                        mission1Tasks(missionScore)
+                        print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                        threatLevel = getThreat()
+                        print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                         input("""
                         echo "[INFO] Scanning internal network for accessible resources..."
@@ -1121,6 +1133,10 @@ def mission1():
                     """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input(
                     """
@@ -1141,6 +1157,10 @@ def mission1():
                      """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 [Accessing archived audio files...]
@@ -1156,6 +1176,10 @@ def mission1():
                  """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 // Biometric authentication completed
@@ -1192,6 +1216,10 @@ def mission1():
                     """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 >>> Initiating file corruption sequence...
@@ -1202,6 +1230,10 @@ def mission1():
                  """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 [Overwriting CAM_13_09-2024.log...]
@@ -1211,6 +1243,10 @@ def mission1():
                 """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 [Overwriting CAM_14_09-2024.log...]
@@ -1221,6 +1257,10 @@ def mission1():
                 """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 >>> Initiating log cleanup...
@@ -1231,6 +1271,10 @@ def mission1():
                 """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("You've successfully erased incriminating data. ")
                 input("Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
@@ -1316,6 +1360,10 @@ def mission1():
                      """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 [Accessing archived audio files...]
@@ -1329,6 +1377,10 @@ def mission1():
                  """)
 
                 # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 // Biometric authentication completed
@@ -1405,7 +1457,7 @@ def mission1():
 
     #######################################################################################################################
 
-def mission1Tasks():
+def mission1Tasks(points):
     points = 0
     randValue = random.randint(1, 4)
     while points < 4:
@@ -1414,6 +1466,7 @@ def mission1Tasks():
             if task1 == "Genetically Modified Organism" or task1 == "genetically modified organism":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -1422,6 +1475,7 @@ def mission1Tasks():
             if task2 == "CRISPR" or task2 == "crispr":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -1431,6 +1485,7 @@ def mission1Tasks():
             if task3 == "1994":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -1440,6 +1495,7 @@ def mission1Tasks():
             if task4 == "Genetic Engineering" or task4 == "genetic engineering":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -1740,7 +1796,10 @@ def mission2():
                 input("HELPER.PY: Injecting data parser algorithm. ")
 
                 #TASK HERE
-                #SCORE
+                mission2Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input(
                 """
@@ -1753,7 +1812,10 @@ def mission2():
                 """)
 
                 #TASK HERE
-                #SCORE
+                mission2Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 print()
@@ -1765,7 +1827,10 @@ def mission2():
                 """)
 
                 #TASK HERE
-                #SCORE
+                mission2Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                 for i in range(5):
@@ -1883,7 +1948,10 @@ def mission2():
                 input("HELPER.PY: Injecting data parser algorithm. ")
 
                 # TASK HERE
-                # SCORE
+                mission2Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input(
                     """
@@ -1896,7 +1964,10 @@ def mission2():
                     """)
 
                 # TASK HERE
-                # SCORE
+                mission2Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                     print()
@@ -1908,7 +1979,10 @@ def mission2():
                     """)
 
                 # TASK HERE
-                # SCORE
+                mission2Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
 
                 input("""
                     for i in range(5):
@@ -1990,15 +2064,16 @@ def mission2():
                                    "\n "
                                    "\nInput: ")
 
-def mission2Tasks():
+def mission2Tasks(points):
     points = 0
     randomValue = random.randint(1, 10)
-    while points < 4:
+    while True:
         if randomValue == 1:
             task1 = input("Solve the following sentence using Caesar Shift -1: 'fnnc ktbj rzuhmf sgd vnqkc'\n")
             if task1 == "good luck saving the world":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -2007,6 +2082,7 @@ def mission2Tasks():
             if task2 == "hologram":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
         elif randomValue == 3:
@@ -2014,6 +2090,7 @@ def mission2Tasks():
             if task3 == "are you serious":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -2022,6 +2099,7 @@ def mission2Tasks():
             if task4 == "good morning vietnam":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -2030,6 +2108,7 @@ def mission2Tasks():
             if task5 == "well done is better than well said":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -2038,6 +2117,7 @@ def mission2Tasks():
             if task6 == "privara capital":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -2046,6 +2126,7 @@ def mission2Tasks():
             if task7 == "neuragenix":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -2054,6 +2135,7 @@ def mission2Tasks():
             if task8 == "network protocol":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -2062,6 +2144,7 @@ def mission2Tasks():
             if task9 == "authentication":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
@@ -2070,6 +2153,7 @@ def mission2Tasks():
             if task10 == "kernel panic":
                 print("Correct! Well done!")
                 points += 1
+                return points
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
