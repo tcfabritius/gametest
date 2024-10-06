@@ -564,7 +564,7 @@ def mission0():
     # mission location/ country
     airport = mission_airport(airports[0])
     country = mission_country(maat[0])
-    print(f"You arrived to {airport} in {country}")
+    print(f"* You arrived to {airport} in {country}")
     # Mission scoretracking
     missionScoreMax = 4
     missionScore = 0
@@ -793,10 +793,12 @@ def mission0():
               f"\nPay: {1000*scoreModifier}.")
 
     pay(scoreModifier, 0, 1)
-    input("HELPER.PY: Continue? ")
+    input("HELPER.PY: Mission complete! ")
     missionCompletedScreen()
     #Update mission status
     cursor = connection.cursor(buffered=True)
+    print("* Changing location... ")
+    travel_menu(maat[0])
     cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 0))
     connection.commit()
 
@@ -812,7 +814,7 @@ def mission1():
     # mission location/ country
     airport1= mission_airport(airports[1])
     country1 = mission_country(maat[1])
-    print(f"You arrived to {airport1} in {country1}")
+    print(f"* You arrived to {airport1} in {country1}")
     print(Fore.GREEN)
     print("* Later on... ")
     #Description-print here
@@ -1114,7 +1116,8 @@ def mission1():
             moveOption = input("What would you like to do? "
                                "\n (1): Info-desk "
                                "\n (2): Waiting area "
-                               "\n (3): Bathroom ")
+                               "\n (3): Bathroom "
+                               "\n Input: ")
 
             if moveOption == "1":
                 input("* Going to the info-desk, you try to chat up the attendant."
@@ -1384,8 +1387,10 @@ def mission1():
                           f"\nPay: {1000 * scoreModifier}.")
 
                 pay(scoreModifier, 1, 2)
-                input("HELPER.PY: Continue? ")
+                input("HELPER.PY: Mission complete! ")
                 missionCompletedScreen()
+                print("* Changing location... ")
+                travel_menu(maat[1])
                 # Update mission status
                 cursor = connection.cursor()
                 cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 1))
@@ -1615,7 +1620,7 @@ def mission2():
     # mission location/ country
     airport2 = mission_airport(airports[2])
     country2 = mission_country(maat[2])
-    print(f"You arrived to {airport2} in {country2}")
+    print(f"* You arrived to {airport2} in {country2}")
     print(Fore.GREEN)
     print("* Later on... ")
     #Description-print here
@@ -1854,17 +1859,16 @@ def mission2():
 
                 #Tracking package
                 while True:
-                    print("HELPER.PY: No tracker with given id in range. ")
                     if trackerId == "204":
                         input("HELPER.PY: Connection established. Tracking.")
                         input("HELPER.PY: Tracking...")
-                        input("HELPER.PY:Tracking..")
+                        input("HELPER.PY: Tracking..")
                         input("HELPER.PY: Path built, result:"
                               "\n ^, ^, <, >")
                         break
                     elif trackerId != "204":
                         attempts += 1
-                        print("HELPER.PY: No suck tracker in range. ")
+                        print("HELPER.PY: No tracker with given id in range. ")
                         trackerId = input("HELPER.PY: Please input linked tracker id: ")
                     elif attempts > 4:
                         print("HELPER.PY: No more trackers in range. Terminating.")
