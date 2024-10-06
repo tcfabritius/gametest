@@ -421,6 +421,7 @@ def mission_country(maat):
     country = cursor.fetchall()
     cursor.close()
     return country[0][0]
+
 """
 # *** POISTETTU OMINAISUUS ***
 # def optionMenu():
@@ -518,7 +519,6 @@ def init_airports():
             else:
                 print(f"No airport found for country: {maa}")
 
-
 def init():
     # Kysytään pelaajan nimi
     print("HACKING USER ID DATABASE...\nACCESS GRANTED...")
@@ -556,7 +556,6 @@ def init():
     cursor.close()
 
     return player
-
 
 def mission0():
     print(Fore.GREEN)
@@ -626,7 +625,6 @@ def mission0():
             webQuery1 = input("Please enter url: ")
 
     input("USER: Gh0stP@cket sent: lol ty (HELPER.PY:[Enter]): ")
-
     input("""
           $ sudo chmod 777 /var/log/.hidden
           $ sudo cat /var/log/.hidden
@@ -691,37 +689,33 @@ def mission0():
             input("HELPER.PY: Please try again. (HELPER.PY:[Enter]): ")
 
     print(" ")
-    input("What would you like to do? "
-          "\n(Enter) Use rootkit ")
+    input("What would you like to do? \n(Enter) Use rootkit ")
     input("Deploying rootkit... ")
-    input("""
-    $ sudo dmesg | tail
-    [13562.33] USB device 3-1: New USB device connected, idVendor=16d0, idProduct=0af2
-    [13562.35] USB device 3-1: HID device initialized
-    [13562.37] Rootkit module loaded from /dev/usb/backdoor
-    [13562.40] Kernel hook injected at 0xFFFF0A34...
-    [13562.42] Rootkit process initiated...
-    $ ls /dev/usb/
-    backdoor    rootkit.sh    terminal.txt
-    """)
+    input("$ sudo dmesg | tail")
+    input("[13562.33] USB device 3-1: New USB device connected, idVendor=16d0, idProduct=0af2")
+    input("[13562.35] USB device 3-1: HID device initialized"
+          "\n[13562.37] Rootkit module loaded from /dev/usb/backdoor")
+    input("[13562.40] Kernel hook injected at 0xFFFF0A34..."
+          "\n[13562.40] Kernel hook injected at 0xFFFF0A34...")
+    input("$ ls /dev/usb/backdoor    rootkit.sh    terminal.txt")
 
-    input("""
-    $ sudo cat /dev/usb/rootkit.sh
-    #!/bin/bash
-    echo "[ROOTKIT] Accessing bank transaction logs..."
-    sleep 1
-    echo "[ROOTKIT] Re-routing transactions to 192.168.1.200..."
-    sleep 1
-    echo "[ROOTKIT] Masking malicious activity in logs..."
-    sleep 1
-    echo "[ROOTKIT] Uploading data to external server..."
+    print("$ sudo cat /dev/usb/rootkit.sh#!/bin/bash")
+    print("echo [ROOTKIT] Accessing bank transaction logs..."
+          "\nsleep 1")
+    print("echo [ROOTKIT] Re-routing transactions to 192.168.1.200..."
+          "\nsleep 1")
+    print("echo [ROOTKIT] Masking malicious activity in logs..."
+          "\nsleep 1")
+    print("echo [ROOTKIT] Uploading data to external server...")
+    print("""
     $ sudo netstat -an | grep 192.168.1.200
     tcp        0      0 192.168.1.50:45328     192.168.1.200:8080     ESTABLISHED
     $ sudo ps aux | grep rootkit
     root       3137  0.0  0.1  13672  2640 ?        S    10:32   0:00 /dev/usb/rootkit.sh
     root       3151  0.0  0.0   6428  1144 ?        S    10:32   0:00 /usr/lib/backdoor
-    $ echo "System compromise in progress."
     """)
+
+    print("$ echo System compromise in progress.")
 
     # Player will tutorial missions here.
     while True:
@@ -760,6 +754,9 @@ def mission0():
                 print("User error. ")
 
     # Teach about the threat-mechanic via intrusion
+    raiseThreat("failure")
+    threatLevel = getThreat()
+    print(f"HELPER.PY: Threat index is: {threatLevel}. ")
     print("HELPER.PY: /!\WARNING/!\: Threat-level increased.\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
     # Here is where we update the threat level for the first time.
 
@@ -982,6 +979,10 @@ def mission1():
                         print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                         threatLevel = getThreat()
                         print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                        #WARNING
+                        if threatLevel >= 40:
+                            input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                                  "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                         input("""
                         echo "[INFO] Firewall breach alerted."
@@ -999,6 +1000,10 @@ def mission1():
                         print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                         threatLevel = getThreat()
                         print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                        # WARNING
+                        if threatLevel >= 40:
+                            input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                                  "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                         input("""
                         echo "[INFO] Executing exploit on CVE-2024-1234 - Authentication Bypass Exploit"
@@ -1013,24 +1018,36 @@ def mission1():
                         print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                         threatLevel = getThreat()
                         print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                        # WARNING
+                        if threatLevel >= 40:
+                            input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                                  "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                         input("""
                         echo "[INFO] Scanning internal network for accessible resources..."
                         sleep 2
                         echo "[INFO] Discovered 3 active servers:"
                         sleep 1
+                        """)
+                        input("""
                         echo "      [1] FileServer01 - 192.168.1.10"
                         echo "      [2] DatabaseServer - 192.168.1.20"
                         echo "      [3] MailServer - 192.168.1.30"
+                        """)
+                        input("""
                         sleep 1
                         echo "[INFO] Attempting to access DatabaseServer..."
                         sleep 2
                         echo "[INFO] Failure, biometric security detected."
                         sleep 1
+                        """)
+                        input("""
                         echo "[INFO] Generating id data."
                         sleep 1
                         echo "[SUCCESS] ID data generated."
                         sleep 1
+                        """)
+                        input("""
                         echo "[SUCCESS] Access id linked with RFID."
                         sleep 1
                         echo "[INFO] Command finished. Quitting program... Cleaning logs... "
@@ -1107,6 +1124,7 @@ def mission1():
                 input("* Noting the attendant is busy with transfer calls and paperwork. ")
                 input("* You bring out your laptop as if waiting for someone to come pick you up. ")
                 input("* You install the usb you were provided. This brings out an remote access panel. ")
+                print(" ")
                 input("NEW CHAT INBOUND (HELPER.PY:[Enter]) ")
                 input("USER: K3rn3lGh0$t sent: HEH gotchu now.  (HELPER.PY: [Enter]) ")
                 input("USER: K3rn3lGh0$t sent: Lmao, don't sweat it. We already had your stuff.  (HELPER.PY: [Enter]) ")
@@ -1119,14 +1137,20 @@ def mission1():
                         echo "[INFO] Injecting payload..."
                         sleep 3
                         echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
+                        """)
+                input(""" 
                         echo "[INFO] Scanning internal network for accessible resources..."
                         sleep 2
                         echo "[INFO] Discovered 3 active servers:"
                         sleep 1
+                        """)
+                input(""" 
                         echo "      [1] FileServer01 - 192.168.1.10"
                         echo "      [2] DatabaseServer - 192.168.1.20"
                         echo "      [3] MailServer - 192.168.1.30"
                         sleep 1
+                        """)
+                input("""
                         echo "[INFO] Attempting to access DatabaseServer..."
                         sleep 2
                         echo "[SUCCESS] Secure.server access established. -HANDSHAKE- .kg\ForceOpen.exe."
@@ -1137,21 +1161,30 @@ def mission1():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input(
                     """
                     // Initializing NeuraGenix Biometric Security Bypass
                     >>> Initializing facial recognition bypass...
+                    """)
+                input("""
                     [Scanning NeuraGenix executive database...]
                     [Acquiring facial image dataset...]
-                    [Generating 3D facial model... 5%]
-                    [Generating 3D facial model... 12%]
-                    [Generating 3D facial model... 54%]
-                    [Generating 3D facial model... 80%]
-                    [Generating 3D facial model... 90%]
+                    """)
+                input("[Generating 3D facial model... 5%]")
+                input("[Generating 3D facial model... 12%]")
+                input("[Generating 3D facial model... 54%]")
+                input("[Generating 3D facial model... 80%]")
+                input("[Generating 3D facial model... 90%]")
+                input("""
                     >>> Facial recognition match: 97% accuracy
                     >>> Status: Bypass successful
-
+                    """)
+                input("""
                     // Proceeding to voiceprint authentication...
                     >>> Initiating voiceprint data extraction...
                      """)
@@ -1161,16 +1194,21 @@ def mission1():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                 [Accessing archived audio files...]
                 [Extracting voice patterns: Frequency, Pitch, Tone...]
-                [Generating synthetic voice model...2%]
-                [Generating synthetic voice model...5%]
-                [Generating synthetic voice model...47%]
-                [Generating synthetic voice model...78%]
-                [Generating synthetic voice model...87%]
-
+                """)
+                input("[Generating synthetic voice model...2%]")
+                input("[Generating synthetic voice model...5%]")
+                input("[Generating synthetic voice model...47%]")
+                input("[Generating synthetic voice model...78%]")
+                input("[Generating synthetic voice model...87%]")
+                input("""
                 >>> Voiceprint match: 92% accuracy
                 >>> Status: Bypass successful
                  """)
@@ -1180,6 +1218,10 @@ def mission1():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                 // Biometric authentication completed
@@ -1206,11 +1248,17 @@ def mission1():
                 print("""
                     // Initializing NeuraGenix Security Camera System Bypass
                     >>> Accessing camera feed storage...
+                    """)
+                print("""
                     [Connecting to NeuraGenix security network...]
                     [Bypassing encryption layers...]
+                    """)
+                print("""
                     [Authorization token spoofed]
                     >>> Camera feed access granted
                     >>> Locating relevant video files...
+                    """)
+                print("""
                     [Searching for recent surveillance recordings...]
                     >>> Files located: CAM_12_09-2024.log, CAM_13_09-2024.log, CAM_14_09-2024.log
                     """)
@@ -1220,6 +1268,10 @@ def mission1():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                 >>> Initiating file corruption sequence...
@@ -1234,47 +1286,60 @@ def mission1():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
-                input("""
-                [Overwriting CAM_13_09-2024.log...]
-                >>> 25% complete...
-                >>> 50% complete...
-                >>> 100% complete - File corrupted
-                """)
-
-                # TASKS HERE
-                mission1Tasks(missionScore)
-                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
-                threatLevel = getThreat()
-                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
-
-                input("""
-                [Overwriting CAM_14_09-2024.log...]
-                >>> 25% complete...
-                >>> 50% complete...
-                >>> 100% complete - File corrupted
-                >>> Status: All relevant surveillance footage has been erased.
-                """)
+                input("[Overwriting CAM_13_09-2024.log...]")
+                input(">>> 25% complete...")
+                input(">>> 50% complete...")
+                input(">>> 100% complete - File corrupted")
 
                 # TASKS HERE
                 mission1Tasks(missionScore)
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
+
+                input("[Overwriting CAM_14_09-2024.log...]")
+                input(">>> 25% complete...")
+                input(">>> 50% complete...")
+                input(">>> 100% complete - File corrupted")
+                input(">>> Status: All relevant surveillance footage has been erased.")
+
+                # TASKS HERE
+                mission1Tasks(missionScore)
+                print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
+                threatLevel = getThreat()
+                print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                 >>> Initiating log cleanup...
-                [Scrubbing access logs...]
+                [Scrubbing access logs...]""")
+                input("""
                 >>> Log entries for Camera Access successfully deleted
                 >>> System audit trail: Clean
-                >>> Surveillance bypass complete. No trace detected.
                 """)
+                input(">>> Surveillance bypass complete. No trace detected.")
 
                 # TASKS HERE
                 mission1Tasks(missionScore)
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("You've successfully erased incriminating data. ")
                 input("Time to head out. Holding a phone in hand and pretending to talk to someone, you leave the premises. ")
@@ -1330,15 +1395,21 @@ def mission1():
                         sleep 2
                         echo "[INFO] Injecting payload..."
                         sleep 3
+                        """)
+                input("""
                         echo "[SUCCESS] Payload injected successfully. Access granted to internal network. "
                         echo "[INFO] Scanning internal network for accessible resources..."
                         sleep 2
+                        """)
+                input("""
                         echo "[INFO] Discovered 3 active servers:"
                         sleep 1
                         echo "      [1] FileServer01 - 192.168.1.10"
                         echo "      [2] DatabaseServer - 192.168.1.20"
                         echo "      [3] MailServer - 192.168.1.30"
                         sleep 1
+                        """)
+                input("""
                         echo "[INFO] Attempting to access DatabaseServer..."
                         sleep 2
                         echo "[SUCCESS] Secure.server access established. -HANDSHAKE- .kg\ForceOpen.exe."
@@ -1349,12 +1420,16 @@ def mission1():
                     >>> Initializing facial recognition bypass...
                     [Scanning NeuraGenix executive database...]
                     [Acquiring facial image dataset...]
-                    [Generating 3D facial model... 5%]
-                    [Generating 3D facial model... 34%]
-                    [Generating 3D facial model... 80%]
-                    [Generating 3D facial model... 90%]
+                    """)
+                input("[Generating 3D facial model... 5%]")
+                input("[Generating 3D facial model... 34%]")
+                input("[Generating 3D facial model... 80%]")
+                input("[Generating 3D facial model... 90%]")
+                input("""
                     >>> Facial recognition match: 97% accuracy
                     >>> Status: Bypass successful
+                    """)
+                input("""
                     // Proceeding to voiceprint authentication...
                     >>> Initiating voiceprint data extraction...
                      """)
@@ -1364,36 +1439,50 @@ def mission1():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                 [Accessing archived audio files...]
                 [Extracting voice patterns: Frequency, Pitch, Tone...]
-                [Generating synthetic voice model...6%]
-                [Generating synthetic voice model...15%]
-                [Generating synthetic voice model...68%]
-                [Generating synthetic voice model...87%]
+                """)
+                input("[Generating synthetic voice model...6%]")
+                input("[Generating synthetic voice model...15%]")
+                input("[Generating synthetic voice model...68%]")
+                input("[Generating synthetic voice model...87%]")
+                input("""
                 >>> Voiceprint match: 92% accuracy
                 >>> Status: Bypass successful
-                 """)
+                """)
 
                 # TASKS HERE
                 mission1Tasks(missionScore)
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                 // Biometric authentication completed
                 >>> Access granted to secure files
                 >>> Navigating to "Nexus_Prototype" folder...
+                """)
+                input("""
                 [Decrypting folder contents...]
                 [Data extraction in progress...]
-                >>> 45% complete...
-                >>> 80% complete...
-                >>> 100% complete!
+                """)
+                input(">>> 45% complete...")
+                input(">>> 80% complete...")
+                input(">>> 100% complete!")
+                input("""
                 >>> Project Nexus data successfully extracted.
                 >>> Warning: Security systems triggered. Initiating escape protocol...
-                 """)
+                """)
 
                 input("USER: K3rn3lGh0$t sent: Done, got the packet. Rest is on you. (HELPER.PY: [Enter]) ")
                 print(" ")
@@ -1462,42 +1551,43 @@ def mission1Tasks(points):
     randValue = random.randint(1, 4)
     while points < 4:
         if randValue == 1:
-            task1 = input("Question: What does GMO stand for in biotechnology?")
+            task1 = input("Question: What does GMO stand for in biotechnology? ")
             if task1 == "Genetically Modified Organism" or task1 == "genetically modified organism":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randValue == 2:
-            task2 = input("Question: Which famous biotechnology tool allows for precise editing of DNA sequences?")
+            task2 = input("Question: Which famous biotechnology tool allows for precise editing of DNA sequences? ")
             if task2 == "CRISPR" or task2 == "crispr":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randValue == 3:
             task3 = input(
-                "Question: In which year was the first genetically modified crop, the Flavr Savr tomato, approved for commercial sale in the U.S.? HINT it's in the 90s")
+                "Question: In which year was the first genetically modified crop, "
+                "the Flavr Savr tomato, approved for commercial sale in the U.S.? HELPER.PY: Hint: 90s ")
             if task3 == "1994":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randValue == 4:
             task4 = input(
                 "Question: What is the term for the process of transferring genes from one organism to another?")
             if task4 == "Genetic Engineering" or task4 == "genetic engineering":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
     return points
 
@@ -1794,6 +1884,7 @@ def mission2():
                 elif mainFrameDirections != "<,>,^,^,<":
                     print("* You take a long time to find your way in the complex. By the time you arrive, 1,5 hours have passed. ")
                     #Increase threat
+                    raiseThreat("failure")
                     missionScore =-1
 
                 print("* You head inside the mainframe. ")
@@ -1807,6 +1898,10 @@ def mission2():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input(
                 """
@@ -1823,6 +1918,10 @@ def mission2():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                 print()
@@ -1838,6 +1937,10 @@ def mission2():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                 for i in range(5):
@@ -1964,6 +2067,10 @@ def mission2():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input(
                     """
@@ -1980,6 +2087,10 @@ def mission2():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                     print()
@@ -1995,6 +2106,10 @@ def mission2():
                 print(f"HELPER.PY: Mission Progress: {missionScore} / {missionScoreMax}. ")
                 threatLevel = getThreat()
                 print(f"HELPER.PY: Threat index is: {threatLevel}. ")
+                # WARNING
+                if threatLevel >= 40:
+                    input("HELPER.PY: /!\WARNING/!\: Threat-level increased."
+                          "\nPlease consider aborting current mission. (HELPER.PY:[Enter]): ")
 
                 input("""
                     for i in range(5):
@@ -2080,91 +2195,91 @@ def mission2Tasks(points):
         if randomValue == 1:
             task1 = input("Solve the following sentence using Caesar Shift -1: 'fnnc ktbj rzuhmf sgd vnqkc'\n")
             if task1 == "good luck saving the world":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randomValue == 2:
             task2 = input("Solve the following word using Caesar Shift -1: 'gnknfqzl'\n")
             if task2 == "hologram":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
         elif randomValue == 3:
             task3 = input("Solve the following sentence using Caesar Shift -1: 'zqd xnt rdqhntr'\n")
             if task3 == "are you serious":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randomValue == 4:
             task4 = input("Solve the following sentence using Caesar Shift -1: 'fnnc lnqmhmf uhdszml'\n")
             if task4 == "good morning vietnam":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randomValue == 5:
             task5 = input("Solve the following sentence using Caesar Shift +1: 'xfmm epof jt cfuufs uibo xfmm tbje'\n")
             if task5 == "well done is better than well said":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randomValue == 6:
             task6 = input("Solve the following words using Caesar Shift +1: 'qsjwbsb dbqjubm'\n")
             if task6 == "privara capital":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randomValue == 7:
             task7 = input("Solve the following word using Caesar Shift +1: 'ofvsbhfojy'\n")
             if task7 == "neuragenix":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randomValue == 8:
             task8 = input("Solve the following words using Caesar Shift +1: 'ofuxpsl qspupdpm'\n")
             if task8 == "network protocol":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randomValue == 9:
             task9 = input("Solve the following word using Caesar Shift +1: 'bvuifoujdbujpo'\n")
             if task9 == "authentication":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
         elif randomValue == 10:
             task10 = input("Solve the following word using Caesar Shift +1: 'lfsofm qbojd'\n")
             if task10 == "kernel panic":
-                print("Correct! Well done!")
+                print("access_point_status: GREEN")
                 points += 1
                 return points
             else:
-                print("Incorrect. Try again!")
+                print("ERROR: Faulty user input...")
                 raiseThreat("failure")
     return points
 
