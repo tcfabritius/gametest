@@ -1499,6 +1499,7 @@ def mission1Tasks(points):
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
+    return points
 
 def mission2():
     #Mission scoretracking
@@ -1714,7 +1715,9 @@ def mission2():
             roomSurvey = input("HELPER.PY: What would you like to do? "
                                "\n(1): Head to the security scan. "
                                "\n(2): Head to helpdesk. "
-                               "\n(3): Head to IT. ")
+                               "\n(3): Head to IT. "
+                               "\n "
+                               "\nInput: ")
 
             if roomSurvey == "1":
                 print("* You head to the security scan. ")
@@ -1738,8 +1741,8 @@ def mission2():
                 input("* You take another left from where the assistant was headed but stay in wait after the turn. ")
                 input("* You take out your laptop. ")
                 print(" ")
-                input("HELPER.PY: How can I help? ")
-                input("HELPER.PY: .\main\-systemLink.enableTracker() ")
+                input("HELPER.PY: How can I help? [Enter]")
+                input("* .\main\-systemLink.enableTracker() ")
                 print("Trackers detected. ")
                 trackerId = input("HELPER.PY: Please input linked tracker id: ")
                 attempts = 0
@@ -1900,8 +1903,8 @@ def mission2():
 
                 input("* You take out your laptop. ")
                 print(" ")
-                input("HELPER.PY: How can I help? ")
-                input("HELPER.PY: .\main\-systemLink.enableTracker() ")
+                input("HELPER.PY: How can I help? [Enter]")
+                input("* .\main\-systemLink.enableTracker() ")
                 print("Trackers detected. ")
 
                 # Tracking package
@@ -2163,6 +2166,7 @@ def mission2Tasks(points):
             else:
                 print("Incorrect. Try again!")
                 raiseThreat("failure")
+    return points
 
 
 # FUNKTIOT PÄÄTTYY
