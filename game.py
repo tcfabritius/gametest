@@ -329,6 +329,7 @@ def travel_menu(country_code):
         prices.append(calcPrice(current_location, r[0]))
         co2.append(calcCO2(current_location, r[0]))
 
+    print(Fore.GREEN)
     # print menu
     print("\nAvailable Airports: \n")
     print(f"{'ICAO':<15}{'Names':<35}{'Price':<15}{'CO2(ppm)':<15}")
@@ -374,6 +375,7 @@ def loseGame(player):
     return
 
 def winGame(player):
+    print(Fore.GREEN)
     # ENDSCREEN NÄKYMÄ (WINSTATE) GREAT SUCCESS!
     print("CONGRATULATIONS FOR WINNING THE GAME!")
     # Luodaan kursori
@@ -472,6 +474,7 @@ def reset():
         pauseMenu()
 
 def pauseMenu():
+    print(Fore.GREEN)
     print("Pause Menu\n1.Start Game\n2.Delete Player\n3.Quit Game\n ")
 
     while True:
@@ -2469,6 +2472,6 @@ if completed_missions_count == 2:
     completed_missions_count = check_completed_missions()
 
 if completed_missions_count == 3:
-    winGame(player)
     endScreen()
+    winGame(player)
     #winScreen()
