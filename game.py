@@ -1418,6 +1418,7 @@ def mission1():
                 clear_console()
                 travel_to(airports[2])
 
+
                 break
             elif moveOption == "3":
                 input("You head to the bathroom. ")
