@@ -352,7 +352,7 @@ def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
     print("GAME OVER")
     playback.stop()
-    playback.load_file('orch4.mp3')
+    playback.load_file('orch4.mp3') # Lähde: https://www.findsounds.com/ISAPI/search.dll?keywords=orchestra+hit&keywords=orchestra+hit
     playback.load_file('bgmusicexample.mp3')
     playback.loop_at_end(True)
     playback.play()
