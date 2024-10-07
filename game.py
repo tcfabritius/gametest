@@ -2406,16 +2406,15 @@ voittoanimaatioruutu = """
 loppuanimaatioruutu = """
 Epic Cinematic Gaming Cyberpunk | RESET by Alex-Productions | https://onsound.eu/
 Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/
 
-                               ..::CREDITS::..
-**Tim Fabritius**       **Svetlana Kekkonen-Mattila**      **Joni Oksanen**
--Graphics programming       -Function programming       -Mechanics programming
--Database programming          -UI programming              -UI programming
--Function programming           -Gameplay QA                  -Gameplay QA
-              **Mikko Laakkonen**             **Outi Salonen**
-             -Gameplay programming              -Design QA
-               -Implementation                 -Documentation
-               -Documentation
+..::CREDITS::..
+Tim Fabritius                Svetlana Kekkonen-Mattila    Mikko Laakkonen                   Joni Oksanen             Outi Salonen
+-Graphics programming        -Database design             -Narrative design                 -Gameplay design         -Design QA
+-System design               -Funcition programming       -Gameplay programming & design    -Mechanics programming   -Documentation
+-Database design             -Travel design               -Graphic design                   -UI programming
+-Function programming        -Gameplay QA                 -Documentation                    -Gameplay QA
 """
 
 # TIMIN FUNKTIOT
