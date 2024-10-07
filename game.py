@@ -347,6 +347,11 @@ def travel_menu(country_code):
 def loseGame(player):
     # ENDSCREEN NÄKYMÄ (GAME OVER) FAILURE
     print("GAME OVER")
+    playback.stop()
+    playback.load_file('orch4.mp3')
+    playback.load_file('bgmusicexample.mp3')
+    playback.loop_at_end(True)
+    playback.play()
     # Luodaan kursori
     cursor = connection.cursor()
     # Tulostetaan lopullinen CO2 mikä jäi käyttämättä
