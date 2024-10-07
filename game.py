@@ -122,16 +122,20 @@ def raiseThreat(type):
     threat = int(threat[0])
     if type == "stay":
         if threat + 1 > 100:
-            loseGame()
+            loseGame(player)
         else:
             cursor.execute("UPDATE game SET threat = threat +1 WHERE id = %s", (player,))
+            threatLevel = getThreat()
+            print(f"HELPER.PY: Analyzing... Threat index is: {threatLevel}")
             connection.commit()
 
     if type == "failure":
         if threat + 3 > 100:
-            loseGame()
+            loseGame(player)
         else:
             cursor.execute("UPDATE game SET threat = threat +3 WHERE id = %s", (player,))
+            threatLevel = getThreat()
+            print(f"HELPER.PY: Analyzing... Threat index is: {threatLevel}")
             connection.commit()
 
     cursor.close()
@@ -305,7 +309,7 @@ def travel_to(icao_target):
     cursor = connection.cursor(buffered=True)
     cursor.execute("SELECT game.money FROM game WHERE game.id = %s", (player,))
     money_left = cursor.fetchone()
-    print(f"Money left in the budget: {money_left[0]}€")
+    print(f"Money left in the budget: {money_left[0]}©")
     lowerThreat()
 
 def travel_menu(country_code):
@@ -339,7 +343,7 @@ def travel_menu(country_code):
     cursor = connection.cursor(buffered=True)
     cursor.execute("SELECT game.money FROM game WHERE game.id = %s", (player,))
     money_left = cursor.fetchone()
-    print(f"Money left in the budget: {money_left[0]}€")
+    print(f"Money left in the budget: {money_left[0]}©")
     destination = input("Where do you want to go? Please choose airport code from the list: ")
     # if airport code in airports
     if destination in icao or destination != "":
@@ -826,7 +830,6 @@ def mission0():
     input("Press enter to continue ")
     clear_console()
     travel_to(airports[1])
-
 
 def mission1():
     #Mission scoretracking
