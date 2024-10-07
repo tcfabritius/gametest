@@ -122,14 +122,14 @@ def raiseThreat(type):
     threat = int(threat[0])
     if type == "stay":
         if threat + 1 > 100:
-            loseGame(player)
+            loseGame()
         else:
             cursor.execute("UPDATE game SET threat = threat +1 WHERE id = %s", (player,))
             connection.commit()
 
     if type == "failure":
         if threat + 3 > 100:
-            loseGame(player)
+            loseGame()
         else:
             cursor.execute("UPDATE game SET threat = threat +3 WHERE id = %s", (player,))
             connection.commit()
@@ -336,6 +336,10 @@ def travel_menu(country_code):
     for (a, b, c, d) in zip(icao, names, prices, co2):
         b = b.split()[0]
         print(f"{a:<15}{b:<35}{c:<15}{d:<15}")
+    cursor = connection.cursor(buffered=True)
+    cursor.execute("SELECT game.money FROM game WHERE game.id = %s", (player,))
+    money_left = cursor.fetchone()
+    print(f"Money left in the budget: {money_left[0]}€")
     destination = input("Where do you want to go? Please choose airport code from the list: ")
     # if airport code in airports
     if destination in icao or destination != "":
@@ -488,7 +492,7 @@ def pauseMenu():
             init()
             break
         elif choice == 2:
-            reset(player)
+            reset()
             break
         elif choice == 3:
             quitGame()
@@ -818,9 +822,11 @@ def mission0():
     travel_menu(maat[0])
     cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 0))
     connection.commit()
-
-    travel_to(airports[1])
     cursor.close()
+    input("Press enter to continue ")
+    clear_console()
+    travel_to(airports[1])
+
 
 def mission1():
     #Mission scoretracking
@@ -1413,8 +1419,10 @@ def mission1():
                 cursor.execute("INSERT INTO mission_accomplished(game_id, mission_id) VALUES (%s, %s)", (player, 1))
                 connection.commit()
                 cursor.close()
-
+                input("Press enter to continue ")
+                clear_console()
                 travel_to(airports[2])
+
 
                 break
             elif moveOption == "3":
@@ -2451,7 +2459,7 @@ Tim Fabritius                Svetlana Kekkonen-Mattila    Mikko Laakkonen       
 # pauseMenu()
 
 # Svetlanan funktiot
-# travel_menu("FI")
+#travel_menu("FI")
 # travel_to("EFHK")
 #mission_airport(airports[1])
 #mission_country(maat[1])
