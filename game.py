@@ -353,6 +353,7 @@ def loseGame(player):
     print("GAME OVER")
     playback.stop()
     playback.load_file('orch4.mp3') # Lähde: https://www.findsounds.com/ISAPI/search.dll?keywords=orchestra+hit&keywords=orchestra+hit
+    playback.play()
     playback.load_file('bgmusicexample.mp3')
     playback.loop_at_end(True)
     playback.play()
@@ -404,7 +405,8 @@ def winGame(player):
 
     reset()
 
-    #winScreen()
+    winScreen()
+
     # Suljetaan kursori ja yhteys
     cursor.close()
 
