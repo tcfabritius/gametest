@@ -122,14 +122,14 @@ def raiseThreat(type):
     threat = int(threat[0])
     if type == "stay":
         if threat + 1 > 100:
-            loseGame()
+            loseGame(player)
         else:
             cursor.execute("UPDATE game SET threat = threat +1 WHERE id = %s", (player,))
             connection.commit()
 
     if type == "failure":
         if threat + 3 > 100:
-            loseGame()
+            loseGame(player)
         else:
             cursor.execute("UPDATE game SET threat = threat +3 WHERE id = %s", (player,))
             connection.commit()
